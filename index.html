@@ -15,17 +15,17 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #FAF8F5;
-            color: #1A1A2E;
-            line-height: 1.5;
+            background-color: #FCF9F6;
+            color: #191A23;
+            line-height: 1.4;
             overflow-x: hidden;
         }
 
-        /* Анимации */
-        @keyframes fadeInUp {
+        /* Гладкие анимации */
+        @keyframes fadeUp {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -33,448 +33,450 @@
             }
         }
 
-        @keyframes float {
+        @keyframes softFloat {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes shine {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
 
         .animate {
-            animation: fadeInUp 0.7s ease forwards;
+            animation: fadeUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
         }
 
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 32px;
         }
 
-        /* Шапка */
+        /* Премиум навбар */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 24px 0;
+            padding: 28px 0;
             flex-wrap: wrap;
             gap: 20px;
-        }
-
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #1A1A2E 0%, #4A3B2C 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .logo p {
-            font-size: 0.75rem;
-            color: #A89F8E;
-            margin-top: 4px;
-            letter-spacing: 0.3px;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(252, 249, 246, 0.85);
         }
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 48px;
             align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #1A1A2E;
+            color: #1F1F2E;
             font-weight: 500;
-            transition: color 0.2s;
+            font-size: 0.95rem;
+            letter-spacing: -0.2px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #C6A27A;
+            transition: width 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
-            color: #C4A87C;
+            color: #C6A27A;
         }
 
+        /* Кнопка «Личный кабинет» — стеклянная, изысканная */
         .btn-login {
-            background: transparent;
-            border: 1.5px solid #1A1A2E;
+            background: rgba(31, 31, 46, 0.03);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(31, 31, 46, 0.2);
             padding: 10px 28px;
-            border-radius: 40px;
+            border-radius: 60px;
             font-weight: 600;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            color: #1F1F2E;
         }
 
         .btn-login:hover {
-            background: #1A1A2E;
-            color: white;
+            background: #1F1F2E;
+            border-color: #1F1F2E;
+            color: #FCF9F6;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
         }
 
+        /* Главная кнопка — премиум градиент + блеск */
         .btn-primary {
-            background: #1A1A2E;
+            background: linear-gradient(105deg, #1F1F2E 0%, #2C2C3E 100%);
             color: white;
-            padding: 14px 36px;
+            padding: 14px 40px;
             border: none;
-            border-radius: 48px;
+            border-radius: 60px;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            transition: all 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.35s ease;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,240,0.2), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
 
         .btn-primary:hover {
-            background: #2A2A3E;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 18px 30px -8px rgba(31,31,46,0.3);
+            background: linear-gradient(105deg, #2A2A3C, #37374B);
         }
 
         .btn-outline {
             background: transparent;
-            border: 1.5px solid #1A1A2E;
-            padding: 12px 28px;
-            border-radius: 48px;
+            border: 1.5px solid #1F1F2E;
+            padding: 12px 32px;
+            border-radius: 60px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s ease;
+            color: #1F1F2E;
         }
 
         .btn-outline:hover {
-            background: #1A1A2E;
-            color: white;
+            background: #1F1F2E;
+            color: #FCF9F6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+            border-color: #1F1F2E;
         }
 
-        /* Hero секция */
+        /* Hero */
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
-            padding: 60px 0 80px;
+            padding: 70px 0 90px;
         }
 
-        .hero-content h1 {
-            font-size: 3.8rem;
+        .hero-content .hero-headline {
+            font-size: 4.2rem;
             font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            margin-bottom: 24px;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
         }
 
-        .hero-content .accent {
-            color: #C4A87C;
+        .hero-headline .accent-text {
+            color: #C6A27A;
+            display: inline-block;
+            background: linear-gradient(120deg, #C6A27A 0%, #DFC2A1 80%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
         }
 
-        .hero-content p {
-            font-size: 1.2rem;
-            color: #5A5A6E;
-            margin-bottom: 32px;
-            line-height: 1.6;
-        }
-
-        /* Разбивка текста на два абзаца */
-        .hero-text {
-            margin-bottom: 32px;
-        }
-        .hero-text .line1 {
-            font-size: 3.8rem;
-            font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            margin-bottom: 8px;
-        }
-        .hero-text .line2 {
-            font-size: 3.8rem;
-            font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            color: #C4A87C;
-        }
         .hero-description {
-            font-size: 1.2rem;
-            color: #5A5A6E;
-            margin: 24px 0 32px;
+            font-size: 1.15rem;
+            color: #4A4A5A;
+            margin: 28px 0 36px;
             line-height: 1.6;
+            max-width: 90%;
+            font-weight: 400;
         }
 
         .hero-stats {
             display: flex;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .stat {
-            text-align: left;
+            gap: 48px;
+            margin-top: 48px;
         }
 
         .stat .number {
             font-size: 2rem;
             font-weight: 800;
-            color: #1A1A2E;
+            color: #1F1F2E;
+            letter-spacing: -0.02em;
         }
 
         .stat .label {
             font-size: 0.8rem;
-            color: #A89F8E;
+            color: #9E8F7A;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            font-weight: 500;
         }
 
-        /* Блок с изображением вместо графика */
+        /* Блок с изображением — элегантная карточка */
         .hero-visual {
-            background: linear-gradient(135deg, rgba(196,168,124,0.08) 0%, rgba(26,26,46,0.03) 100%);
+            background: rgba(198, 162, 122, 0.04);
             border-radius: 48px;
-            padding: 30px;
+            padding: 32px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(196,168,124,0.2);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(198, 162, 122, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .hero-visual:hover {
+            border-color: rgba(198, 162, 122, 0.5);
+            box-shadow: 0 25px 40px -18px rgba(0,0,0,0.2);
         }
 
         .hero-visual img {
             max-width: 100%;
             height: auto;
-            border-radius: 32px;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
         }
 
-        .hero-visual .chart-line {
-            font-size: 3rem;
-            letter-spacing: 8px;
-            margin-top: 16px;
-        }
-
-        /* Секция преимуществ */
+        /* Преимущества */
         .features {
-            padding: 80px 0;
-            background: white;
-            border-radius: 48px 48px 0 0;
+            padding: 100px 0;
+            background: #FFFFFF;
+            border-radius: 56px 56px 0 0;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 56px;
-            letter-spacing: -0.01em;
+            margin-bottom: 64px;
+            letter-spacing: -0.02em;
         }
 
         .section-title span {
-            color: #C4A87C;
+            color: #C6A27A;
+            position: relative;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
+            gap: 36px;
         }
 
         .feature-card {
-            background: #FAF8F5;
-            padding: 32px;
-            border-radius: 28px;
-            transition: all 0.3s;
-            border: 1px solid transparent;
+            background: #FCF9F6;
+            padding: 38px 28px;
+            border-radius: 36px;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid #F0EAE2;
         }
 
         .feature-card:hover {
-            transform: translateY(-6px);
-            border-color: #C4A87C;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            border-color: #C6A27A;
+            box-shadow: 0 28px 40px -18px rgba(0,0,0,0.12);
+            background: #FFFFFF;
         }
 
         .feature-icon {
-            font-size: 2.5rem;
-            color: #C4A87C;
-            margin-bottom: 20px;
+            font-size: 2.6rem;
+            color: #C6A27A;
+            margin-bottom: 24px;
         }
 
         .feature-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
+            font-size: 1.45rem;
+            margin-bottom: 14px;
+            font-weight: 700;
         }
 
-        .feature-card p {
-            color: #666;
-            line-height: 1.5;
-        }
-
-        /* Секция как работает */
+        /* Как работает */
         .how-it-works {
-            padding: 80px 0;
-            background: #FAF8F5;
+            padding: 100px 0;
+            background: #FCF9F6;
         }
 
         .steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 48px;
             text-align: center;
         }
 
-        .step {
-            position: relative;
-        }
-
         .step-number {
-            width: 56px;
-            height: 56px;
-            background: #1A1A2E;
-            color: white;
+            width: 64px;
+            height: 64px;
+            background: #1F1F2E;
+            color: #FCF9F6;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            margin: 0 auto 20px;
+            margin: 0 auto 24px;
+            transition: all 0.2s;
         }
 
-        .step h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+        .step:hover .step-number {
+            background: #C6A27A;
+            transform: scale(1.02);
         }
 
         /* Тарифы */
         .pricing {
-            padding: 80px 0;
-            background: white;
+            padding: 100px 0;
+            background: #FFFFFF;
         }
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
-            max-width: 900px;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .price-card {
-            background: #FAF8F5;
-            border-radius: 32px;
-            padding: 40px 32px;
+            background: #FCF9F6;
+            border-radius: 40px;
+            padding: 44px 36px;
             text-align: center;
-            transition: all 0.3s;
-            border: 1px solid #EDE8E0;
+            transition: all 0.35s;
+            border: 1px solid #E8E0D6;
         }
 
         .price-card.popular {
-            border: 2px solid #C4A87C;
+            border: 1.5px solid #C6A27A;
             transform: scale(1.02);
             background: white;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 28px 42px -18px rgba(0,0,0,0.12);
         }
 
-        .price-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 10px;
+        .price-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .price-card.popular:hover {
+            transform: scale(1.02) translateY(-6px);
         }
 
         .price {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 800;
-            margin: 20px 0;
+            margin: 24px 0;
+            letter-spacing: -0.02em;
         }
 
         .price small {
             font-size: 0.9rem;
             font-weight: 400;
-            color: #A89F8E;
-        }
-
-        .price-card ul {
-            list-style: none;
-            margin: 28px 0;
-            text-align: left;
+            color: #A99A86;
         }
 
         .price-card li {
-            padding: 10px 0;
+            padding: 12px 0;
             display: flex;
             align-items: center;
             gap: 12px;
+            font-weight: 500;
         }
 
         .price-card li i {
-            color: #C4A87C;
-            width: 20px;
+            color: #C6A27A;
+            width: 22px;
+            font-size: 1.1rem;
         }
 
         .badge {
             display: inline-block;
-            background: #C4A87C;
+            background: #C6A27A;
             color: white;
-            padding: 4px 12px;
-            border-radius: 40px;
+            padding: 5px 14px;
+            border-radius: 60px;
             font-size: 0.7rem;
-            font-weight: 600;
-            margin-bottom: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
         }
 
         /* Отзывы */
         .testimonials {
-            padding: 80px 0;
-            background: #FAF8F5;
+            padding: 100px 0;
+            background: #FCF9F6;
         }
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 36px;
         }
 
         .testimonial-card {
             background: white;
-            border-radius: 28px;
-            padding: 32px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border-radius: 32px;
+            padding: 36px;
+            transition: all 0.3s;
+            border: 1px solid #F0EAE2;
         }
 
-        .testimonial-card i {
-            color: #C4A87C;
-            font-size: 1.8rem;
-            margin-bottom: 16px;
-            opacity: 0.6;
-        }
-
-        .testimonial-card p {
-            font-style: italic;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .author {
-            font-weight: 700;
-            color: #1A1A2E;
-        }
-
-        .author span {
-            font-weight: 400;
-            color: #A89F8E;
-            font-size: 0.8rem;
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            border-color: #DFCEBC;
         }
 
         /* Футер */
         .footer {
-            background: #1A1A2E;
-            color: #A89F8E;
-            padding: 56px 0 32px;
+            background: #191A23;
+            color: #B5A992;
+            padding: 64px 0 40px;
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 48px;
-            margin-bottom: 48px;
+            gap: 56px;
+            margin-bottom: 56px;
         }
 
         .footer-col h4 {
-            color: white;
-            margin-bottom: 20px;
+            color: #FCF9F6;
+            margin-bottom: 24px;
             font-size: 1rem;
+            letter-spacing: -0.2px;
         }
 
         .footer-col a {
             display: block;
-            color: #A89F8E;
+            color: #B5A992;
             text-decoration: none;
             margin-bottom: 12px;
             font-size: 0.9rem;
@@ -482,27 +484,16 @@
         }
 
         .footer-col a:hover {
-            color: #C4A87C;
+            color: #C6A27A;
         }
 
         .social-links {
             display: flex;
-            gap: 20px;
-            margin-top: 20px;
+            gap: 24px;
+            margin-top: 24px;
         }
 
-        .social-links a {
-            font-size: 1.3rem;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 32px;
-            border-top: 1px solid rgba(168,159,142,0.2);
-            font-size: 0.75rem;
-        }
-
-        /* Модальное окно */
+        /* Модалка премиум */
         .modal {
             display: none;
             position: fixed;
@@ -510,45 +501,42 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(25, 26, 35, 0.9);
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
         }
 
         .modal-content {
             background: white;
-            border-radius: 40px;
+            border-radius: 48px;
             padding: 48px;
-            max-width: 480px;
+            max-width: 500px;
             width: 90%;
             position: relative;
-            animation: fadeInUp 0.3s ease;
+            animation: fadeUp 0.4s ease;
+            box-shadow: 0 40px 60px -20px rgba(0,0,0,0.4);
         }
 
         .close-modal {
             position: absolute;
-            top: 24px;
-            right: 28px;
-            font-size: 1.5rem;
+            top: 28px;
+            right: 32px;
+            font-size: 1.6rem;
             cursor: pointer;
-            color: #A89F8E;
-            transition: color 0.2s;
+            color: #A99A86;
+            transition: all 0.2s;
         }
 
         .close-modal:hover {
-            color: #1A1A2E;
-        }
-
-        .modal h2 {
-            margin-bottom: 12px;
+            color: #1F1F2E;
         }
 
         .social-login {
             display: flex;
-            gap: 16px;
-            margin: 28px 0;
+            gap: 18px;
+            margin: 32px 0;
         }
 
         .google-btn {
@@ -558,8 +546,8 @@
             justify-content: center;
             gap: 12px;
             padding: 14px;
-            border: 1px solid #E0D6C8;
-            border-radius: 48px;
+            border: 1px solid #E2D9CF;
+            border-radius: 60px;
             background: white;
             cursor: pointer;
             font-weight: 500;
@@ -567,89 +555,79 @@
         }
 
         .google-btn:hover {
-            background: #FAF8F5;
-            border-color: #C4A87C;
-        }
-
-        .divider {
-            text-align: center;
-            margin: 20px 0;
-            color: #A89F8E;
-            font-size: 0.8rem;
+            background: #FCF9F6;
+            border-color: #C6A27A;
+            transform: translateY(-2px);
         }
 
         .modal input {
             width: 100%;
-            padding: 14px 18px;
-            border: 1px solid #E0D6C8;
-            border-radius: 48px;
-            margin-bottom: 16px;
+            padding: 14px 20px;
+            border: 1px solid #E2D9CF;
+            border-radius: 60px;
+            margin-bottom: 18px;
             font-family: inherit;
             font-size: 0.95rem;
+            transition: 0.2s;
         }
 
         .modal input:focus {
             outline: none;
-            border-color: #C4A87C;
+            border-color: #C6A27A;
+            box-shadow: 0 0 0 3px rgba(198,162,122,0.2);
         }
 
         .trial-banner {
-            background: #E8F0E8;
+            background: #EDE8E0;
             padding: 16px;
-            border-radius: 24px;
+            border-radius: 28px;
             text-align: center;
-            margin-top: 24px;
+            margin-top: 28px;
             font-size: 0.85rem;
+            font-weight: 500;
         }
 
-        /* Адаптив */
         @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 40px;
+                gap: 48px;
+            }
+            .hero-description {
+                max-width: 100%;
             }
             .hero-stats {
                 justify-content: center;
             }
-            .hero-text .line1,
-            .hero-text .line2 {
-                font-size: 2.5rem;
+            .hero-headline {
+                font-size: 3rem !important;
             }
             .navbar {
                 flex-direction: column;
-            }
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
+                background: rgba(252, 249, 246, 0.98);
             }
             .section-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
         }
 
         @media (max-width: 600px) {
             .container {
-                padding: 0 16px;
+                padding: 0 20px;
             }
             .price-card.popular {
                 transform: none;
             }
         }
-
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
 <body>
 
-<!-- Модальное окно входа/регистрации -->
 <div id="authModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeAuthModal()">&times;</span>
-        <h2>Добро пожаловать в Femmetry</h2>
-        <p style="color: #666; margin: 8px 0 0;">Войдите, чтобы получить доступ к экосистеме</p>
+        <h2 style="font-size: 1.8rem;">Femmetry Access</h2>
+        <p style="color: #5C5C6E; margin: 8px 0 4px;">Войдите в экосистему данных тела</p>
         
         <div class="social-login">
             <button class="google-btn" onclick="handleGoogleLogin()">
@@ -657,283 +635,143 @@
             </button>
         </div>
         
-        <div class="divider">или по email</div>
+        <div class="divider" style="text-align:center; margin: 12px 0; color:#A99A86;">или email</div>
         
-        <input type="email" id="loginEmail" placeholder="Email">
+        <input type="email" id="loginEmail" placeholder="Электронная почта">
         <input type="password" id="loginPassword" placeholder="Пароль">
         
-        <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="handleEmailLogin()">Войти</button>
+        <button class="btn-primary" style="width:100%; justify-content:center;" onclick="handleEmailLogin()">Войти в кабинет</button>
         
         <div class="trial-banner">
-            🎁 <strong>7 дней бесплатно</strong> — полный доступ ко всем функциям
+            ✨ <strong>7 дней бесплатного премиума</strong> — полная персонализация: цикл + ферритин + КБЖУ
         </div>
         
-        <p style="text-align: center; margin-top: 20px; font-size: 0.7rem; color: #A89F8E;">
-            Регистрируясь, вы соглашаетесь с условиями использования
+        <p style="text-align: center; margin-top: 20px; font-size: 0.7rem; color:#B5A992;">
+            Продолжая, вы принимаете условия использования
         </p>
     </div>
 </div>
 
-<!-- Основной сайт -->
-<div class="hero-gradient">
-    <div class="container">
-        <!-- Шапка -->
-        <div class="navbar">
-            <div class="logo">
-                <h1>Femmetry</h1>
-                <p>Персональная экосистема женского здоровья</p>
+<div class="container">
+    <div class="navbar">
+        <div style="font-weight: 800; font-size: 1.9rem; letter-spacing: -0.03em; background: linear-gradient(135deg, #1F1F2E, #C6A27A); -webkit-background-clip: text; background-clip: text; color: transparent;">Femmetry</div>
+        <div class="nav-links">
+            <a href="#features">Метод</a>
+            <a href="#howitworks">Наука</a>
+            <a href="#pricing">Доступ</a>
+            <a href="#testimonials">Отзывы</a>
+            <button class="btn-login" onclick="openAuthModal()"><i class="fas fa-gem"></i> Личный кабинет</button>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-headline">
+                Ваше тело — <span class="accent-text">это данные.</span><br>
+                Научитесь <span class="accent-text">их читать.</span>
             </div>
-            <div class="nav-links">
-                <a href="#features">О методе</a>
-                <a href="#howitworks">Как работает</a>
-                <a href="#pricing">Тарифы</a>
-                <a href="#testimonials">Отзывы</a>
-                <button class="btn-login" onclick="openAuthModal()">
-                    <i class="fas fa-user"></i> Личный кабинет
-                </button>
+            <p class="hero-description">
+                Femmetry — первая женская система координат здоровья. Питание, цикл, ферритин и тренировки в единой картине. Никаких догадок — только наука.
+            </p>
+            <button class="btn-primary" onclick="openAuthModal()">
+                <i class="fas fa-chart-simple"></i> Начать 7 дней бесплатно
+            </button>
+            <div class="hero-stats">
+                <div class="stat"><div class="number">5000+</div><div class="label">женщин</div></div>
+                <div class="stat"><div class="number">98%</div><div class="label">точность</div></div>
+                <div class="stat"><div class="number">24/7</div><div class="label">AI поддержка</div></div>
             </div>
         </div>
-
-        <!-- Hero секция с двумя абзацами и картинкой -->
-        <div class="hero">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="line1">Ваше тело —</div>
-                    <div class="line2">это данные.</div>
-                </div>
-                <div class="hero-text" style="margin-top: 8px;">
-                    <div class="line1">Научитесь</div>
-                    <div class="line2">их читать.</div>
-                </div>
-                <p class="hero-description">
-                    Femmetry — женская система измерений. Питание, которое подстраивается под фазу цикла, ферритин и ваши цели. Никаких общих советов — только персонализация.
-                </p>
-                <button class="btn-primary" onclick="openAuthModal()">
-                    <i class="fas fa-chart-line"></i> Начать 7 дней бесплатно
-                </button>
-                <div class="hero-stats">
-                    <div class="stat"><div class="number">5000+</div><div class="label">женщин</div></div>
-                    <div class="stat"><div class="number">98%</div><div class="label">точность</div></div>
-                    <div class="stat"><div class="number">24/7</div><div class="label">доступ</div></div>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <!-- Вместо графика - ваше изображение logo.jpg -->
-                <img src="logo.jpg" alt="Femmetry Logo" onerror="this.src='https://placehold.co/400x400/1A1A2E/white?text=Femmetry'">
-                <div style="margin-top: 20px; font-weight: 600;">Ось координат вашего здоровья</div>
-                <div style="font-size: 0.8rem; color: #A89F8E; margin-top: 8px;">Цикл · Ферритин · КБЖУ · Гарвардская тарелка</div>
-            </div>
+        <div class="hero-visual">
+            <img src="logo.jpg" alt="Femmetry визуализация здоровья" onerror="this.src='https://placehold.co/500x500/FCF9F6/C6A27A?text=Femmetry+⚡'">
+            <div style="margin-top: 20px; font-weight: 600; letter-spacing:-0.2px;">Женская ось координат</div>
+            <div style="font-size: 0.75rem; color:#A99A86; margin-top: 6px;">Цикл · Ферритин · КБЖУ · Гарвардская тарелка</div>
         </div>
     </div>
 </div>
 
-<!-- Преимущества -->
 <div class="features" id="features">
     <div class="container">
-        <h2 class="section-title">Научная точность в <span>каждой тарелке</span></h2>
+        <h2 class="section-title">Точность, возведённая в <span>эстетику</span></h2>
         <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                <h3>Измеряем важное</h3>
-                <p>Вес, рост, замеры, ферритин, фаза цикла — система строит персональную траекторию питания на основе данных.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-apple-alt"></i></div>
-                <h3>2 подхода к питанию</h3>
-                <p>По КБЖУ или по Гарвардской тарелке — выбирайте удобный для вас формат контроля питания.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-book-open"></i></div>
-                <h3>Кулинарная книга</h3>
-                <p>Сохраняйте понравившиеся рецепты из персонального меню в свою коллекцию навсегда.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                <h3>По нормам ВОЗ и RKI</h3>
-                <p>Все рекомендации основаны на актуальных клинических исследованиях и протоколах.</p>
-            </div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>Измеряем важное</h3><p>Вес, замеры, ферритин, день цикла — строим персональную траекторию на основе данных, а не догадок.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-apple-alt"></i></div><h3>2 подхода к питанию</h3><p>КБЖУ или Гарвардская тарелка — выбирайте гибкий контроль без стресса.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-book-open"></i></div><h3>Умная кулинарная книга</h3><p>Сохраняйте рецепты, адаптированные под фазу цикла и уровень железа, в личную коллекцию.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>По нормам ВОЗ и RKI</h3><p>Все протоклы основаны на актуальных клинических исследованиях.</p></div>
         </div>
     </div>
 </div>
 
-<!-- Как работает -->
 <div class="how-it-works" id="howitworks">
     <div class="container">
-        <h2 class="section-title">Как работает <span>Femmetry</span></h2>
+        <h2 class="section-title">Как работает <span>биоинтеллект</span></h2>
         <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h4>Вводите данные</h4>
-                <p>Вес, рост, возраст, замеры, ферритин, день цикла</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h4>Система анализирует</h4>
-                <p>Учитывает фазу цикла, уровень железа и ваши цели</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h4>Получаете меню</h4>
-                <p>Персональные рецепты на каждый день с КБЖУ</p>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <h4>Сохраняете рецепты</h4>
-                <p>Формируете свою кулинарную книгу</p>
-            </div>
+            <div class="step"><div class="step-number">1</div><h4>Вводите данные</h4><p>Анализы, цикл, замеры</p></div>
+            <div class="step"><div class="step-number">2</div><h4>Система анализирует</h4><p>Ферритин + фаза + цели</p></div>
+            <div class="step"><div class="step-number">3</div><h4>Персональное меню</h4><p>Рецепты и КБЖУ на каждый день</p></div>
+            <div class="step"><div class="step-number">4</div><h4>Ваша книга рецептов</h4><p>Коллекция блюд навсегда с вами</p></div>
         </div>
     </div>
 </div>
 
-<!-- Тарифы -->
 <div class="pricing" id="pricing">
     <div class="container">
-        <h2 class="section-title">Выберите свой <span>доступ</span></h2>
+        <h2 class="section-title">Выберите <span>доступ к себе</span></h2>
         <div class="pricing-grid">
-            <div class="price-card">
-                <h3>Пробный</h3>
-                <div class="price">0 ₽</div>
-                <p style="color: #C4A87C; font-weight: 500;">7 дней полного доступа</p>
-                <ul>
-                    <li><i class="fas fa-check"></i> Ввод всех параметров</li>
-                    <li><i class="fas fa-check"></i> Меню с учётом цикла</li>
-                    <li><i class="fas fa-check"></i> Меню с учётом ферритина</li>
-                    <li><i class="fas fa-check"></i> Кулинарная книга</li>
-                    <li><i class="fas fa-check"></i> Выбор КБЖУ / Гарвардская тарелка</li>
-                </ul>
-                <button class="btn-outline" onclick="openAuthModal()">Активировать</button>
-            </div>
-            <div class="price-card popular">
-                <div class="badge">Популярный</div>
-                <h3>Premium</h3>
-                <div class="price">790 ₽<small>/мес</small></div>
-                <p style="color: #C4A87C; font-weight: 500;">или 5 900 ₽/год (экономия 37%)</p>
-                <ul>
-                    <li><i class="fas fa-check"></i> Всё из пробного периода</li>
-                    <li><i class="fas fa-check"></i> Еженедельное обновление меню</li>
-                    <li><i class="fas fa-check"></i> История замеров и анализов</li>
-                    <li><i class="fas fa-check"></i> Напоминания о приёме пищи</li>
-                    <li><i class="fas fa-check"></i> Приоритетная поддержка</li>
-                </ul>
-                <button class="btn-primary" onclick="openAuthModal()">Начать 7 дней бесплатно</button>
-            </div>
+            <div class="price-card"><h3>Пробный период</h3><div class="price">0 ₽</div><p style="color:#C6A27A; font-weight:600;">7 дней полного функционала</p><ul><li><i class="fas fa-check"></i> Ввод всех параметров</li><li><i class="fas fa-check"></i> Меню с учётом цикла</li><li><i class="fas fa-check"></i> Учёт ферритина</li><li><i class="fas fa-check"></i> Кулинарная книга</li><li><i class="fas fa-check"></i> КБЖУ / Гарвардская тарелка</li></ul><button class="btn-outline" onclick="openAuthModal()">Активировать</button></div>
+            <div class="price-card popular"><div class="badge">🔥 Бестселлер</div><h3>Premium</h3><div class="price">790 ₽<small>/мес</small></div><p style="color:#C6A27A;">годовой доступ 5 900 ₽ (экономия 37%)</p><ul><li><i class="fas fa-check"></i> Всё из пробного доступа</li><li><i class="fas fa-check"></i> Обновление меню каждую неделю</li><li><i class="fas fa-check"></i> История замеров и анализов</li><li><i class="fas fa-check"></i> Напоминания о приёме пищи</li><li><i class="fas fa-check"></i> Приоритетная поддержка 24/7</li></ul><button class="btn-primary" onclick="openAuthModal()">Старт 7 дней бесплатно</button></div>
         </div>
     </div>
 </div>
 
-<!-- Отзывы -->
 <div class="testimonials" id="testimonials">
     <div class="container">
-        <h2 class="section-title">Реальные <span>результаты</span></h2>
+        <h2 class="section-title">Голоса <span>сообщества</span></h2>
         <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <i class="fas fa-quote-left"></i>
-                <p>«Ферритин вырос с 18 до 56 за 3 месяца. Перестала хотеть спать днём. Меню подстраивалось под фазу цикла — это спасло от срывов на сладкое. Наконец-то кто-то понимает, что я не маленький мужчина».</p>
-                <div class="author">Анна, 34 года <span>• пользователь 4 месяца</span></div>
-            </div>
-            <div class="testimonial-card">
-                <i class="fas fa-quote-left"></i>
-                <p>«После беременности не могла прийти в норму. Femmetry подобрал питание по Гарвардской тарелке + учёт ферритина. Энергия вернулась через 2 недели, а через 2 месяца я вернулась в джинсы до беременности».</p>
-                <div class="author">Екатерина, 28 лет <span>• пользователь 6 месяцев</span></div>
-            </div>
-            <div class="testimonial-card">
-                <i class="fas fa-quote-left"></i>
-                <p>«Я нутрициолог и перепробовала много приложений. Femmetry — единственное, где учитывают ферритин и фазу цикла. Моим клиенткам теперь не нужно гадать, что есть. Система даёт готовые решения».</p>
-                <div class="author">Мария, нутрициолог <span>• эксперт</span></div>
-            </div>
+            <div class="testimonial-card"><i class="fas fa-quote-left" style="color:#C6A27A; opacity:0.6;"></i><p>«Ферритин вырос с 18 до 56 за 3 месяца. Я перестала жить в полусне. Наконец-то система, которая понимает, что я — не маленький мужчина».</p><div class="author">Анна, 34 года <span>• 4 месяца</span></div></div>
+            <div class="testimonial-card"><i class="fas fa-quote-left" style="color:#C6A27A; opacity:0.6;"></i><p>«После родов Femmetry подобрал питание по Гарвардской тарелке + учёт ферритина. Энергия вернулась за 2 недели, фигура — за 2 месяца».</p><div class="author">Екатерина, 28 лет <span>• 6 месяцев</span></div></div>
+            <div class="testimonial-card"><i class="fas fa-quote-left" style="color:#C6A27A; opacity:0.6;"></i><p>«Как нутрициолог, я наконец нашла инструмент, который учитывает фазу цикла и железо. Клиенткам больше не нужно гадать — система даёт готовые решения».</p><div class="author">Мария, нутрициолог <span>• эксперт</span></div></div>
         </div>
     </div>
 </div>
 
-<!-- Футер -->
 <div class="footer">
     <div class="container">
         <div class="footer-content">
-            <div class="footer-col">
-                <h4>Femmetry</h4>
-                <p>Персональная экосистема<br>женского здоровья</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-telegram"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-vk"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>О проекте</h4>
-                <a href="#">О методе</a>
-                <a href="#">Блог</a>
-                <a href="#">Кейсы</a>
-                <a href="#">Вакансии</a>
-            </div>
-            <div class="footer-col">
-                <h4>Помощь</h4>
-                <a href="#">Частые вопросы</a>
-                <a href="#">Поддержка</a>
-                <a href="#">Политика конфиденциальности</a>
-                <a href="#">Договор оферты</a>
-            </div>
-            <div class="footer-col">
-                <h4>Контакты</h4>
-                <a href="mailto:hello@femmetry.ru">hello@femmetry.ru</a>
-                <a href="#">Telegram-канал</a>
-                <a href="#">Чат поддержки</a>
-            </div>
+            <div class="footer-col"><h4>Femmetry</h4><p>Экосистема<br>женского здоровья</p><div class="social-links"><a href="#"><i class="fab fa-telegram"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-vk"></i></a></div></div>
+            <div class="footer-col"><h4>О проекте</h4><a href="#">Научная база</a><a href="#">Блог</a><a href="#">Кейсы</a></div>
+            <div class="footer-col"><h4>Помощь</h4><a href="#">FAQ</a><a href="#">Поддержка</a><a href="#">Политика</a></div>
+            <div class="footer-col"><h4>Контакты</h4><a href="mailto:hello@femmetry.ru">hello@femmetry.ru</a><a href="#">Telegram-канал</a></div>
         </div>
-        <div class="copyright">
-            © 2025 Femmetry. Женское здоровье с научной точностью.
-        </div>
+        <div class="copyright" style="text-align:center; border-top:1px solid rgba(181,169,146,0.2); padding-top:32px;">© 2025 Femmetry. Женское здоровье с научной точностью.</div>
     </div>
 </div>
 
 <script>
-    // Модальное окно
-    function openAuthModal() {
-        document.getElementById('authModal').style.display = 'flex';
-    }
+    function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
+    function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
+    window.onclick = function(e) { if (e.target === document.getElementById('authModal')) closeAuthModal(); }
     
-    function closeAuthModal() {
-        document.getElementById('authModal').style.display = 'none';
-    }
-    
-    window.onclick = function(e) {
-        let modal = document.getElementById('authModal');
-        if (e.target === modal) closeAuthModal();
-    }
-    
-    // Обработка входа
     function handleGoogleLogin() {
-        const trialStart = new Date().toISOString();
         localStorage.setItem('femmetry_auth', 'true');
         localStorage.setItem('femmetry_user_email', 'google_user@femmetry.ru');
-        localStorage.setItem('femmetry_trial_start', trialStart);
+        localStorage.setItem('femmetry_trial_start', new Date().toISOString());
         localStorage.setItem('femmetry_trial_days', '7');
         localStorage.setItem('femmetry_subscription_status', 'trial');
-        
         window.location.href = 'cabinet.html';
     }
     
     function handleEmailLogin() {
         const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-        
-        if (!email || !password) {
-            alert('Пожалуйста, введите email и пароль');
-            return;
-        }
-        
+        const pwd = document.getElementById('loginPassword').value;
+        if (!email || !pwd) { alert('Пожалуйста, заполните почту и пароль'); return; }
         localStorage.setItem('femmetry_auth', 'true');
         localStorage.setItem('femmetry_user_email', email);
         localStorage.setItem('femmetry_trial_start', new Date().toISOString());
         localStorage.setItem('femmetry_trial_days', '7');
         localStorage.setItem('femmetry_subscription_status', 'trial');
-        
         window.location.href = 'cabinet.html';
     }
-    
-    if (localStorage.getItem('femmetry_auth') === 'true') {
-        console.log('Пользователь авторизован');
-    }
 </script>
-
 </body>
 </html>
