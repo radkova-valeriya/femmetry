@@ -1,3 +1,15 @@
+Отлично! Добавляю в онбординг:
+
+1. **Тип питания** (КБЖУ / Гарвардская тарелка)
+2. **Уровень физической активности** (для формулы Харриса-Бенедикта)
+3. **Ферритин** для небеременных
+4. **ГСД и гемоглобин** для беременных
+
+После онбординга на **главной странице** — три варианта меню (завтрак, обед, ужин) и кнопка «Смотреть все меню» с переходом на вкладку меню.
+
+Вот полностью обновлённый `cabinet.html`:
+
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -12,7 +24,6 @@
         body { font-family: 'Inter', sans-serif; background: #FCF9F6; color: #1A1A2E; }
         .app-container { max-width: 1300px; margin: 0 auto; padding: 20px 24px; }
         
-        /* Шапка */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 20px; border-bottom: 1px solid #EDE8E0; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
         .logo { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #1A1A2E, #C6A27A); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .user-area { display: flex; align-items: center; gap: 20px; }
@@ -20,13 +31,11 @@
         .btn-icon { background: transparent; border: 1px solid #E0D6C8; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: all 0.2s; }
         .btn-icon:hover { background: #1A1A2E; color: white; }
         
-        /* Главное меню (только 4 пункта) */
         .main-menu { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; border-bottom: 1px solid #EDE8E0; padding-bottom: 12px; }
         .menu-item { background: none; border: none; padding: 10px 28px; font-weight: 600; color: #A89F8E; cursor: pointer; border-radius: 40px; transition: all 0.2s; }
         .menu-item.active { background: #1A1A2E; color: white; }
         .menu-item:hover:not(.active) { background: #EDE8E0; color: #1A1A2E; }
         
-        /* Контентные блоки */
         .page { display: none; animation: fade 0.3s ease; }
         .page.active { display: block; }
         @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -39,8 +48,12 @@
         .field input, .field select { width: 100%; padding: 12px; border: 1px solid #E0D6C8; border-radius: 40px; font-family: 'Inter', sans-serif; background: white; }
         .btn { background: #1A1A2E; color: white; padding: 12px 28px; border: none; border-radius: 40px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
         .btn:hover { background: #2A2A3E; transform: translateY(-1px); }
-        .btn-outline { background: transparent; border: 1.5px solid #1A1A2E; padding: 10px 24px; border-radius: 40px; cursor: pointer; }
+        .btn-outline { background: transparent; border: 1.5px solid #1A1A2E; padding: 10px 24px; border-radius: 40px; cursor: pointer; transition: all 0.2s; }
+        .btn-outline:hover { background: #1A1A2E; color: white; }
         .info-badge { background: #E8F0E8; padding: 14px; border-radius: 20px; margin-top: 16px; font-size: 0.85rem; }
+        .menu-preview { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0; }
+        .meal-card { background: #FAF8F5; border-radius: 24px; padding: 20px; text-align: center; }
+        .meal-card h4 { color: #C6A27A; margin-bottom: 12px; }
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin: 24px 0; }
         .menu-card { background: #FAF8F5; border-radius: 24px; padding: 20px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
         .menu-card:hover { transform: translateY(-3px); }
@@ -55,9 +68,9 @@
         .footer-links a { color: #A89F8E; text-decoration: none; font-size: 0.85rem; }
         .footer-links a:hover { color: #C6A27A; }
         
-        /* Онбординг (ступенчатый) */
+        /* Онбординг */
         .onboarding-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; }
-        .onboarding-card { background: white; border-radius: 48px; padding: 40px; max-width: 500px; width: 90%; text-align: center; animation: fade 0.3s ease; }
+        .onboarding-card { background: white; border-radius: 48px; padding: 40px; max-width: 500px; width: 90%; text-align: center; animation: fade 0.3s ease; max-height: 90vh; overflow-y: auto; }
         .onboarding-card h2 { font-size: 1.8rem; margin-bottom: 20px; }
         .onboarding-card .options { display: flex; flex-direction: column; gap: 12px; margin: 28px 0; }
         .onboarding-card .option-btn { background: #FAF8F5; border: 1px solid #EDE8E0; padding: 16px; border-radius: 60px; font-size: 1rem; cursor: pointer; transition: all 0.2s; }
@@ -82,7 +95,6 @@
             </div>
         </div>
         
-        <!-- Главное меню: только 4 пункта -->
         <div class="main-menu">
             <button class="menu-item active" data-page="feed">🏠 Главная</button>
             <button class="menu-item" data-page="menu">🍽️ Меню</button>
@@ -91,23 +103,29 @@
             <button class="menu-item" data-page="stats">📈 Статистика</button>
         </div>
         
-        <!-- ГЛАВНАЯ СТРАНИЦА (лента) -->
+        <!-- ГЛАВНАЯ -->
         <div id="feedPage" class="page active">
-            <!-- Призыв сделать замеры -->
             <div class="card" id="reminderCard">
                 <h2><i class="fas fa-heartbeat"></i> Заполните параметры</h2>
                 <p>Для точных рекомендаций укажите вес, рост и возраст</p>
                 <button class="btn" onclick="document.querySelector('[data-page=\'measurements\']').click();"><i class="fas fa-arrow-right"></i> Перейти к замерам</button>
             </div>
             
-            <!-- Последние статьи блога -->
+            <!-- Превью меню на сегодня -->
+            <div class="card">
+                <h2><i class="fas fa-calendar-day"></i> Ваше меню на сегодня</h2>
+                <div id="menuPreview" class="menu-preview"></div>
+                <div style="text-align: center; margin-top: 8px;">
+                    <button class="btn-outline" onclick="document.querySelector('[data-page=\'menu\']').click();">🍽️ Смотреть все меню →</button>
+                </div>
+            </div>
+            
             <div class="card">
                 <h2><i class="fas fa-newspaper"></i> Последние из блога</h2>
                 <div id="latestBlog"></div>
                 <div style="text-align: center; margin-top: 16px;"><a href="#" id="blogLinkAll" style="color:#C6A27A; text-decoration:none;">Все статьи →</a></div>
             </div>
             
-            <!-- Актуальные темы форума -->
             <div class="card">
                 <h2><i class="fas fa-comments"></i> Обсуждают в сообществе</h2>
                 <div id="latestForum"></div>
@@ -115,7 +133,7 @@
             </div>
         </div>
         
-        <!-- СТРАНИЦА МЕНЮ -->
+        <!-- МЕНЮ -->
         <div id="menuPage" class="page">
             <div class="card">
                 <h2><i class="fas fa-calendar-day"></i> Персональное меню на сегодня</h2>
@@ -136,7 +154,7 @@
             </div>
         </div>
         
-        <!-- ЗАМЕРЫ (анкета) -->
+        <!-- ЗАМЕРЫ -->
         <div id="measurementsPage" class="page">
             <div class="card">
                 <h2><i class="fas fa-chart-simple"></i> Мои параметры</h2>
@@ -148,6 +166,8 @@
                     <div class="field"><label>Бёдра (см)</label><input type="number" id="hips"></div>
                 </div>
                 <div class="grid-2">
+                    <div class="field"><label>Уровень активности</label><select id="activity"><option value="1.2">Сидячий (минимум движения)</option><option value="1.375">Легкая активность (1-3 дня/нед)</option><option value="1.55">Средняя (3-5 дней/нед)</option><option value="1.725">Высокая (6-7 дней/нед)</option><option value="1.9">Очень высокая (спортсмен)</option></select></div>
+                    <div class="field"><label>Тип питания</label><select id="nutritionType"><option value="kbzhu">По КБЖУ (точный расчёт)</option><option value="harvard">Гарвардская тарелка</option></select></div>
                     <div class="field"><label>📅 Первый день последних месячных</label><input type="date" id="lastPeriod"></div>
                     <div class="field"><label>🩸 Ферритин (нг/мл)</label><input type="number" id="ferritin"></div>
                     <div class="field"><label>🤰 Беременность</label><select id="pregnant"><option value="no">Нет</option><option value="yes">Да</option></select></div>
@@ -163,11 +183,11 @@
             <div class="card">
                 <h2><i class="fas fa-baby-carriage"></i> Параметры беременности (если применимо)</h2>
                 <div class="grid-2">
-                    <div class="field"><label>Триместр</label><select id="pregnancyTrimester"><option value="1">Первый</option><option value="2">Второй</option><option value="3">Третий</option></select></div>
-                    <div class="field"><label>Гемоглобин</label><select id="pregnancyHemoglobin"><option value="normal">Норма (≥110)</option><option value="low">90-109</option><option value="very_low">&lt;90</option></select></div>
-                    <div class="field"><label>Гестационный СД</label><select id="pregnancyGSD"><option value="no">Нет</option><option value="yes">Да</option></select></div>
+                    <div class="field"><label>Триместр</label><select id="pregnancyTrimester"><option value="1">Первый (1-13 нед)</option><option value="2">Второй (14-27 нед)</option><option value="3">Третий (28-40 нед)</option></select></div>
+                    <div class="field"><label>Гемоглобин (г/л)</label><select id="pregnancyHemoglobin"><option value="normal">Норма (≥110)</option><option value="low">90-109 (лёгкая анемия)</option><option value="very_low">&lt;90 (анемия)</option></select></div>
+                    <div class="field"><label>Гестационный СД</label><select id="pregnancyGSD"><option value="no">Нет</option><option value="yes">Да, ГСД</option></select></div>
                 </div>
-                <button id="savePregnancyBtn" class="btn-outline">Сохранить</button>
+                <button id="savePregnancyBtn" class="btn-outline">Сохранить параметры беременности</button>
             </div>
         </div>
         
@@ -178,9 +198,9 @@
                 <div style="overflow-x:auto"><table class="history-table"><thead><tr><th>Дата</th><th>Вес</th><th>Талия</th><th>Бёдра</th><th>Цель</th></tr></thead><tbody id="historyBody"></tbody></table></div>
             </div>
             <div class="card"><h2><i class="fas fa-chart-line"></i> Динамика веса</h2><div class="chart-container"><canvas id="weightChart"></canvas></div></div>
+            <div class="card"><h2><i class="fas fa-calculator"></i> Ваша норма калорий</h2><div id="kcalDisplay" class="info-badge"></div></div>
         </div>
         
-        <!-- Футер с блогом и форумом -->
         <div class="footer-links">
             <a href="#" id="footerBlogLink"><i class="fas fa-newspaper"></i> Научный блог</a>
             <a href="#" id="footerForumLink"><i class="fas fa-comments"></i> Форум сообщества</a>
@@ -190,7 +210,7 @@
     </div>
 </div>
 
-<!-- Модальные окна для блога и форума (простая реализация) -->
+<!-- Модалки -->
 <div id="blogModal" class="hidden" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:3000; overflow:auto; padding:40px;">
     <div style="max-width:800px; margin:0 auto; background:white; border-radius:40px; padding:32px;">
         <div style="display:flex; justify-content:space-between;"><h2>Блог Femmetry</h2><button onclick="closeBlogModal()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button></div>
@@ -205,7 +225,7 @@
 </div>
 
 <script>
-    // ========== ДАННЫЕ ==========
+    // БАЗА ДАННЫХ
     let recipes = JSON.parse(localStorage.getItem('femmetry_recipes') || '[]');
     let blogPosts = JSON.parse(localStorage.getItem('femmetry_blog_posts') || '[]');
     let forumTopics = JSON.parse(localStorage.getItem('femmetry_forum_topics') || '[]');
@@ -213,15 +233,14 @@
     let selectedMenu = null;
     let weightChart = null;
     
-    // Инициализация демо
     if(recipes.length === 0) {
         recipes = [
-            { name:"Омлет с говядиной", meal:"breakfast", calories:"320 ккал" },
-            { name:"Гречка с печенью", meal:"lunch", calories:"450 ккал" },
-            { name:"Скумбрия запечённая", meal:"dinner", calories:"380 ккал" },
-            { name:"Творог с ягодами", meal:"snack", calories:"180 ккал" },
-            { name:"Куриная печень", meal:"lunch", calories:"420 ккал" },
-            { name:"Лосось с киноа", meal:"dinner", calories:"520 ккал" }
+            { name:"Омлет с говядиной и шпинатом", meal:"breakfast", calories:"320 ккал", ingredients:"2 яйца, 50г говядины, шпинат" },
+            { name:"Гречка с печенью", meal:"lunch", calories:"450 ккал", ingredients:"120г гречки, 100г печени, лук" },
+            { name:"Скумбрия запечённая", meal:"dinner", calories:"380 ккал", ingredients:"130г рыбы, лимон, специи" },
+            { name:"Творог с ягодами", meal:"snack", calories:"180 ккал", ingredients:"150г творога, ягоды" },
+            { name:"Куриная печень с луком", meal:"lunch", calories:"420 ккал", ingredients:"150г печени, лук, сметана" },
+            { name:"Лосось с киноа", meal:"dinner", calories:"520 ккал", ingredients:"150г лосося, 80г киноа" }
         ];
         localStorage.setItem('femmetry_recipes', JSON.stringify(recipes));
     }
@@ -240,14 +259,30 @@
         localStorage.setItem('femmetry_forum_topics', JSON.stringify(forumTopics));
     }
     
-    // ========== ОНБОРДИНГ ==========
+    // ФОРМУЛА ХАРРИСА-БЕНЕДИКТА
+    function calculateBMR(weight, height, age) {
+        return 447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age);
+    }
+    function calculateTDEE(weight, height, age, activityFactor) {
+        let bmr = calculateBMR(weight, height, age);
+        return Math.round(bmr * activityFactor);
+    }
+    function getGoalMultiplier(goal) {
+        if(goal === 'loss') return 0.85;
+        if(goal === 'gain') return 1.1;
+        return 1.0;
+    }
+    
+    // ОНБОРДИНГ (расширенный)
     let onboardingData = {};
     let step = 0;
     const questions = [
         { q: "Какова ваша основная цель?", field: "goal", options: ["Снижение веса", "Поддержание формы", "Набор массы", "Я беременна"] },
-        { q: "Укажите ваш возраст", field: "age", type: "number", placeholder: "Полных лет" },
+        { q: "Ваш возраст", field: "age", type: "number", placeholder: "Полных лет" },
         { q: "Ваш рост (см)", field: "height", type: "number", placeholder: "см" },
         { q: "Ваш вес (кг)", field: "weight", type: "number", placeholder: "кг" },
+        { q: "Уровень физической активности", field: "activity", options: ["Сидячий (минимум движения)", "Легкая активность (1-3 дня/нед)", "Средняя (3-5 дней/нед)", "Высокая (6-7 дней/нед)", "Очень высокая (спортсмен)"] },
+        { q: "Какой подход к питанию вам ближе?", field: "nutrition", options: ["По КБЖУ (точный расчёт калорий)", "Гарвардская тарелка (визуальный метод)"] },
         { q: "Первый день последних месячных", field: "lastPeriod", type: "date", placeholder: "Выберите дату" }
     ];
     
@@ -257,7 +292,7 @@
         const q = questions[step];
         let html = `<div class="onboarding-overlay"><div class="onboarding-card"><h2>${q.q}</h2>`;
         if(q.options) {
-            html += `<div class="options">` + q.options.map(opt => `<button class="option-btn" onclick="answerOnboarding('${opt}')">${opt}</button>`).join('') + `</div>`;
+            html += `<div class="options">` + q.options.map(opt => `<button class="option-btn" onclick="answerOnboarding('${opt.replace(/'/g, "\\'")}')">${opt}</button>`).join('') + `</div>`;
         } else {
             html += `<input type="${q.type||'text'}" id="onbInput" placeholder="${q.placeholder||''}" style="width:100%; padding:14px; border-radius:60px; border:1px solid #EDE8E0; font-size:1rem;">`;
             html += `<button class="btn" style="margin-top:20px;" onclick="answerOnboardingInput()">Далее</button>`;
@@ -277,25 +312,59 @@
         step++;
         showStep();
     };
+    
     function finishOnboarding() {
         localStorage.setItem('femmetry_onboarding_done', 'true');
+        
+        // Цель
         let goalMap = { "Снижение веса":"loss", "Поддержание формы":"maintain", "Набор массы":"gain", "Я беременна":"pregnant" };
         let goal = goalMap[onboardingData.goal] || "maintain";
         if(goal === "pregnant") document.getElementById('pregnant').value = "yes";
         else document.getElementById('pregnant').value = "no";
+        
+        // Активность
+        let activityMap = { "Сидячий (минимум движения)":1.2, "Легкая активность (1-3 дня/нед)":1.375, "Средняя (3-5 дней/нед)":1.55, "Высокая (6-7 дней/нед)":1.725, "Очень высокая (спортсмен)":1.9 };
+        let activityVal = activityMap[onboardingData.activity] || 1.375;
+        document.getElementById('activity').value = activityVal;
+        
+        // Тип питания
+        let nutritionVal = onboardingData.nutrition === "По КБЖУ (точный расчёт калорий)" ? "kbzhu" : "harvard";
+        document.getElementById('nutritionType').value = nutritionVal;
+        
+        // Основные данные
         document.getElementById('age').value = onboardingData.age || "";
         document.getElementById('height').value = onboardingData.height || "";
         document.getElementById('weight').value = onboardingData.weight || "";
         document.getElementById('lastPeriod').value = onboardingData.lastPeriod || "";
+        
         if(goal !== "pregnant") currentGoal = goal;
         document.querySelectorAll('[data-goal]').forEach(btn => { btn.classList.remove('active'); if(btn.innerText.includes(goal==="loss"?"Похудение":(goal==="gain"?"Набор":"Поддержание"))) btn.classList.add('active'); });
+        
+        // Дополнительные вопросы для беременных
+        if(goal === "pregnant") {
+            setTimeout(() => {
+                let hb = prompt("Укажите уровень гемоглобина (г/л):\nнорма (≥110) / 90-109 / <90", "норма");
+                if(hb && hb.includes("90")) document.getElementById('pregnancyHemoglobin').value = "low";
+                else if(hb && hb.includes("<90")) document.getElementById('pregnancyHemoglobin').value = "very_low";
+                else document.getElementById('pregnancyHemoglobin').value = "normal";
+                let gsd = confirm("Есть ли у вас гестационный сахарный диабет? (OK=Да, Отмена=Нет)");
+                document.getElementById('pregnancyGSD').value = gsd ? "yes" : "no";
+                alert("Параметры беременности сохранены");
+                localStorage.setItem('femmetry_pregnancy_hemoglobin', document.getElementById('pregnancyHemoglobin').value);
+                localStorage.setItem('femmetry_pregnancy_gsd', document.getElementById('pregnancyGSD').value);
+            }, 100);
+        } else {
+            let fer = prompt("Укажите уровень ферритина (нг/мл), если знаете (можно пропустить)", "");
+            if(fer && !isNaN(fer)) document.getElementById('ferritin').value = fer;
+        }
+        
         saveMeasurements();
         document.getElementById('onboardingContainer').innerHTML = '';
         document.getElementById('mainApp').style.display = 'block';
         renderAll();
     }
     
-    // ========== ОСНОВНЫЕ ФУНКЦИИ ==========
+    // ОСНОВНЫЕ ФУНКЦИИ
     function saveMeasurements() {
         let w = parseFloat(document.getElementById('weight').value);
         let h = parseFloat(document.getElementById('height').value);
@@ -309,25 +378,67 @@
         localStorage.setItem('femmetry_last_period', document.getElementById('lastPeriod').value);
         localStorage.setItem('femmetry_ferritin', document.getElementById('ferritin').value);
         localStorage.setItem('femmetry_pregnant', document.getElementById('pregnant').value);
+        localStorage.setItem('femmetry_activity', document.getElementById('activity').value);
+        localStorage.setItem('femmetry_nutrition_type', document.getElementById('nutritionType').value);
+        
+        // Расчёт калорий
+        let activity = parseFloat(document.getElementById('activity').value) || 1.375;
+        let tdee = calculateTDEE(w, h, a, activity);
+        let targetKcal = Math.round(tdee * getGoalMultiplier(currentGoal));
+        document.getElementById('kcalDisplay').innerHTML = `Ваша дневная норма: ${targetKcal} ккал (${currentGoal==='loss'?'дефицит':(currentGoal==='gain'?'профицит':'поддержание')})`;
+        
         alert("✅ Данные сохранены");
         renderAll();
         return true;
     }
     
+    function getTodayMenuPreview() {
+        let breakfasts = recipes.filter(r=>r.meal==='breakfast');
+        let lunches = recipes.filter(r=>r.meal==='lunch');
+        let dinners = recipes.filter(r=>r.meal==='dinner');
+        return {
+            breakfast: breakfasts[0]?.name || "Овсянка с ягодами",
+            lunch: lunches[0]?.name || "Курица с гречкой",
+            dinner: dinners[0]?.name || "Рыба с овощами"
+        };
+    }
+    
+    function renderMenuPreview() {
+        let preview = getTodayMenuPreview();
+        document.getElementById('menuPreview').innerHTML = `
+            <div class="meal-card"><h4>🌅 Завтрак</h4><p>${preview.breakfast}</p></div>
+            <div class="meal-card"><h4>☀️ Обед</h4><p>${preview.lunch}</p></div>
+            <div class="meal-card"><h4>🌙 Ужин</h4><p>${preview.dinner}</p></div>
+        `;
+    }
+    
     function renderAll() {
-        renderMenu();
+        renderMenuPreview();
+        renderFullMenu();
         renderCookbook();
         renderHistory();
         renderLatestBlog();
         renderLatestForum();
         updateCharts();
         updateReminderCard();
+        updateKcalDisplay();
     }
     
-    function renderMenu() {
+    function updateKcalDisplay() {
         let w = parseFloat(document.getElementById('weight').value);
         let h = parseFloat(document.getElementById('height').value);
-        if(!w || !h) { document.getElementById('menuInfo').innerHTML = "⚠️ Сначала сохраните замеры"; document.getElementById('menuOptions').innerHTML = ""; return; }
+        let a = parseFloat(document.getElementById('age').value);
+        if(w && h && a) {
+            let activity = parseFloat(document.getElementById('activity').value) || 1.375;
+            let tdee = calculateTDEE(w, h, a, activity);
+            let targetKcal = Math.round(tdee * getGoalMultiplier(currentGoal));
+            document.getElementById('kcalDisplay').innerHTML = `Ваша дневная норма: ${targetKcal} ккал (${currentGoal==='loss'?'дефицит':(currentGoal==='gain'?'профицит':'поддержание')})`;
+        }
+    }
+    
+    function renderFullMenu() {
+        let w = parseFloat(document.getElementById('weight').value);
+        if(!w) { document.getElementById('menuInfo').innerHTML = "⚠️ Сначала сохраните замеры"; document.getElementById('menuOptions').innerHTML = ""; return; }
         let breakfasts = recipes.filter(r=>r.meal==='breakfast').slice(0,2);
         let lunches = recipes.filter(r=>r.meal==='lunch').slice(0,2);
         let dinners = recipes.filter(r=>r.meal==='dinner').slice(0,2);
@@ -339,7 +450,7 @@
                 lunch: lunches[i%lunches.length]?.name || "Курица с гречкой",
                 dinner: dinners[i%dinners.length]?.name || "Рыба с овощами",
                 snack: "Йогурт с орехами",
-                research: "Рекомендации ВОЗ"
+                research: "Рекомендации ВОЗ и клинические протоколы"
             });
         }
         document.getElementById('menuInfo').innerHTML = "📋 6 вариантов меню — выберите подходящий";
@@ -350,10 +461,13 @@
     
     function displaySelectedMenu(menu) {
         document.getElementById('selectedMenuDetails').innerHTML = `
-            <div style="display:grid; gap:12px;"><div><strong>🌅 Завтрак:</strong> ${menu.breakfast} <button class="btn-outline" style="padding:4px 12px; margin-left:8px;" onclick="saveRecipeByName('${menu.breakfast}')">Сохранить</button></div>
-            <div><strong>☀️ Обед:</strong> ${menu.lunch} <button class="btn-outline" style="padding:4px 12px; margin-left:8px;" onclick="saveRecipeByName('${menu.lunch}')">Сохранить</button></div>
-            <div><strong>🌙 Ужин:</strong> ${menu.dinner} <button class="btn-outline" style="padding:4px 12px; margin-left:8px;" onclick="saveRecipeByName('${menu.dinner}')">Сохранить</button></div>
-            <div><strong>🍎 Перекус:</strong> ${menu.snack}</div></div><div class="info-badge" style="margin-top:12px;">${menu.research}</div>`;
+            <div style="display:grid; gap:12px;">
+                <div><strong>🌅 Завтрак:</strong> ${menu.breakfast} <button class="btn-outline" style="padding:4px 12px; margin-left:8px;" onclick="saveRecipeByName('${menu.breakfast}')">Сохранить</button></div>
+                <div><strong>☀️ Обед:</strong> ${menu.lunch} <button class="btn-outline" style="padding:4px 12px; margin-left:8px;" onclick="saveRecipeByName('${menu.lunch}')">Сохранить</button></div>
+                <div><strong>🌙 Ужин:</strong> ${menu.dinner} <button class="btn-outline" style="padding:4px 12px; margin-left:8px;" onclick="saveRecipeByName('${menu.dinner}')">Сохранить</button></div>
+                <div><strong>🍎 Перекус:</strong> ${menu.snack}</div>
+            </div>
+            <div class="info-badge" style="margin-top:12px;">${menu.research}</div>`;
         document.getElementById('selectedMenuBlock').classList.remove('hidden');
     }
     
@@ -407,22 +521,13 @@
         container.innerHTML = forumTopics.slice(0,2).map(t=>`<div class="forum-teaser"><span class="tag">${t.category}</span><h4 style="margin:8px 0">${t.title}</h4><p style="font-size:0.8rem; color:#666">${t.author}: ${t.content.substring(0,80)}...</p></div>`).join('');
     }
     
-    function openBlogModal() {
-        let modal = document.getElementById('blogModal');
-        document.getElementById('blogFullList').innerHTML = blogPosts.map(p=>`<div style="margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #EDE8E0;"><span class="tag">${p.category}</span><h3>${p.title}</h3><p style="color:#666; margin:8px 0;">${p.content}</p><div style="font-size:0.7rem; color:#A89F8E">${p.date}</div></div>`).join('');
-        modal.classList.remove('hidden');
-    }
-    function openForumModal() {
-        let modal = document.getElementById('forumModal');
-        document.getElementById('forumFullList').innerHTML = forumTopics.map(t=>`<div style="margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #EDE8E0;"><span class="tag">${t.category}</span><h3>${t.title}</h3><p>${t.content}</p><div style="font-size:0.7rem; color:#A89F8E">${t.author} · ${t.date}</div></div>`).join('');
-        modal.classList.remove('hidden');
-    }
+    function openBlogModal() { document.getElementById('blogFullList').innerHTML = blogPosts.map(p=>`<div style="margin-bottom:24px;"><span class="tag">${p.category}</span><h3>${p.title}</h3><p>${p.content}</p><div style="font-size:0.7rem;">${p.date}</div></div>`).join(''); document.getElementById('blogModal').classList.remove('hidden'); }
+    function openForumModal() { document.getElementById('forumFullList').innerHTML = forumTopics.map(t=>`<div style="margin-bottom:24px;"><span class="tag">${t.category}</span><h3>${t.title}</h3><p>${t.content}</p><div style="font-size:0.7rem;">${t.author} · ${t.date}</div></div>`).join(''); document.getElementById('forumModal').classList.remove('hidden'); }
     function closeBlogModal() { document.getElementById('blogModal').classList.add('hidden'); }
     function closeForumModal() { document.getElementById('forumModal').classList.add('hidden'); }
-    
     function logout() { localStorage.removeItem('femmetry_auth'); window.location.href='index.html'; }
     
-    // Навигация по меню
+    // Навигация
     document.querySelectorAll('.menu-item').forEach(btn=>{
         btn.onclick = () => {
             document.querySelectorAll('.menu-item').forEach(b=>b.classList.remove('active'));
@@ -438,20 +543,21 @@
         localStorage.setItem('femmetry_pregnancy_gsd', document.getElementById('pregnancyGSD').value);
         alert("Параметры беременности сохранены");
     };
-    document.querySelectorAll('[data-goal]').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('[data-goal]').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentGoal=btn.dataset.goal;};});
+    document.querySelectorAll('[data-goal]').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('[data-goal]').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentGoal=btn.dataset.goal; updateKcalDisplay();};});
     document.getElementById('footerBlogLink').onclick = (e) => { e.preventDefault(); openBlogModal(); };
     document.getElementById('footerForumLink').onclick = (e) => { e.preventDefault(); openForumModal(); };
-    document.getElementById('footerInstructionLink').onclick = (e) => { e.preventDefault(); alert("🥗 Метод Гарвардской тарелки: 1/2 овощи, 1/4 белок, 1/4 углеводы + полезные жиры."); };
+    document.getElementById('footerInstructionLink').onclick = (e) => { e.preventDefault(); alert("🥗 Гарвардская тарелка: ½ овощи, ¼ белок, ¼ углеводы + полезные жиры."); };
     document.getElementById('blogLinkAll').onclick = (e) => { e.preventDefault(); openBlogModal(); };
     document.getElementById('forumLinkAll').onclick = (e) => { e.preventDefault(); openForumModal(); };
     
-    // Загрузка данных
     function loadUserData() {
         let p = localStorage.getItem('femmetry_params');
         if(p) { let params = JSON.parse(p); document.getElementById('weight').value = params.weight; document.getElementById('height').value = params.height; document.getElementById('age').value = params.age; document.getElementById('waist').value = params.waist||''; document.getElementById('hips').value = params.hips||''; }
         document.getElementById('lastPeriod').value = localStorage.getItem('femmetry_last_period')||'';
         document.getElementById('ferritin').value = localStorage.getItem('femmetry_ferritin')||'';
         document.getElementById('pregnant').value = localStorage.getItem('femmetry_pregnant')||'no';
+        document.getElementById('activity').value = localStorage.getItem('femmetry_activity')||'1.375';
+        document.getElementById('nutritionType').value = localStorage.getItem('femmetry_nutrition_type')||'harvard';
         document.getElementById('pregnancyTrimester').value = localStorage.getItem('femmetry_pregnancy_trimester')||'1';
         document.getElementById('pregnancyHemoglobin').value = localStorage.getItem('femmetry_pregnancy_hemoglobin')||'normal';
         document.getElementById('pregnancyGSD').value = localStorage.getItem('femmetry_pregnancy_gsd')||'no';
@@ -466,3 +572,4 @@
 </script>
 </body>
 </html>
+```
