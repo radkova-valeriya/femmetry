@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Femmetry — персональная экосистема женского здоровья</title>
+    <title>Femmetry — экосистема женского здоровья</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -13,15 +13,11 @@
             background: #FCF9F6;
             color: #1A1A2E;
             line-height: 1.5;
-            overflow-x: hidden;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            -webkit-font-smoothing: antialiased;
         }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
         
-        /* Navbar */
+        /* Navbar — прозрачный, премиум */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -31,8 +27,8 @@
             gap: 20px;
             position: sticky;
             top: 0;
-            background: rgba(252,249,246,0.95);
-            backdrop-filter: blur(12px);
+            background: rgba(252,249,246,0.92);
+            backdrop-filter: blur(20px);
             z-index: 100;
         }
         .logo h1 {
@@ -42,6 +38,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -0.02em;
         }
         .nav-links {
             display: flex;
@@ -54,32 +51,33 @@
             color: #1A1A2E;
             font-weight: 500;
             transition: color 0.2s;
+            font-size: 0.95rem;
         }
         .nav-links a:hover { color: #C6A27A; }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+        .dropdown { position: relative; display: inline-block; }
         .dropdown-content {
             display: none;
             position: absolute;
-            background: white;
-            min-width: 200px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-radius: 20px;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            min-width: 220px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-radius: 24px;
             padding: 12px 0;
             z-index: 101;
-            top: 30px;
+            top: 35px;
             left: 0;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         .dropdown:hover .dropdown-content { display: block; }
         .dropdown-content a {
             display: block;
-            padding: 10px 20px;
+            padding: 12px 24px;
             color: #1A1A2E;
             font-size: 0.85rem;
+            transition: all 0.2s;
         }
-        .dropdown-content a:hover { background: #FCF9F6; color: #C6A27A; }
+        .dropdown-content a:hover { background: #FCF9F6; color: #C6A27A; padding-left: 28px; }
         
         .btn-login {
             background: transparent;
@@ -89,6 +87,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
+            font-size: 0.9rem;
         }
         .btn-login:hover {
             background: #1A1A2E;
@@ -127,24 +126,32 @@
         .btn-outline:hover {
             background: #1A1A2E;
             color: white;
+            transform: translateY(-1px);
         }
         
-        /* Hero */
+        /* Hero — минимализм, акцент */
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
-            padding: 50px 0 70px;
+            padding: 60px 0 80px;
         }
-        .hero-content h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; }
+        .hero-content h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; }
         .hero-content .accent { color: #C6A27A; }
         .hero-description { font-size: 1.1rem; color: #5A5A6E; margin: 28px 0 32px; line-height: 1.6; }
-        .hero-stats { display: flex; gap: 40px; margin-top: 40px; }
+        .hero-stats { display: flex; gap: 48px; margin-top: 40px; }
         .stat .number { font-size: 1.8rem; font-weight: 800; }
-        .stat .label { font-size: 0.75rem; color: #A89F8E; text-transform: uppercase; }
-        .hero-visual { background: rgba(198,162,122,0.05); border-radius: 48px; padding: 30px; text-align: center; border: 1px solid rgba(198,162,122,0.2); }
-        .hero-visual img { max-width: 100%; border-radius: 28px; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1); }
+        .stat .label { font-size: 0.75rem; color: #A89F8E; text-transform: uppercase; letter-spacing: 0.5px; }
+        .hero-visual {
+            background: rgba(198,162,122,0.04);
+            border-radius: 48px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(198,162,122,0.15);
+            backdrop-filter: blur(10px);
+        }
+        .hero-visual img { max-width: 100%; border-radius: 28px; box-shadow: 0 25px 45px -15px rgba(0,0,0,0.15); }
         
         /* Features — 4 блока в линию */
         .features { padding: 80px 0; background: white; border-radius: 48px 48px 0 0; }
@@ -157,88 +164,161 @@
         }
         .feature-card {
             background: #FCF9F6;
-            padding: 32px 24px;
-            border-radius: 28px;
-            transition: all 0.3s;
+            padding: 32px 28px;
+            border-radius: 32px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             border: 1px solid transparent;
             text-align: center;
         }
         .feature-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-8px);
             border-color: #C6A27A;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.1);
         }
         .feature-icon { font-size: 2.3rem; color: #C6A27A; margin-bottom: 20px; }
-        .feature-card h3 { font-size: 1.3rem; margin-bottom: 12px; }
+        .feature-card h3 { font-size: 1.3rem; margin-bottom: 12px; font-weight: 600; }
         .feature-card p { color: #666; line-height: 1.5; font-size: 0.9rem; }
         
-        @media (max-width: 1000px) {
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
+        /* How it works */
+        .how-section { padding: 80px 0; background: #FAF8F5; }
+        .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: #1A1A2E;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
         }
-        @media (max-width: 600px) {
-            .features-grid { grid-template-columns: 1fr; }
+        
+        /* Blog preview */
+        .blog-section { padding: 80px 0; background: white; }
+        .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .blog-card {
+            background: #FCF9F6;
+            border-radius: 32px;
+            padding: 28px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid #EFEAE3;
+        }
+        .blog-card:hover { transform: translateY(-6px); border-color: #C6A27A; box-shadow: 0 20px 30px -12px rgba(0,0,0,0.08); }
+        .blog-category { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #C6A27A; margin-bottom: 12px; }
+        .blog-card h3 { font-size: 1.2rem; margin-bottom: 12px; font-weight: 600; }
+        .blog-card p { color: #666; font-size: 0.85rem; line-height: 1.5; }
+        
+        /* Pricing */
+        .pricing { padding: 80px 0; background: #FAF8F5; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; max-width: 800px; margin: 0 auto; }
+        .price-card {
+            background: white;
+            border-radius: 40px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #EFEAE3;
+        }
+        .price-card.popular {
+            border: 2px solid #C6A27A;
+            transform: scale(1.02);
+            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.1);
+        }
+        .price { font-size: 2.5rem; font-weight: 800; margin: 20px 0; }
+        
+        /* Age banner (ненавязчивый, внизу) */
+        .age-note {
+            text-align: center;
+            padding: 40px 0;
+            background: white;
+            border-top: 1px solid #EFEAE3;
+        }
+        .age-note p { color: #A89F8E; font-size: 0.8rem; }
+        .age-note a { color: #C6A27A; text-decoration: none; }
+        
+        /* Footer */
+        .footer { background: #1A1A2E; color: #A89F8E; padding: 56px 0 32px; margin-top: 0; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px; margin-bottom: 48px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 0.9rem; font-weight: 600; letter-spacing: -0.2px; }
+        .footer-col a { display: block; color: #A89F8E; text-decoration: none; margin-bottom: 12px; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-col a:hover { color: #C6A27A; transform: translateX(2px); }
+        .copyright { text-align: center; padding-top: 32px; border-top: 1px solid rgba(168,159,142,0.2); font-size: 0.7rem; }
+        
+        /* Модальные окна — премиум */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(12px); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content {
+            background: white;
+            border-radius: 48px;
+            padding: 48px;
+            max-width: 680px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalFade 0.3s ease;
+        }
+        @keyframes modalFade {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-content h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.02em; }
+        .modal-content h3 { font-size: 1.2rem; font-weight: 600; margin: 24px 0 12px; color: #C6A27A; }
+        .modal-content p { margin-bottom: 16px; line-height: 1.6; color: #3A3A4A; }
+        .modal-content ul { margin: 16px 0 16px 24px; }
+        .modal-content li { margin-bottom: 8px; line-height: 1.5; }
+        .close-modal {
+            position: sticky;
+            top: 0;
+            float: right;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #A89F8E;
+            transition: color 0.2s;
+            background: white;
+            padding: 0 0 0 20px;
+            margin-top: -20px;
+        }
+        .close-modal:hover { color: #1A1A2E; }
+        
+        .social-login { display: flex; gap: 16px; margin: 28px 0; }
+        .google-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px; border: 1px solid #E0D6C8; border-radius: 60px; background: white; cursor: pointer; }
+        .checkbox-label { display: flex; align-items: center; gap: 12px; font-size: 0.75rem; color: #666; margin: 16px 0; cursor: pointer; }
+        .trial-banner { background: #E8F0E8; padding: 16px; border-radius: 24px; text-align: center; margin-top: 24px; }
+        
+        @media (max-width: 1000px) {
+            .features-grid, .steps-grid, .blog-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 700px) {
             .hero { grid-template-columns: 1fr; text-align: center; }
             .hero-stats { justify-content: center; }
             .hero-content h1 { font-size: 2.5rem; }
+            .features-grid, .steps-grid, .blog-grid, .pricing-grid { grid-template-columns: 1fr; }
             .nav-links { justify-content: center; }
+            .modal-content { padding: 32px; }
         }
-        
-        .quick-links { padding: 40px 0 20px; }
-        .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        .quick-card { background: white; border-radius: 24px; padding: 20px; text-align: center; border: 1px solid #EFEAE3; transition: all 0.3s; cursor: pointer; }
-        .quick-card:hover { transform: translateY(-4px); border-color: #C6A27A; }
-        .quick-card i { font-size: 1.8rem; color: #C6A27A; margin-bottom: 12px; }
-        
-        .age-banner { background: linear-gradient(135deg, #C6A27A15, #C6A27A05); border-radius: 28px; padding: 32px; margin: 40px 0; text-align: center; border-left: 4px solid #C6A27A; }
-        .blog-section { padding: 60px 0; background: #FFFFFF; }
-        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
-        .blog-card { background: #FCF9F6; border-radius: 28px; padding: 28px; transition: all 0.3s; cursor: pointer; border: 1px solid #EFEAE3; }
-        .blog-card:hover { transform: translateY(-4px); border-color: #C6A27A; }
-        
-        /* Footer */
-        .footer { background: #1A1A2E; color: #A89F8E; padding: 56px 0 32px; margin-top: 40px; }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px; margin-bottom: 48px; }
-        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 1rem; }
-        .footer-col a { display: block; color: #A89F8E; text-decoration: none; margin-bottom: 12px; font-size: 0.85rem; transition: color 0.2s; }
-        .footer-col a:hover { color: #C6A27A; }
-        .copyright { text-align: center; padding-top: 32px; border-top: 1px solid rgba(168,159,142,0.2); font-size: 0.7rem; }
-        
-        /* Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: white; border-radius: 40px; padding: 40px; max-width: 500px; width: 90%; position: relative; max-height: 85vh; overflow-y: auto; }
-        .close-modal { position: absolute; top: 24px; right: 28px; font-size: 1.5rem; cursor: pointer; color: #A89F8E; }
-        .social-login { display: flex; gap: 16px; margin: 28px 0; }
-        .google-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px; border: 1px solid #E0D6C8; border-radius: 60px; background: white; cursor: pointer; }
-        .google-btn:hover { background: #FAF8F5; border-color: #C6A27A; }
-        .checkbox-label { display: flex; align-items: center; gap: 12px; font-size: 0.75rem; color: #666; margin: 16px 0; cursor: pointer; }
-        .checkbox-label input { width: 18px; height: 18px; cursor: pointer; accent-color: #C6A27A; }
-        
-        .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1C1C2A; color: white; padding: 10px 20px; border-radius: 100px; font-size: 0.8rem; z-index: 3000; animation: fadeOut 2s ease forwards; }
-        @keyframes fadeOut { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
     </style>
 </head>
 <body>
 
-<!-- Модальное окно регистрации -->
+<!-- Модалка регистрации -->
 <div id="authModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeAuthModal()">&times;</span>
-        <h2>Добро пожаловать в Femmetry</h2>
-        <p style="color: #666; margin: 8px 0 0;">Войдите, чтобы получить доступ к экосистеме</p>
+        <h2>Добро пожаловать</h2>
+        <p style="color: #666; margin-bottom: 20px;">Войдите, чтобы получить доступ к экосистеме</p>
         <div class="social-login">
             <button class="google-btn" onclick="handleGoogleLogin()"><i class="fab fa-google"></i> Google</button>
         </div>
         <div class="divider" style="text-align:center; margin:20px 0; color:#A89F8E;">или по email</div>
         <input type="email" id="loginEmail" placeholder="Email" style="width:100%; padding:14px; border-radius:60px; border:1px solid #E0D6C8; margin-bottom:16px;">
         <input type="password" id="loginPassword" placeholder="Пароль" style="width:100%; padding:14px; border-radius:60px; border:1px solid #E0D6C8; margin-bottom:16px;">
-        
-        <label class="checkbox-label">
-            <input type="checkbox" id="consentCheckbox">
-            <span>Я понимаю, что Femmetry — информационная платформа, а Валерия Радькова не является врачом. Я принимаю решения о своём здоровье самостоятельно или совместно с лечащим врачом.</span>
-        </label>
-        
+        <label class="checkbox-label"><input type="checkbox" id="consentCheckbox"> <span>Я понимаю, что Femmetry — информационная платформа, а Валерия Радькова не является врачом.</span></label>
         <button class="btn-primary" style="width:100%; justify-content:center;" onclick="handleEmailLogin()">Войти</button>
-        <div class="trial-banner" style="background:#E8F0E8; padding:16px; border-radius:24px; margin-top:24px; text-align:center;">🎁 <strong>7 дней бесплатно</strong> — полный доступ ко всем функциям</div>
+        <div class="trial-banner">🎁 <strong>7 дней бесплатно</strong> — полный доступ</div>
     </div>
 </div>
 
@@ -247,22 +327,22 @@
     <div class="navbar">
         <div class="logo"><h1>Femmetry</h1></div>
         <div class="nav-links">
-            <a href="#features">О методе</a>
-            <a href="#howitworks">Как работает</a>
+            <a href="#features">Метод</a>
+            <a href="#how">Как работает</a>
             <a href="#pricing">Тарифы</a>
             <a href="#blog">Блог</a>
             <div class="dropdown">
                 <a href="#">Ещё <i class="fas fa-chevron-down"></i></a>
                 <div class="dropdown-content">
-                    <a href="#" onclick="showPage('science')">📚 Научная база</a>
-                    <a href="#" onclick="showPage('faq')">❓ FAQ</a>
-                    <a href="#" onclick="showPage('support')">📞 Поддержка</a>
-                    <a href="#" onclick="showPage('privacy')">🔒 Политика</a>
-                    <a href="#" onclick="showPage('requisites')">📄 Реквизиты</a>
-                    <a href="#" onclick="showPage('about')">👩‍⚕️ О проекте</a>
+                    <a href="#" onclick="showModal('science')">📚 Научная база</a>
+                    <a href="#" onclick="showModal('about')">👩‍⚕️ О проекте</a>
+                    <a href="#" onclick="showModal('faq')">❓ FAQ</a>
+                    <a href="#" onclick="showModal('support')">📞 Поддержка</a>
+                    <a href="#" onclick="showModal('privacy')">🔒 Политика</a>
+                    <a href="#" onclick="showModal('requisites')">📄 Реквизиты</a>
                 </div>
             </div>
-            <button class="btn-login" onclick="openAuthModal()"><i class="fas fa-user"></i> Личный кабинет</button>
+            <button class="btn-login" onclick="openAuthModal()"><i class="fas fa-user"></i> Кабинет</button>
         </div>
     </div>
 
@@ -270,7 +350,7 @@
     <div class="hero">
         <div class="hero-content">
             <h1>Ваше тело — <span class="accent">это данные.</span><br>Научитесь <span class="accent">их читать.</span></h1>
-            <p class="hero-description">Femmetry — первая русскоязычная экосистема для женщин, которая связывает анализы, цикл, питание и тренировки в единую научно обоснованную картину.</p>
+            <p class="hero-description">Femmetry — первая экосистема, которая связывает анализы, цикл, питание и тренировки в единую научную картину.</p>
             <button class="btn-primary" onclick="openAuthModal()"><i class="fas fa-chart-line"></i> Начать 7 дней бесплатно</button>
             <div class="hero-stats">
                 <div class="stat"><div class="number">5000+</div><div class="label">женщин</div></div>
@@ -279,31 +359,10 @@
             </div>
         </div>
         <div class="hero-visual">
-            <img src="logo.jpg" alt="Femmetry" onerror="this.src='https://placehold.co/400x400/1A1A2E/C6A27A?text=Femmetry'">
-            <div style="margin-top: 16px; font-weight: 600;">Ось координат вашего здоровья</div>
+            <img src="logo.jpg" alt="Femmetry" onerror="this.src='https://placehold.co/450x450/1A1A2E/C6A27A?text=Femmetry'">
+            <div style="margin-top: 16px; font-weight: 500;">Ось координат вашего здоровья</div>
             <div style="font-size: 0.7rem; color: #A89F8E;">Цикл · Ферритин · КБЖУ · Гарвардская тарелка</div>
         </div>
-    </div>
-</div>
-
-<!-- Быстрый доступ -->
-<div class="quick-links">
-    <div class="container">
-        <div class="quick-grid">
-            <div class="quick-card" onclick="scrollToBlog()"><i class="fas fa-newspaper"></i><h4>📰 Блог</h4><p style="font-size:0.7rem;">Научные статьи</p></div>
-            <div class="quick-card" onclick="openAuthModal()"><i class="fas fa-book-open"></i><h4>📚 Рецепты</h4><p style="font-size:0.7rem;">Кулинарная книга</p></div>
-            <div class="quick-card" onclick="openAuthModal()"><i class="fas fa-comments"></i><h4>💬 Форум</h4><p style="font-size:0.7rem;">Сообщество</p></div>
-            <div class="quick-card" onclick="showHarvardPlate()"><i class="fas fa-plate-wheat"></i><h4>🥗 Гарвардская тарелка</h4><p style="font-size:0.7rem;">Питание без подсчёта</p></div>
-        </div>
-    </div>
-</div>
-
-<!-- Блок для женщин 45+ -->
-<div class="container">
-    <div class="age-banner">
-        <h3><i class="fas fa-leaf"></i> Для женщин 45+</h3>
-        <p>С возрастом потребность в белке и кальций возрастает. Femmetry учитывает ваш возраст и рекомендует <strong>1.2–1.5 г белка на 1 кг веса</strong> и <strong>1200–1500 мг кальция</strong> в день.</p>
-        <button class="btn-outline" onclick="openAuthModal()">Узнать больше</button>
     </div>
 </div>
 
@@ -312,73 +371,54 @@
     <div class="container">
         <h2 class="section-title">Научная точность в <span>каждой тарелке</span></h2>
         <div class="features-grid">
-            <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>Измеряем важное</h3><p>Вес, ферритин, фаза цикла — персональная траектория на основе данных.</p></div>
-            <div class="feature-card"><div class="feature-icon"><i class="fas fa-apple-alt"></i></div><h3>2 подхода к питанию</h3><p>КБЖУ или Гарвардская тарелка — выбирайте удобный формат.</p></div>
-            <div class="feature-card"><div class="feature-icon"><i class="fas fa-book-open"></i></div><h3>Кулинарная книга</h3><p>Сохраняйте любимые рецепты в личную коллекцию.</p></div>
-            <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>По нормам ВОЗ и RKI</h3><p>Все рекомендации основаны на клинических исследованиях.</p></div>
-        </div>
-    </div>
-</div>
-
-<!-- Блог на главной -->
-<div class="blog-section" id="blog">
-    <div class="container">
-        <h2 class="section-title">Последние <span>статьи блога</span></h2>
-        <div class="blog-grid" id="blogGrid">
-            <div class="blog-card" onclick="openAuthModal()">
-                <div class="blog-category" style="color:#C6A27A; font-size:0.7rem;">📊 Анализы</div>
-                <h3>Ферритин: почему он важен для женского здоровья</h3>
-                <p>Разбираемся, как низкий ферритин влияет на энергию, цикл и почему железо лучше усваивается с витамином С.</p>
-                <span style="color:#C6A27A; font-size:0.75rem;">Читать →</span>
-            </div>
-            <div class="blog-card" onclick="openAuthModal()">
-                <div class="blog-category" style="color:#C6A27A; font-size:0.7rem;">🔄 Цикл</div>
-                <h3>Питание по фазам цикла: руководство</h3>
-                <p>В фолликулярную фазу нужны сложные углеводы, в лютеиновую — магний и меньше сладкого.</p>
-                <span style="color:#C6A27A; font-size:0.75rem;">Читать →</span>
-            </div>
-            <div class="blog-card" onclick="openAuthModal()">
-                <div class="blog-category" style="color:#C6A27A; font-size:0.7rem;">🤰 Беременность</div>
-                <h3>Питание при беременности: триместр за триместром</h3>
-                <p>Как меняются потребности в калориях, белке и железе. Рекомендации ВОЗ и Минздрава.</p>
-                <span style="color:#C6A27A; font-size:0.75rem;">Читать →</span>
-            </div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>Измеряем важное</h3><p>Вес, ферритин, фаза цикла — персональная траектория</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-apple-alt"></i></div><h3>2 подхода к питанию</h3><p>КБЖУ или Гарвардская тарелка</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-book-open"></i></div><h3>Кулинарная книга</h3><p>Сохраняйте любимые рецепты</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>По нормам ВОЗ и RKI</h3><p>Основано на клинических исследованиях</p></div>
         </div>
     </div>
 </div>
 
 <!-- Как работает -->
-<div class="how-it-works" id="howitworks" style="padding: 60px 0; background: #FAF8F5;">
+<div class="how-section" id="how">
     <div class="container">
         <h2 class="section-title">Как работает <span>Femmetry</span></h2>
-        <div class="features-grid" style="grid-template-columns: repeat(4,1fr);">
-            <div class="feature-card" style="text-align:center;"><div class="feature-icon" style="font-size:2rem; font-weight:700;">1</div><h4>Вводите данные</h4><p>Вес, рост, возраст, ферритин, день цикла</p></div>
-            <div class="feature-card" style="text-align:center;"><div class="feature-icon" style="font-size:2rem; font-weight:700;">2</div><h4>Система анализирует</h4><p>Учитывает фазу цикла, уровень железа и ваши цели</p></div>
-            <div class="feature-card" style="text-align:center;"><div class="feature-icon" style="font-size:2rem; font-weight:700;">3</div><h4>Получаете меню</h4><p>Персональные рецепты на каждый день с КБЖУ</p></div>
-            <div class="feature-card" style="text-align:center;"><div class="feature-icon" style="font-size:2rem; font-weight:700;">4</div><h4>Сохраняете рецепты</h4><p>Формируете свою кулинарную книгу</p></div>
+        <div class="steps-grid">
+            <div><div class="step-number">1</div><h3>Вводите данные</h3><p style="color:#666;">Вес, рост, ферритин, день цикла</p></div>
+            <div><div class="step-number">2</div><h3>Система анализирует</h3><p style="color:#666;">Фазу цикла, уровень железа, цели</p></div>
+            <div><div class="step-number">3</div><h3>Получаете меню</h3><p style="color:#666;">Персональные рецепты с КБЖУ</p></div>
+            <div><div class="step-number">4</div><h3>Сохраняете рецепты</h3><p style="color:#666;">Формируете свою кулинарную книгу</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- Блог -->
+<div class="blog-section" id="blog">
+    <div class="container">
+        <h2 class="section-title">Последние <span>статьи</span></h2>
+        <div class="blog-grid">
+            <div class="blog-card" onclick="openAuthModal()"><div class="blog-category">📊 Анализы</div><h3>Ферритин: энергия и гормоны</h3><p>Как низкий ферритин влияет на усталость, волосы и цикл</p></div>
+            <div class="blog-card" onclick="openAuthModal()"><div class="blog-category">🔄 Цикл</div><h3>Питание по фазам цикла</h3><p>Что есть в фолликулярную, а что в лютеиновую фазу</p></div>
+            <div class="blog-card" onclick="openAuthModal()"><div class="blog-category">🤰 Беременность</div><h3>Триместр за триместром</h3><p>Потребности в калориях, белке и железе</p></div>
         </div>
     </div>
 </div>
 
 <!-- Тарифы -->
-<div class="pricing" id="pricing" style="padding: 80px 0; background: white;">
+<div class="pricing" id="pricing">
     <div class="container">
-        <h2 class="section-title">Выберите свой <span>доступ</span></h2>
-        <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); max-width: 900px; margin: 0 auto;">
-            <div class="feature-card" style="text-align:center;">
-                <h3>Пробный</h3>
-                <div style="font-size: 2rem; font-weight: 800;">0 ₽</div>
-                <p style="color:#C6A27A;">7 дней полного доступа</p>
-                <button class="btn-outline" onclick="openAuthModal()" style="margin-top:20px;">Активировать</button>
-            </div>
-            <div class="feature-card" style="text-align:center; border: 2px solid #C6A27A; transform: scale(1.02);">
-                <div style="background:#C6A27A; color:white; display:inline-block; padding:4px 12px; border-radius:40px; font-size:0.7rem;">🔥 Популярный</div>
-                <h3 style="margin-top:16px;">Premium</h3>
-                <div style="font-size: 2rem; font-weight: 800;">790 ₽<small style="font-size:0.8rem;">/мес</small></div>
-                <p style="color:#C6A27A;">или 5 900 ₽/год (экономия 37%)</p>
-                <button class="btn-primary" onclick="openAuthModal()" style="margin-top:20px;">Начать 7 дней бесплатно</button>
-            </div>
+        <h2 class="section-title">Выберите <span>доступ</span></h2>
+        <div class="pricing-grid">
+            <div class="price-card"><h3>Пробный</h3><div class="price">0 ₽</div><p style="color:#C6A27A;">7 дней полного доступа</p><button class="btn-outline" onclick="openAuthModal()" style="margin-top:20px;">Активировать</button></div>
+            <div class="price-card popular"><div style="background:#C6A27A; color:white; display:inline-block; padding:4px 12px; border-radius:40px; font-size:0.7rem;">🔥 Популярный</div><h3 style="margin-top:16px;">Premium</h3><div class="price">790 ₽<small>/мес</small></div><p style="color:#C6A27A;">или 5 900 ₽/год (экономия 37%)</p><button class="btn-primary" onclick="openAuthModal()" style="margin-top:20px;">Начать 7 дней</button></div>
         </div>
+    </div>
+</div>
+
+<!-- Ненавязчивый блок для 45+ -->
+<div class="age-note">
+    <div class="container">
+        <p><i class="fas fa-leaf" style="color:#C6A27A;"></i> Для женщин 45+ Femmetry учитывает повышенную потребность в белке (1.2–1.5 г/кг) и кальций. <a href="#" onclick="showModal('about')">Подробнее →</a></p>
     </div>
 </div>
 
@@ -386,25 +426,104 @@
 <div class="footer">
     <div class="container">
         <div class="footer-content">
-            <div class="footer-col"><h4>Femmetry</h4><p>Персональная экосистема<br>женского здоровья</p></div>
-            <div class="footer-col"><h4>О проекте</h4><a href="#" onclick="showPage('about')">О нас</a><a href="#" onclick="showPage('science')">Научная база</a><a href="#" onclick="showPage('faq')">FAQ</a></div>
-            <div class="footer-col"><h4>Помощь</h4><a href="#" onclick="showPage('support')">Поддержка</a><a href="#" onclick="showPage('privacy')">Политика</a><a href="#" onclick="showPage('requisites')">Реквизиты</a></div>
+            <div class="footer-col"><h4>Femmetry</h4><p style="font-size:0.8rem;">Экосистема женского здоровья</p></div>
+            <div class="footer-col"><h4>О проекте</h4><a href="#" onclick="showModal('about')">О нас</a><a href="#" onclick="showModal('science')">Научная база</a><a href="#" onclick="showModal('faq')">FAQ</a></div>
+            <div class="footer-col"><h4>Помощь</h4><a href="#" onclick="showModal('support')">Поддержка</a><a href="#" onclick="showModal('privacy')">Политика</a><a href="#" onclick="showModal('requisites')">Реквизиты</a></div>
             <div class="footer-col"><h4>Контакты</h4><a href="mailto:hello@femmetry.ru">hello@femmetry.ru</a><a href="#">Telegram-канал</a></div>
         </div>
         <div class="copyright">© 2025 Femmetry. Женское здоровье с научной точностью.</div>
     </div>
 </div>
 
-<!-- Модальное окно для страниц (FAQ, Поддержка и т.д.) -->
-<div id="pageModal" class="modal">
-    <div class="modal-content" style="max-width: 700px;">
-        <span class="close-modal" onclick="closePageModal()">&times;</span>
-        <div id="pageModalContent"></div>
+<!-- Модальное окно для страниц (единый компонент) -->
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeInfoModal()">&times;</span>
+        <div id="infoModalContent"></div>
     </div>
 </div>
 
 <script>
-    // Модалка авторизации
+    // Контент для модальных окон (красиво отформатирован)
+    const modalContents = {
+        about: `
+            <h2>👩‍⚕️ О проекте Femmetry</h2>
+            <p><strong>Почему мы появились</strong></p>
+            <p>Меня зовут Валерия Радькова. Я сертифицированный тренер с 10-летним опытом, специалист по Polestar Pilates, нейро-соматике и женской физиологии.</p>
+            <p>Долгое время я сама жила с хроническими мигренями, утренней усталостью и постоянным напряжением в теле. Я поняла главное: женщинам нужна единая система, которая учитывает их физиологию.</p>
+            <p><strong>Важное примечание</strong></p>
+            <p>Я не врач. Я не ставлю диагнозы, не назначаю лечение. Femmetry — это информационная поддержка в области питания, движения и образа жизни.</p>
+            <p><strong>На чём мы стоим</strong></p>
+            <p>Femmetry опирается на клинические руководства ВОЗ, Минздрава РФ, систематические обзоры и РКИ в области женской физиологии.</p>
+            <button class="btn-primary" onclick="openAuthModal(); closeInfoModal();" style="margin-top:20px;">Попробовать 7 дней бесплатно</button>
+        `,
+        science: `
+            <h2>📚 Научная база Femmetry</h2>
+            <p>Методология Femmetry опирается на актуальные клинические рекомендации ВОЗ, систематические обзоры и мета-анализы.</p>
+            <h3>📌 Питание во время беременности</h3>
+            <ul>
+                <li><strong>WHO recommendations on antenatal care</strong> (2016/2025)</li>
+                <li><strong>WHO recommendations on care for women with diabetes during pregnancy</strong> (2025) — первые глобальные рекомендации ВОЗ</li>
+                <li><strong>Клинические рекомендации «Нормальная беременность»</strong>, Минздрав РФ (с изм. 01.01.2025)</li>
+            </ul>
+            <h3>📌 Женская физиология и метаболизм</h3>
+            <ul>
+                <li><strong>GPNi. Sex differences and considerations for female specific nutritional strategies</strong> (2025)</li>
+                <li><strong>Sims, S.T. ROAR: Match your food and fitness to your unique female physiology</strong> (2024)</li>
+                <li><strong>Female Athlete Triad Coalition Consensus Statement</strong> (2025)</li>
+            </ul>
+            <h3>📌 Микронутриенты</h3>
+            <ul>
+                <li><strong>WHO. Daily iron and folic acid supplementation during pregnancy</strong> (2023)</li>
+                <li><strong>Артымук Н.В., Тачкова О.А. Витамин D при беременности</strong> (2025)</li>
+            </ul>
+            <p><strong>Все рекомендации основаны на РКИ, систематических обзорах и клинических руководствах.</strong></p>
+        `,
+        faq: `
+            <h2>❓ Часто задаваемые вопросы</h2>
+            <h3>❓ Валерия — врач? Femmetry — это медицинский сервис?</h3>
+            <p>Нет. Валерия Радькова — сертифицированный тренер и специалист по питанию, не врач. Femmetry — информационно-образовательная платформа.</p>
+            <h3>❓ Как работает пробный период?</h3>
+            <p>7 дней бесплатного полного доступа. Списание только на 8-й день, если не отменить.</p>
+            <h3>❓ Учитывает ли меню мой цикл?</h3>
+            <p>Да. Система определяет фазу цикла и корректирует рекомендации по калорийности и БЖУ.</p>
+            <h3>❓ Можно ли пользоваться Femmetry при беременности?</h3>
+            <p>Да. Есть специальный модуль с учётом триместра и норм прибавки веса.</p>
+            <h3>❓ У меня низкий ферритин. Femmetry это учитывает?</h3>
+            <p>Да. Система предложит меню с повышенным содержанием гемового железа.</p>
+        `,
+        support: `
+            <h2>📞 Поддержка</h2>
+            <p><strong>Мы на связи каждый день</strong></p>
+            <p>📧 <strong>Email:</strong> <a href="mailto:valeria@femmetry.ru">valeria@femmetry.ru</a><br>Для вопросов по подписке, возвратам, сотрудничеству.</p>
+            <p>💬 <strong>Telegram:</strong> @femmetry_support<br>Для быстрых вопросов.</p>
+            <p>🕒 <strong>Время работы:</strong><br>Пн–Пт: 10:00 – 19:00 (МСК)<br>Сб–Вс: отвечаем в порядке очереди</p>
+        `,
+        privacy: `
+            <h2>🔒 Политика конфиденциальности</h2>
+            <p><strong>1. Какие данные мы собираем:</strong> имя, email, параметры тела, данные о здоровье (день цикла, ферритин).</p>
+            <p><strong>2. Как используем:</strong> для генерации персонализированного меню, графиков прогресса, улучшения сервиса.</p>
+            <p><strong>3. Передача данных:</strong> не продаём. Исключения: платёжные сервисы, требования законодательства.</p>
+            <p><strong>4. Хранение:</strong> в течение подписки + 30 дней. Можно запросить удаление: valeria@femmetry.ru</p>
+            <p><strong>5. Защита:</strong> HTTPS-шифрование, серверы в РФ (соответствие 152-ФЗ).</p>
+        `,
+        requisites: `
+            <h2>📄 Реквизиты</h2>
+            <p><strong>Исполнитель:</strong> Радькова Валерия Андреевна</p>
+            <p><strong>Налоговый режим:</strong> Налог на профессиональный доход (самозанятый)</p>
+            <p><strong>ИНН:</strong> 505078314069</p>
+            <p><strong>Email:</strong> valeria@femmetry.ru</p>
+            <p><strong>Проверка статуса:</strong> <a href="https://npd.nalog.ru/check" target="_blank">npd.nalog.ru/check</a> (введите ИНН 505078314069)</p>
+            <p><strong>Оплата:</strong> карты Visa, Mastercard, Мир, СБП. После оплаты приходит фискальный чек.</p>
+        `
+    };
+    
+    function showModal(type) {
+        document.getElementById('infoModalContent').innerHTML = modalContents[type] || '<p>Содержание загружается...</p>';
+        document.getElementById('infoModal').style.display = 'flex';
+    }
+    function closeInfoModal() { document.getElementById('infoModal').style.display = 'none'; }
+    
     function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
     function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
     
@@ -422,7 +541,7 @@
         let password = document.getElementById('loginPassword').value;
         let consent = document.getElementById('consentCheckbox')?.checked;
         if(!email || !password) { alert('Введите email и пароль'); return; }
-        if(!consent) { alert('Пожалуйста, подтвердите, что вы ознакомились с информацией о невраче'); return; }
+        if(!consent) { alert('Подтвердите, что вы ознакомились с информацией о невраче'); return; }
         localStorage.setItem('femmetry_auth', 'true');
         localStorage.setItem('femmetry_user_email', email);
         localStorage.setItem('femmetry_consent', 'true');
@@ -430,100 +549,10 @@
         window.location.href = 'cabinet.html';
     }
     
-    function scrollToBlog() { document.getElementById('blog').scrollIntoView({ behavior: 'smooth' }); }
-    function showHarvardPlate() { alert("🥗 Гарвардская тарелка: ½ овощи + ¼ белок + ¼ углеводы + полезные жиры. Подробнее в личном кабинете."); }
-    
-    // Страницы (FAQ, Поддержка, Политика, Реквизиты, О проекте, Научная база)
-    function showPage(page) {
-        let content = '';
-        if(page === 'science') {
-            content = `<h2>📚 Научная база Femmetry</h2>
-<p>Методология Femmetry опирается на актуальные клинические рекомендации ВОЗ, систематические обзоры, мета-анализы и консенсусы международных профессиональных сообществ.</p>
-<h3>📌 Питание во время беременности</h3>
-<ul><li>WHO recommendations on antenatal care for a positive pregnancy experience (2016/2025)</li>
-<li>WHO recommendations on care for women with diabetes during pregnancy (2025) — первые глобальные рекомендации ВОЗ</li>
-<li>Клинические рекомендации «Нормальная беременность», Минздрав РФ (с изм. 01.01.2025)</li></ul>
-<h3>📌 Женская физиология и метаболизм</h3>
-<ul><li>GPNi. Sex differences and considerations for female specific nutritional strategies (2025)</li>
-<li>Sims, S.T. ROAR: Match your food and fitness to your unique female physiology (2024)</li>
-<li>Female Athlete Triad Coalition Consensus Statement (2025)</li></ul>
-<p><strong>Все рекомендации основаны на РКИ, систематических обзорах и клинических руководствах.</strong></p>`;
-        } else if(page === 'faq') {
-            content = `<h2>❓ Часто задаваемые вопросы</h2>
-<h3>❓ Валерия — врач? Femmetry — это медицинский сервис?</h3>
-<p>Нет. Валерия Радькова — сертифицированный тренер и специалист по питанию (нутрициолог), не врач. Femmetry — это информационно-образовательная платформа для поддержки здорового образа жизни. Мы не ставим диагнозы, не назначаем лечение и не отменяем назначения врачей.</p>
-<h3>❓ Как работает пробный период?</h3>
-<p>Вы получаете полный доступ ко всем функциям Femmetry на 7 дней бесплатно. Для активации потребуется привязать банковскую карту. Списание произойдёт только на 8-й день, если вы не отмените подписку.</p>
-<h3>❓ Можно ли заморозить подписку?</h3>
-<p>Да. В личном кабинете есть функция «Заморозить на 30 дней». В этот период плата не списывается, доступ приостановлен.</p>
-<h3>❓ Учитывает ли меню мой цикл?</h3>
-<p>Да, это одна из ключевых особенностей Femmetry. Система автоматически определяет вашу фазу цикла и корректирует рекомендации по калорийности и БЖУ.</p>
-<h3>❓ Можно ли пользоваться Femmetry при беременности?</h3>
-<p>Да. В экосистеме есть специальный модуль для беременных. Меню формируется с учётом триместра и норм прибавки веса по ИМТ.</p>
-<h3>❓ У меня низкий ферритин. Femmetry это учитывает?</h3>
-<p>Да. При вводе уровня ферритина ниже референсных значений система предложит меню с повышенным содержанием гемового железа.</p>
-<h3>❓ Я вегетарианка. Есть ли для меня меню?</h3>
-<p>Да. В настройках профиля можно выбрать тип питания: «всё ем», «пескетарианство», «ово-лакто вегетарианство», «веганство».</p>`;
-        } else if(page === 'support') {
-            content = `<h2>📞 Поддержка и контакты</h2>
-<p><strong>Мы на связи каждый день</strong></p>
-<p>📧 <strong>Email:</strong> <a href="mailto:valeria@femmetry.ru">valeria@femmetry.ru</a><br>
-Для вопросов по подписке, возвратам, предложениям о сотрудничестве.</p>
-<p>💬 <strong>Telegram:</strong> @femmetry_support<br>
-Для быстрых вопросов и оперативной помощи.</p>
-<p>🕒 <strong>Время работы поддержки:</strong><br>
-Пн–Пт: 10:00 – 19:00 (МСК)<br>
-Сб–Вс: отвечаем в порядке очереди</p>
-<p>📍 <strong>Исполнитель:</strong> Радькова Валерия Андреевна, ИНН: 505078314069, плательщик НПД</p>`;
-        } else if(page === 'privacy') {
-            content = `<h2>🔒 Политика конфиденциальности</h2>
-<p><strong>1. Какие данные мы собираем</strong><br>Имя, email, параметры тела (вес, рост, возраст), данные о здоровье (день цикла, ферритин), данные об оплате (обрабатываются платёжным сервисом).</p>
-<p><strong>2. Как мы используем ваши данные</strong><br>Для генерации персонализированного меню, отображения графиков прогресса, улучшения сервиса и ответов на запросы.</p>
-<p><strong>3. Передача данных третьим лицам</strong><br>Мы не продаём данные. Исключения: платёжные сервисы, требования законодательства РФ.</p>
-<p><strong>4. Хранение и удаление данных</strong><br>Данные хранятся в течение срока подписки + 30 дней после отмены. Вы можете запросить удаление данных, написав на valeria@femmetry.ru.</p>
-<p><strong>5. Защита данных</strong><br>Используется HTTPS-шифрование, серверы на территории РФ соответствуют 152-ФЗ.</p>`;
-        } else if(page === 'requisites') {
-            content = `<h2>📄 Реквизиты</h2>
-<p><strong>Исполнитель услуг</strong><br>
-Радькова Валерия Андреевна</p>
-<p><strong>Специальный налоговый режим</strong><br>
-Налог на профессиональный доход (самозанятый / плательщик НПД)</p>
-<p><strong>ИНН:</strong> 505078314069</p>
-<p><strong>Email для финансовых вопросов:</strong> valeria@femmetry.ru</p>
-<p><strong>Проверка статуса самозанятого:</strong> <a href="https://npd.nalog.ru/check" target="_blank">npd.nalog.ru/check</a> (введите ИНН 505078314069)</p>
-<p><strong>Оплата:</strong> банковские карты Visa, Mastercard, Мир, СБП. После оплаты приходит фискальный чек из приложения «Мой налог».</p>`;
-        } else if(page === 'about') {
-            content = `<h2>👩‍⚕️ О проекте Femmetry</h2>
-<p><strong>Почему мы появились</strong></p>
-<p>Меня зовут Валерия Радькова. Я сертифицированный тренер с 10-летним опытом, специалист по Polestar Pilates, нейро-соматике, биомеханике и женской физиологии.</p>
-<p>Долгое время я сама жила с хроническими мигренями, утренней усталостью и постоянным напряжением в теле. Я прошла десятки обучений, перечитала сотни исследований и поняла главное: женщинам нужна единая система, которая учитывает их физиологию.</p>
-<p><strong>Важное примечание</strong></p>
-<p>Я не врач. Я не ставлю диагнозы, не назначаю лечение и не отменяю назначения вашего лечащего врача. Всё, что вы найдёте на Femmetry — это информационная поддержка в области питания, движения и образа жизни, основанная на актуальных научных данных.</p>
-<p><strong>На чём мы стоим</strong></p>
-<p>Femmetry — это не «авторская диета» и не «ещё один блог о ПП». Это платформа, где все рекомендации опираются на клинические руководства ВОЗ и Минздрава РФ, систематические обзоры и мета-анализы, актуальные РКИ в области женской физиологии.</p>
-<p><strong>Присоединяйтесь</strong></p>
-<p>Мы создаём Femmetry для тех, кто устал от противоречивой информации и хочет опереться на науку, заботу и систему, которая действительно работает.</p>
-<button class="btn-primary" onclick="openAuthModal(); closePageModal();" style="margin-top:20px;">Попробовать 7 дней бесплатно</button>`;
-        }
-        document.getElementById('pageModalContent').innerHTML = content;
-        document.getElementById('pageModal').style.display = 'flex';
-    }
-    
-    function closePageModal() { document.getElementById('pageModal').style.display = 'none'; }
-    
     window.onclick = function(e) {
         if (e.target === document.getElementById('authModal')) closeAuthModal();
-        if (e.target === document.getElementById('pageModal')) closePageModal();
+        if (e.target === document.getElementById('infoModal')) closeInfoModal();
     }
-    
-    window.showPage = showPage;
-    window.scrollToBlog = scrollToBlog;
-    window.showHarvardPlate = showHarvardPlate;
-    window.openAuthModal = openAuthModal;
-    window.closeAuthModal = closeAuthModal;
-    window.handleGoogleLogin = handleGoogleLogin;
-    window.handleEmailLogin = handleEmailLogin;
-    window.closePageModal = closePageModal;
 </script>
 </body>
 </html>
