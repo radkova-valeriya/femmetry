@@ -17,7 +17,6 @@
         }
         .app { max-width: 1280px; margin: 0 auto; padding: 20px 28px; }
         
-        /* Header */
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
         .logo { font-size: 1.7rem; font-weight: 800; background: linear-gradient(135deg, #1C1C2A, #C6A27A); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -25,7 +24,6 @@
         .logout-btn { background: transparent; border: 1px solid #E2DCD3; padding: 8px 20px; border-radius: 100px; cursor: pointer; transition: 0.2s; }
         .logout-btn:hover { background: #1C1C2A; color: white; }
         
-        /* Navigation */
         .nav { display: flex; gap: 6px; margin-bottom: 32px; flex-wrap: wrap; border-bottom: 1px solid #EFEAE3; padding-bottom: 12px; }
         .nav-btn { background: none; border: none; padding: 8px 24px; font-weight: 500; font-size: 0.85rem; color: #A89F8E; cursor: pointer; border-radius: 100px; transition: 0.2s; }
         .nav-btn.active { background: #1C1C2A; color: white; }
@@ -34,21 +32,30 @@
         .page.active { display: block; }
         @keyframes fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Cards */
         .card { background: white; border-radius: 32px; padding: 28px; margin-bottom: 24px; border: 1px solid #EFEAE3; transition: all 0.2s; }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
         .card-header h2 { font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
         
-        /* Phase banner */
         .phase-banner { background: linear-gradient(135deg, #C6A27A15, #C6A27A08); border-radius: 24px; padding: 20px; margin-bottom: 24px; border-left: 4px solid #C6A27A; }
         .phase-name { font-size: 1rem; font-weight: 700; color: #C6A27A; margin-bottom: 8px; }
-        .phase-recommendation { font-size: 0.85rem; color: #5A5A6E; line-height: 1.5; }
         
-        /* Быстрые замеры */
+        /* Harvard Plate Guide */
+        .harvard-guide { text-align: center; }
+        .plate-diagram { max-width: 400px; margin: 0 auto 24px; background: #FCFAF8; border-radius: 32px; padding: 20px; }
+        .plate-svg { width: 100%; max-width: 300px; margin: 0 auto; }
+        .plate-legend { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 24px; }
+        .legend-item { text-align: center; padding: 16px; background: #FCFAF8; border-radius: 20px; }
+        .legend-color { width: 40px; height: 40px; border-radius: 50%; margin: 0 auto 12px; }
+        .legend-color.green { background: #7CB342; }
+        .legend-color.orange { background: #FFB74D; }
+        .legend-color.purple { background: #BA68C8; }
+        
+        .food-list { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 20px 0; }
+        .food-tag { background: #F0EDE8; padding: 8px 16px; border-radius: 40px; font-size: 0.8rem; }
+        
         .quick-weight { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
         .quick-weight .field { flex: 1; margin-bottom: 0; }
         
-        /* Progress ring */
         .progress-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
         .ring-container { position: relative; width: 100px; height: 100px; }
         .ring-bg { fill: none; stroke: #EFEAE3; stroke-width: 8; }
@@ -56,13 +63,11 @@
         .ring-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
         .ring-value { font-size: 1.3rem; font-weight: 700; }
         
-        /* Menu preview */
         .menu-preview { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 20px 0; }
         .meal-preview-card { background: #FCFAF8; border-radius: 24px; padding: 20px; text-align: center; border: 1px solid #EFEAE3; transition: 0.2s; }
         .meal-preview-card:hover { transform: translateY(-3px); border-color: #C6A27A; }
         .meal-preview-card .name { font-weight: 600; margin-bottom: 6px; }
         
-        /* Week tabs */
         .week-tabs { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 24px; padding-bottom: 8px; }
         .day-btn { background: white; border: 1px solid #EFEAE3; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.2s; white-space: nowrap; }
         .day-btn.active { background: #1C1C2A; color: white; border-color: #1C1C2A; }
@@ -98,6 +103,7 @@
             .grid-2, .menu-preview { grid-template-columns: 1fr; }
             .nav-btn { padding: 6px 16px; font-size: 0.75rem; }
             .card { padding: 20px; }
+            .plate-legend { grid-template-columns: 1fr; }
         }
         .hidden { display: none; }
         .text-accent { color: #C6A27A; }
@@ -127,7 +133,6 @@
         <div id="dashboardPage" class="page active">
             <div class="phase-banner" id="phaseBanner"></div>
             
-            <!-- Быстрые замеры -->
             <div class="card">
                 <div class="card-header"><h2><i class="fas fa-weight-scale text-accent"></i> Быстрый вес</h2></div>
                 <div class="quick-weight">
@@ -136,7 +141,6 @@
                 </div>
             </div>
             
-            <!-- Прогресс дня -->
             <div class="card">
                 <div class="card-header"><h2><i class="fas fa-chart-pie text-accent"></i> Прогресс дня</h2></div>
                 <div class="progress-row">
@@ -163,15 +167,74 @@
             </div>
         </div>
         
-        <!-- Меню -->
+        <!-- Меню (адаптируется под тип питания) -->
         <div id="menuPage" class="page">
-            <div class="card">
-                <div class="card-header"><h2><i class="fas fa-calendar-alt"></i> План питания</h2></div>
-                <div id="kcalHeader" class="info-badge" style="background:#E8F0E8; padding:12px; border-radius:20px; margin-bottom:20px;"></div>
-                <div class="week-tabs" id="weekTabs"></div>
-                <div id="mealsContainer"></div>
-                <div class="research-note">
-                    <i class="fas fa-flask"></i> <strong>Источники:</strong> ВОЗ (2025), клинические рекомендации Минздрава РФ
+            <div id="kbzhuContent" style="display: none;">
+                <div class="card">
+                    <div class="card-header"><h2><i class="fas fa-calendar-alt"></i> План питания</h2></div>
+                    <div id="kcalHeader" class="info-badge" style="background:#E8F0E8; padding:12px; border-radius:20px; margin-bottom:20px;"></div>
+                    <div class="week-tabs" id="weekTabs"></div>
+                    <div id="mealsContainer"></div>
+                </div>
+            </div>
+            
+            <div id="harvardContent" style="display: none;">
+                <div class="card harvard-guide">
+                    <div class="card-header"><h2><i class="fas fa-plate-wheat"></i> Гарвардская тарелка</h2></div>
+                    <p style="margin-bottom: 20px; color: #5A5A6E;">Визуальный метод здорового питания без подсчёта калорий. Мысленно делите тарелку на три части и наполняйте их правильными продуктами.</p>
+                    
+                    <div class="plate-diagram">
+                        <svg class="plate-svg" viewBox="0 0 200 200">
+                            <circle cx="100" cy="100" r="90" fill="#7CB342" stroke="#fff" stroke-width="3"/>
+                            <path d="M100 10 A90 90 0 0 1 170 100 L100 100 Z" fill="#FFB74D"/>
+                            <path d="M100 10 A90 90 0 0 0 30 100 L100 100 Z" fill="#BA68C8"/>
+                            <circle cx="100" cy="100" r="12" fill="#fff"/>
+                            <text x="65" y="55" font-size="9" fill="#fff" font-weight="bold">½ овощи</text>
+                            <text x="115" y="45" font-size="9" fill="#fff" font-weight="bold">¼ белок</text>
+                            <text x="40" y="130" font-size="9" fill="#fff" font-weight="bold">¼ углеводы</text>
+                        </svg>
+                    </div>
+                    
+                    <div class="plate-legend">
+                        <div class="legend-item"><div class="legend-color green"></div><strong>½ тарелки — овощи и фрукты</strong><p style="font-size:0.7rem; margin-top:8px;">Огурцы, помидоры, кабачки, брокколи, листовая зелень, ягоды, яблоки, цитрусовые</p></div>
+                        <div class="legend-item"><div class="legend-color orange"></div><strong>¼ тарелки — белок</strong><p style="font-size:0.7rem; margin-top:8px;">Рыба, курица, индейка, яйца, творог, тофу, бобовые</p></div>
+                        <div class="legend-item"><div class="legend-color purple"></div><strong>¼ тарелки — сложные углеводы</strong><p style="font-size:0.7rem; margin-top:8px;">Гречка, киноа, бурый рис, овсянка, цельнозерновой хлеб, картофель</p></div>
+                    </div>
+                    
+                    <div class="research-note" style="margin-top: 24px;">
+                        <i class="fas fa-flask"></i> <strong>Дополнительно:</strong> 1–2 ст.л. растительного масла (оливковое, льняное) + горсть орехов или семян.
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header"><h2><i class="fas fa-lightbulb"></i> Примеры сбалансированного питания</h2></div>
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="font-size:1rem; margin-bottom:12px;">🍳 Завтрак</h3>
+                        <div class="food-list"><span class="food-tag">Овсянка с ягодами</span><span class="food-tag">2 яйца + авокадо + тост</span><span class="food-tag">Творог с фруктами</span><span class="food-tag">Смути со шпинатом</span></div>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="font-size:1rem; margin-bottom:12px;">☀️ Обед</h3>
+                        <div class="food-list"><span class="food-tag">Курица + гречка + овощи</span><span class="food-tag">Рыба + киноа + салат</span><span class="food-tag">Чечевичный суп + хлеб</span><span class="food-tag">Тофу с овощами и рисом</span></div>
+                    </div>
+                    <div>
+                        <h3 style="font-size:1rem; margin-bottom:12px;">🌙 Ужин</h3>
+                        <div class="food-list"><span class="food-tag">Рыба + запечённые овощи</span><span class="food-tag">Индейка + брокколи</span><span class="food-tag">Омлет с овощами</span><span class="food-tag">Творожная запеканка</span></div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header"><h2><i class="fas fa-book-open"></i> Полная инструкция</h2></div>
+                    <p style="margin-bottom: 16px;">Метод «Нормальной тарелки» (Healthy Eating Plate) — визуальная модель здорового питания, разработанная на основе рекомендаций ВОЗ и клинических исследований.</p>
+                    <p style="margin-bottom: 16px;"><strong>Суть метода:</strong> Мысленно делим тарелку на три части и наполняем их определёнными продуктами. Никаких весов, никаких калькуляторов — только глаза и здравый смысл.</p>
+                    <ul style="margin-left: 20px; margin-bottom: 16px; line-height: 1.6;">
+                        <li><strong>½ тарелки</strong> — овощи и фрукты (источник клетчатки, витаминов)</li>
+                        <li><strong>¼ тарелки</strong> — белковые продукты (рыба, курица, яйца, бобовые)</li>
+                        <li><strong>¼ тарелки</strong> — сложные углеводы (гречка, киноа, бурый рис)</li>
+                        <li><strong>+ жиры</strong> — 1–2 ст.л. растительного масла, горсть орехов</li>
+                    </ul>
+                    <div class="research-note">
+                        <i class="fas fa-flask"></i> <strong>Источники:</strong> ВОЗ. Здоровое питание. Информационный бюллетень; Клинические рекомендации Минздрава России; Метод тарелки в рекомендациях ВОЗ.
+                    </div>
                 </div>
             </div>
         </div>
@@ -207,7 +270,7 @@
                     <div class="field"><label>🩸 Ферритин (нг/мл)</label><input type="number" id="ferritin"></div>
                     <div class="field"><label>🤰 Беременность</label><select id="pregnant"><option value="no">Нет</option><option value="yes">Да</option></select></div>
                     <div class="field"><label>🏃‍♀️ Активность</label><select id="activity"><option value="1.2">Сидячий</option><option value="1.375">Лёгкая</option><option value="1.55">Средняя</option><option value="1.725">Высокая</option></select></div>
-                    <div class="field"><label>🍽️ Тип питания</label><select id="nutritionType"><option value="kbzhu">По КБЖУ</option><option value="harvard">Гарвардская тарелка</option></select></div>
+                    <div class="field"><label>🍽️ Тип питания</label><select id="nutritionType"><option value="kbzhu">По КБЖУ (точный расчёт)</option><option value="harvard">Гарвардская тарелка</option></select></div>
                     <div class="field"><label>📊 Возрастная группа</label><select id="ageGroup"><option value="18-35">18–35 лет</option><option value="36-45">36–45 лет</option><option value="46+">46+ лет</option></select></div>
                 </div>
                 <button id="saveCycleBtn" class="btn-outline">Сохранить цикл</button>
@@ -227,19 +290,19 @@
 <script>
     const RECIPES = {
         breakfast: [
-            { id:"b1", name:"Омлет с говядиной", kcal:320, protein:28, tags:["iron"], ingredients:"2 яйца, 50г говядины", instructions:"Обжарьте" },
-            { id:"b2", name:"Овсянка с ягодами", kcal:290, protein:12, tags:["magnesium"], ingredients:"40г овсянки, ягоды", instructions:"Залейте" },
-            { id:"b3", name:"Творожная запеканка", kcal:310, protein:24, tags:["calcium"], ingredients:"200г творога", instructions:"Запекайте" }
+            { id:"b1", name:"Омлет с говядиной", kcal:320, protein:28, tags:["iron"], ingredients:"2 яйца, 50г говядины", instructions:"Обжарьте говядину, залейте яйцами." },
+            { id:"b2", name:"Овсянка с ягодами", kcal:290, protein:12, tags:["magnesium"], ingredients:"40г овсянки, 100г ягод", instructions:"Залейте молоком." },
+            { id:"b3", name:"Творожная запеканка", kcal:310, protein:24, tags:["calcium"], ingredients:"200г творога, яйцо", instructions:"Запекайте 25 мин." }
         ],
         lunch: [
-            { id:"l1", name:"Гречка с печенью", kcal:450, protein:32, tags:["iron"], ingredients:"120г гречки, 100г печени", instructions:"Отварите" },
-            { id:"l2", name:"Куриная печень с луком", kcal:420, protein:30, tags:["iron"], ingredients:"150г печени", instructions:"Обжарьте" },
-            { id:"l3", name:"Киноа с лососем", kcal:580, protein:35, tags:["omega3"], ingredients:"80г киноа, 150г лосося", instructions:"Запеките" }
+            { id:"l1", name:"Гречка с печенью", kcal:450, protein:32, tags:["iron"], ingredients:"120г гречки, 100г печени", instructions:"Отварите гречку, обжарьте печень." },
+            { id:"l2", name:"Куриная печень с луком", kcal:420, protein:30, tags:["iron"], ingredients:"150г печени, лук", instructions:"Обжарьте с луком." },
+            { id:"l3", name:"Киноа с лососем", kcal:580, protein:35, tags:["omega3"], ingredients:"80г киноа, 150г лосося", instructions:"Запеките лосось." }
         ],
         dinner: [
-            { id:"d1", name:"Скумбрия запечённая", kcal:380, protein:28, tags:["omega3"], ingredients:"130г скумбрии", instructions:"Запекайте" },
-            { id:"d2", name:"Лосось с киноа", kcal:520, protein:34, tags:["omega3"], ingredients:"150г лосося", instructions:"Запеките" },
-            { id:"d3", name:"Курица с брокколи", kcal:360, protein:42, tags:["protein"], ingredients:"150г курицы", instructions:"Запеките" }
+            { id:"d1", name:"Скумбрия запечённая", kcal:380, protein:28, tags:["omega3"], ingredients:"130г скумбрии", instructions:"Запекайте 20 мин." },
+            { id:"d2", name:"Лосось с киноа", kcal:520, protein:34, tags:["omega3"], ingredients:"150г лосося, 80г киноа", instructions:"Запеките." },
+            { id:"d3", name:"Курица с брокколи", kcal:360, protein:42, tags:["protein"], ingredients:"150г курицы, 150г брокколи", instructions:"Запеките." }
         ],
         snack: [
             { id:"s1", name:"Греческий йогурт", kcal:150, protein:12, tags:["calcium"], ingredients:"150г йогурта", instructions:"" },
@@ -272,6 +335,17 @@
         return { name:PHASES.luteal, key:"luteal", day:cycleDay };
     }
     
+    function switchNutritionDisplay(){
+        let type = localStorage.getItem('femmetry_nutrition_type') || "kbzhu";
+        if(type === "harvard"){
+            document.getElementById('kbzhuContent').style.display = 'none';
+            document.getElementById('harvardContent').style.display = 'block';
+        } else {
+            document.getElementById('kbzhuContent').style.display = 'block';
+            document.getElementById('harvardContent').style.display = 'none';
+        }
+    }
+    
     function loadUserData(){
         let p=JSON.parse(localStorage.getItem('femmetry_params')||'{}');
         let w=p.weight||65, h=p.height||165, a=p.age||30, act=parseFloat(localStorage.getItem('femmetry_activity'))||1.375;
@@ -289,6 +363,7 @@
         document.getElementById('activity').value=act; document.getElementById('nutritionType').value=nutritionType;
         document.getElementById('ageGroup').value=ageGroup;
         document.querySelectorAll('.goal-btn').forEach(b=>{b.classList.remove('active'); if(b.dataset.goal===currentGoal)b.classList.add('active');});
+        switchNutritionDisplay();
         return {w,h,a,act};
     }
     
@@ -311,7 +386,7 @@
     
     function renderPhaseBanner(){
         let last=localStorage.getItem('femmetry_last_period')||'';
-        if(!last){ document.getElementById('phaseBanner').innerHTML=`<div class="phase-banner"><div class="phase-name">📅 Укажите дату месячных</div><div class="phase-recommendation">Это поможет адаптировать меню под ваш цикл.</div></div>`; return; }
+        if(!last){ document.getElementById('phaseBanner').innerHTML=`<div class="phase-banner"><div class="phase-name">📅 Укажите дату месячных</div><div class="phase-recommendation">Это поможет адаптировать рекомендации под ваш цикл.</div></div>`; return; }
         let phase=getCyclePhase(last);
         document.getElementById('phaseBanner').innerHTML=`<div class="phase-banner"><div class="phase-name">${phase.name.name} • ${phase.name.days} день цикла</div><div class="phase-recommendation"><i class="fas fa-lightbulb"></i> Фокус: ${phase.name.focus}. ${phase.name.focus==="Железо"?"Добавьте красное мясо, печень, гречку.":phase.name.focus==="Омега-3"?"Жирная рыба, авокадо, оливковое масло.":"Белок, овощи, цельнозерновые."}</div></div>`;
     }
@@ -347,13 +422,12 @@
     }
     
     function renderDashboard(){
-        let p=JSON.parse(localStorage.getItem('femmetry_params')||'{}');
         renderPhaseBanner();
         let today=weeklyMeals[new Date().getDay()];
         document.getElementById('todayMenuPreview').innerHTML=`
-            <div class="meal-preview-card"><div class="name">🌅 ${today.breakfast?.name||'—'}</div>${nutritionType==='kbzhu'?`<div>${today.breakfast?.kcal||0} ккал</div>`:''}</div>
-            <div class="meal-preview-card"><div class="name">☀️ ${today.lunch?.name||'—'}</div>${nutritionType==='kbzhu'?`<div>${today.lunch?.kcal||0} ккал</div>`:''}</div>
-            <div class="meal-preview-card"><div class="name">🌙 ${today.dinner?.name||'—'}</div>${nutritionType==='kbzhu'?`<div>${today.dinner?.kcal||0} ккал</div>`:''}</div>
+            <div class="meal-preview-card"><div class="name">🌅 ${today.breakfast?.name||'—'}</div>${nutritionType==='kbzhu'?`<div>${today.breakfast?.kcal||0} ккал</div>`:'<div style="font-size:0.7rem;">🥗 + овощи</div>'}</div>
+            <div class="meal-preview-card"><div class="name">☀️ ${today.lunch?.name||'—'}</div>${nutritionType==='kbzhu'?`<div>${today.lunch?.kcal||0} ккал</div>`:'<div style="font-size:0.7rem;">🥗 + овощи</div>'}</div>
+            <div class="meal-preview-card"><div class="name">🌙 ${today.dinner?.name||'—'}</div>${nutritionType==='kbzhu'?`<div>${today.dinner?.kcal||0} ккал</div>`:'<div style="font-size:0.7rem;">🥗 + овощи</div>'}</div>
         `;
         let blog=JSON.parse(localStorage.getItem('femmetry_blog_posts')||'[]');
         let forum=JSON.parse(localStorage.getItem('femmetry_forum_topics')||'[]');
@@ -370,27 +444,28 @@
     
     function renderMenuPage(){
         loadUserData();
-        document.getElementById('kcalHeader').innerHTML=nutritionType==='kbzhu'?`🎯 Норма: ${userTargetKcal} ккал/день • Белок: ${targetProtein} г`:'🍽️ Гарвардская тарелка • ½ овощи + ¼ белок + ¼ углеводы';
-        let days=['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'];
-        document.getElementById('weekTabs').innerHTML=days.map((d,i)=>`<button class="day-btn ${currentDay===i?'active':''}" onclick="setDay(${i})">${d}</button>`).join('');
-        let meals=weeklyMeals[currentDay];
-        document.getElementById('mealsContainer').innerHTML=`
-            ${renderMealBlock('breakfast','🌅 Завтрак',meals.breakfast)}
-            ${renderMealBlock('lunch','☀️ Обед',meals.lunch)}
-            ${renderMealBlock('dinner','🌙 Ужин',meals.dinner)}
-            ${renderMealBlock('snack','🍎 Перекус',meals.snack)}
-        `;
+        if(nutritionType === 'kbzhu'){
+            document.getElementById('kcalHeader').innerHTML=nutritionType==='kbzhu'?`🎯 Норма: ${userTargetKcal} ккал/день • Белок: ${targetProtein} г`:'🍽️ Гарвардская тарелка';
+            let days=['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'];
+            document.getElementById('weekTabs').innerHTML=days.map((d,i)=>`<button class="day-btn ${currentDay===i?'active':''}" onclick="setDay(${i})">${d}</button>`).join('');
+            let meals=weeklyMeals[currentDay];
+            document.getElementById('mealsContainer').innerHTML=`
+                ${renderMealBlock('breakfast','🌅 Завтрак',meals.breakfast)}
+                ${renderMealBlock('lunch','☀️ Обед',meals.lunch)}
+                ${renderMealBlock('dinner','🌙 Ужин',meals.dinner)}
+                ${renderMealBlock('snack','🍎 Перекус',meals.snack)}
+            `;
+        }
     }
     
     function renderMealBlock(type,title,meal){
-        let kcalHtml=nutritionType==='kbzhu'?`<span style="background:#F0EDE8; padding:4px 12px; border-radius:40px;">${meal?.kcal||0} ккал</span>`:'';
         return `<div style="margin-bottom:24px;"><div style="display:flex; justify-content:space-between; margin-bottom:12px;"><h3>${title}</h3><button class="btn-outline" style="padding:6px 16px;" onclick="openReplaceModal('${type}')">Заменить</button></div>
-        <div class="meal-card" onclick="toggleRecipe('${type}')"><div style="display:flex; justify-content:space-between;"><span style="font-weight:600;">${meal?.name||'—'}</span>${kcalHtml}</div>
+        <div class="meal-card" onclick="toggleRecipe('${type}')"><div style="display:flex; justify-content:space-between;"><span style="font-weight:600;">${meal?.name||'—'}</span><span style="background:#F0EDE8; padding:4px 12px; border-radius:40px;">${meal?.kcal||0} ккал</span></div>
         <div id="recipe-${type}" class="recipe-detail"><p>🍳 ${meal?.instructions||'—'}</p><button class="btn-outline" style="margin-top:8px; padding:4px 12px;" onclick="event.stopPropagation(); saveRecipe('${meal?.name}')">Сохранить</button></div></div></div>`;
     }
     
     window.toggleRecipe=function(t){ let e=document.getElementById(`recipe-${t}`); if(e) e.style.display=e.style.display==='none'?'block':'none'; };
-    window.openReplaceModal=function(t){ currentReplaceType=t; let opts=RECIPES[t].map(r=>`<div style="padding:12px; border-bottom:1px solid #EFEAE3; cursor:pointer;" onclick="replaceMeal('${t}',${currentDay},'${r.id}')"><strong>${r.name}</strong> ${nutritionType==='kbzhu'?`— ${r.kcal} ккал`:''}<div style="font-size:0.7rem;">${r.ingredients}</div></div>`).join('');
+    window.openReplaceModal=function(t){ currentReplaceType=t; let opts=RECIPES[t].map(r=>`<div style="padding:12px; border-bottom:1px solid #EFEAE3; cursor:pointer;" onclick="replaceMeal('${t}',${currentDay},'${r.id}')"><strong>${r.name}</strong> — ${r.kcal} ккал<div style="font-size:0.7rem;">${r.ingredients}</div></div>`).join('');
         document.getElementById('replaceOptions').innerHTML=opts; document.getElementById('replaceModal').style.display='flex'; };
     window.replaceMeal=function(t,d,id){ let nr=RECIPES[t].find(r=>r.id===id); if(nr&&weeklyMeals[d]){ weeklyMeals[d][t]=nr; localStorage.setItem('femmetry_weekly',JSON.stringify(weeklyMeals)); renderMenuPage(); updateProgress(); renderDashboard(); } closeReplaceModal(); };
     window.closeReplaceModal=function(){ document.getElementById('replaceModal').style.display='none'; };
@@ -415,7 +490,7 @@
     
     document.querySelectorAll('.nav-btn').forEach(b=>{b.onclick=()=>{document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active')); document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); b.classList.add('active'); document.getElementById(b.dataset.page+'Page').classList.add('active'); if(b.dataset.page==='menu') renderMenuPage(); if(b.dataset.page==='cookbook') renderCookbook(); if(b.dataset.page==='stats') renderHistory(); if(b.dataset.page==='dashboard') renderDashboard(); };});
     document.getElementById('saveMeasurementsBtn').onclick=saveMeasurements;
-    document.getElementById('saveCycleBtn').onclick=()=>{ localStorage.setItem('femmetry_last_period',document.getElementById('lastPeriod').value); localStorage.setItem('femmetry_ferritin',document.getElementById('ferritin').value); localStorage.setItem('femmetry_pregnant',document.getElementById('pregnant').value); showToast("✅ Данные цикла сохранены"); location.reload(); };
+    document.getElementById('saveCycleBtn').onclick=()=>{ localStorage.setItem('femmetry_last_period',document.getElementById('lastPeriod').value); localStorage.setItem('femmetry_ferritin',document.getElementById('ferritin').value); localStorage.setItem('femmetry_pregnant',document.getElementById('pregnant').value); localStorage.setItem('femmetry_nutrition_type',document.getElementById('nutritionType').value); showToast("✅ Данные сохранены"); location.reload(); };
     document.getElementById('quickWeightBtn').onclick=quickWeight;
     document.querySelectorAll('.goal-btn').forEach(b=>{b.onclick=()=>{document.querySelectorAll('.goal-btn').forEach(g=>g.classList.remove('active')); b.classList.add('active'); currentGoal=b.dataset.goal; saveMeasurements();};});
     
