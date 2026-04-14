@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -12,11 +13,11 @@
         body { font-family: 'Inter', sans-serif; background: #FAF8F5; color: #1A1A2E; }
         .cabinet-container { max-width: 1400px; margin: 0 auto; padding: 24px; }
         .cabinet-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #EDE8E0; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
-        .logo-small h2 { font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, #1A1A2E 0%, #4A3B2C 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .user-info { display: flex; align-items: center; gap: 20px; }
+        .logo-small h2 { font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, #1A1A2E 0%, #C6A27A 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .user-info { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
         .trial-badge { background: #E8F0E8; padding: 6px 14px; border-radius: 40px; font-size: 0.8rem; font-weight: 500; }
-        .logout-btn { background: transparent; border: 1px solid #E0D6C8; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: all 0.2s; }
-        .logout-btn:hover { background: #1A1A2E; color: white; }
+        .logout-btn, .admin-btn { background: transparent; border: 1px solid #E0D6C8; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: all 0.2s; }
+        .logout-btn:hover, .admin-btn:hover { background: #1A1A2E; color: white; }
         .tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; border-bottom: 1px solid #EDE8E0; padding-bottom: 12px; }
         .tab-btn { background: none; border: none; padding: 12px 28px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.95rem; color: #A89F8E; cursor: pointer; border-radius: 40px; transition: all 0.2s; }
         .tab-btn.active { background: #1A1A2E; color: white; }
@@ -37,33 +38,40 @@
         .btn:hover { background: #2A2A3E; transform: translateY(-1px); }
         .btn-outline { background: transparent; border: 1.5px solid #1A1A2E; color: #1A1A2E; padding: 10px 24px; border-radius: 40px; cursor: pointer; }
         .info-text { background: #E8F0E8; padding: 16px; border-radius: 20px; margin-top: 16px; font-size: 0.9rem; }
-        .info-text a { color: #C4A87C; text-decoration: none; }
         .hidden { display: none; }
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; margin: 24px 0; }
         .menu-card { background: #FAF8F5; border-radius: 24px; padding: 20px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
         .menu-card:hover { transform: translateY(-3px); }
-        .menu-card.selected { border-color: #C4A87C; background: #F3EFEA; }
+        .menu-card.selected { border-color: #C6A27A; background: #F3EFEA; }
         .menu-card h4 { margin-bottom: 8px; font-size: 1.1rem; }
-        .menu-desc { font-size: 0.75rem; color: #C4A87C; margin-bottom: 16px; }
+        .menu-desc { font-size: 0.75rem; color: #C6A27A; margin-bottom: 16px; }
         .meal-preview p { font-size: 0.8rem; color: #666; margin: 6px 0; }
         .meal-detail { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0; }
         .meal-item { background: white; padding: 16px; border-radius: 20px; }
         .meal-item h5 { margin-bottom: 8px; color: #1A1A2E; }
-        .save-recipe-btn { background: none; border: none; color: #C4A87C; cursor: pointer; margin-top: 10px; font-size: 0.75rem; display: flex; align-items: center; gap: 5px; }
+        .save-recipe-btn { background: none; border: none; color: #C6A27A; cursor: pointer; margin-top: 10px; font-size: 0.75rem; display: flex; align-items: center; gap: 5px; }
         .save-recipe-btn:hover { color: #1A1A2E; }
         .research-link { font-size: 0.7rem; margin-top: 12px; padding-top: 8px; border-top: 1px solid #EDE8E0; color: #A89F8E; }
-        .saved-recipe-item { background: #FAF8F5; padding: 16px; border-radius: 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .saved-recipe-item, .admin-recipe-item { background: #FAF8F5; padding: 16px; border-radius: 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
         .history-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         .history-table th, .history-table td { padding: 12px; text-align: left; border-bottom: 1px solid #EDE8E0; }
         .history-table th { background: #FAF8F5; font-weight: 600; }
         .chart-container { max-width: 100%; margin: 20px 0; padding: 20px; background: #FAF8F5; border-radius: 24px; }
         canvas { max-height: 300px; }
-        .blog-post, .forum-topic { background: #FAF8F5; border-radius: 20px; padding: 20px; margin-bottom: 20px; cursor: pointer; transition: all 0.2s; }
+        .blog-post, .forum-topic, .admin-post-item { background: #FAF8F5; border-radius: 20px; padding: 20px; margin-bottom: 20px; transition: all 0.2s; }
         .blog-post:hover, .forum-topic:hover { transform: translateX(5px); background: #F3EFEA; }
         .forum-category { background: #1A1A2E; color: white; padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; display: inline-block; margin-bottom: 10px; }
+        .comment-section { margin-top: 20px; padding-top: 20px; border-top: 1px solid #EDE8E0; }
+        .comment { background: white; padding: 12px; border-radius: 16px; margin-bottom: 12px; }
+        .comment-input { width: 100%; padding: 12px; border: 1px solid #E0D6C8; border-radius: 40px; margin-top: 12px; font-family: 'Inter', sans-serif; }
         .telegram-widget { background: linear-gradient(135deg, #1A1A2E 0%, #2A2A3E 100%); color: white; border-radius: 28px; padding: 30px; text-align: center; margin-top: 20px; }
-        .telegram-widget a { color: white; background: #C4A87C; padding: 12px 28px; border-radius: 40px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; }
-        .pregnancy-extra { background: #FFF8F0; border-left: 4px solid #C4A87C; padding: 20px; border-radius: 20px; margin: 20px 0; }
+        .telegram-widget a { color: white; background: #C6A27A; padding: 12px 28px; border-radius: 40px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; }
+        .pregnancy-extra { background: #FFF8F0; border-left: 4px solid #C6A27A; padding: 20px; border-radius: 20px; margin: 20px 0; }
+        .admin-form { background: #F3EFEA; padding: 24px; border-radius: 24px; margin-bottom: 24px; }
+        .admin-form input, .admin-form textarea, .admin-form select { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #E0D6C8; border-radius: 40px; font-family: 'Inter', sans-serif; }
+        .admin-form textarea { border-radius: 20px; resize: vertical; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; border-radius: 32px; padding: 32px; max-width: 400px; width: 90%; }
         @media (max-width: 700px) { .cabinet-container { padding: 16px; } .card { padding: 20px; } .menu-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -73,6 +81,7 @@
         <div class="logo-small"><h2>Femmetry <span style="font-size:0.8rem;color:#A89F8E">| экосистема</span></h2></div>
         <div class="user-info">
             <div class="trial-badge" id="trialStatus">🎁 Пробный период: 7 дней</div>
+            <button class="admin-btn" onclick="openAdminModal()"><i class="fas fa-crown"></i> Админ</button>
             <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Выйти</button>
         </div>
     </div>
@@ -109,11 +118,12 @@
         <div class="card"><h2><i class="fas fa-chart-simple"></i> Мои параметры</h2>
             <div class="grid"><div class="field"><label>Вес (кг) *</label><input type="number" id="weight" step="0.1"></div><div class="field"><label>Рост (см) *</label><input type="number" id="height"></div><div class="field"><label>Возраст *</label><input type="number" id="age"></div><div class="field"><label>Талия (см)</label><input type="number" id="waist"></div><div class="field"><label>Бёдра (см)</label><input type="number" id="hips"></div></div>
             <div class="goal-group"><button class="goal-btn" data-goal="loss">🔥 Похудение</button><button class="goal-btn active" data-goal="maintain">⚖️ Поддержание</button><button class="goal-btn" data-goal="gain">💪 Набор массы</button></div>
-            <button id="saveParamsBtn" class="btn"><i class="fas fa-save"></i> Сохранить</button><div id="calorieDisplay" class="info-text hidden"></div>
+            <button id="saveParamsBtn" class="btn"><i class="fas fa-save"></i> Сохранить</button>
         </div>
         <div class="card"><h2><i class="fas fa-female"></i> Цикл и анализы</h2>
             <div class="grid"><div class="field"><label>📅 Первый день последних месячных</label><input type="date" id="lastPeriod"></div><div class="field"><label>⏱️ Длина цикла (дней)</label><input type="number" id="cycleLength" value="28"></div><div class="field"><label>🤰 Беременность</label><select id="pregnant"><option value="no">Нет</option><option value="yes">Да</option></select></div><div class="field"><label>🩸 Ферритин (нг/мл)</label><input type="number" id="ferritin"></div></div>
-            <button id="saveCycleBtn" class="btn"><i class="fas fa-chart-line"></i> Сохранить</button><div id="cycleDisplay" class="info-text hidden"></div>
+            <button id="saveCycleBtn" class="btn"><i class="fas fa-chart-line"></i> Сохранить</button>
+            <div id="cycleDisplay" class="info-text hidden"></div>
         </div>
         <div class="card"><h2><i class="fas fa-utensils"></i> Подход к питанию</h2>
             <div class="goal-group"><button class="goal-btn" data-nutrition="kbzhu">🥩 По КБЖУ</button><button class="goal-btn active" data-nutrition="harvard">🍽️ Гарвардская тарелка</button></div>
@@ -121,7 +131,7 @@
         </div>
     </div>
 
-    <!-- Меню (обычное, 6 вариантов) -->
+    <!-- Меню -->
     <div id="menu" class="tab-content">
         <div class="card"><h2><i class="fas fa-calendar-day"></i> Меню на сегодня</h2>
             <div id="menuInfo" class="info-text"></div>
@@ -144,9 +154,9 @@
     <div id="blog" class="tab-content"><div class="card"><h2><i class="fas fa-newspaper"></i> Научный блог Femmetry</h2><div id="blogList"></div></div></div>
 
     <!-- Форум -->
-    <div id="forum" class="tab-content"><div class="card"><h2><i class="fas fa-comments"></i> Форум сообщества</h2><p style="margin-bottom:20px;color:#A89F8E">Доступ к форуму — только для активных подписчиков.</p><div id="forumList"></div><div class="telegram-widget" style="margin-top:30px;background:#C4A87C20;color:#1A1A2E"><i class="fab fa-telegram" style="font-size:2rem;color:#C4A87C"></i><h3>Оперативные вопросы — в Telegram-чат</h3><a href="https://t.me/femmetry_chat" target="_blank" style="background:#1A1A2E;color:white"><i class="fab fa-telegram"></i> Перейти в чат</a></div></div></div>
+    <div id="forum" class="tab-content"><div class="card"><h2><i class="fas fa-comments"></i> Форум сообщества</h2><div id="forumList"></div><div class="telegram-widget" style="margin-top:30px;background:#C6A27A20;color:#1A1A2E"><i class="fab fa-telegram" style="font-size:2rem;color:#C6A27A"></i><h3>Оперативные вопросы — в Telegram-чат</h3><a href="https://t.me/femmetry_chat" target="_blank" style="background:#1A1A2E;color:white"><i class="fab fa-telegram"></i> Перейти в чат</a></div></div></div>
 
-    <!-- Инструкция по методу тарелки -->
+    <!-- Инструкция -->
     <div id="instruction" class="tab-content">
         <div class="card"><h2><i class="fas fa-book"></i> Метод «Нормальной тарелки»</h2>
             <div style="text-align:center;margin:20px 0"><img src="tarelka.jpg" alt="Тарелка" style="max-width:100%;border-radius:28px" onerror="this.src='https://placehold.co/600x400/1A1A2E/white?text=1/2+овощи,+1/4+белок,+1/4+углеводы'"></div>
@@ -157,12 +167,9 @@
         </div>
     </div>
 
-    <!-- Беременность: отдельная вкладка -->
+    <!-- Беременность -->
     <div id="pregnancy" class="tab-content">
-        <div class="card">
-            <h2><i class="fas fa-baby-carriage"></i> Питание при беременности</h2>
-            <p style="margin-bottom:20px;color:#A89F8E">Персонализированные меню с учётом триместра, калорийности, уровня гемоглобина и гестационного сахарного диабета (ГСД).</p>
-            
+        <div class="card"><h2><i class="fas fa-baby-carriage"></i> Питание при беременности</h2>
             <div class="pregnancy-extra">
                 <h3 style="margin-bottom:16px"><i class="fas fa-stethoscope"></i> Дополнительные параметры</h3>
                 <div class="grid">
@@ -173,81 +180,378 @@
                 </div>
                 <button id="savePregnancyBtn" class="btn"><i class="fas fa-save"></i> Сохранить параметры беременности</button>
             </div>
-            
             <div id="pregnancyMenuInfo" class="info-text"></div>
             <div id="pregnancyMenuOptions" class="menu-grid"></div>
             <div id="selectedPregnancyMenuBlock" class="hidden" style="margin-top:32px;padding:24px;background:#E8F0E8;border-radius:24px"><h3>✅ Вы выбрали меню для беременных:</h3><div id="selectedPregnancyMenuDetails"></div></div>
-            
-            <div class="info-text" style="margin-top:20px">
-                <i class="fas fa-book-open"></i> <strong>Источники и исследования:</strong><br>
-                • ВОЗ (2025). Глобальные рекомендации по ведению диабета во время беременности.<br>
-                • ACOG / IOM. Рекомендации по гестационной прибавке веса.<br>
-                • Клинические рекомендации «Нормальная беременность» (с изм. 2025).<br>
-                • Артымук Н.В., Тачкова О.А. Профилактика и лечение дефицита витамина D при беременности.
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно админки -->
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <h2>🔐 Вход в админ-панель</h2>
+        <input type="password" id="adminPassword" placeholder="Пароль" style="width:100%;padding:12px;margin:16px 0;border-radius:40px;border:1px solid #E0D6C8">
+        <button class="btn" onclick="checkAdminLogin()" style="width:100%">Войти</button>
+        <button class="btn-outline" onclick="closeAdminModal()" style="margin-top:12px;width:100%">Отмена</button>
+    </div>
+</div>
+
+<!-- Админ-панель (скрыта по умолчанию) -->
+<div id="adminPanel" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:2000; overflow:auto; padding:40px;">
+    <div style="max-width:1200px; margin:0 auto; background:#FAF8F5; border-radius:40px; padding:32px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+            <h2><i class="fas fa-crown"></i> Админ-панель Femmetry</h2>
+            <button class="btn-outline" onclick="closeAdminPanel()"><i class="fas fa-times"></i> Закрыть</button>
+        </div>
+        
+        <!-- Управление рецептами -->
+        <div class="card">
+            <h3><i class="fas fa-utensils"></i> Управление рецептами</h3>
+            <div class="admin-form">
+                <input type="text" id="recipeName" placeholder="Название рецепта">
+                <select id="recipeMeal"><option value="breakfast">Завтрак</option><option value="lunch">Обед</option><option value="dinner">Ужин</option><option value="snack">Перекус</option></select>
+                <input type="text" id="recipeIngredients" placeholder="Ингредиенты (через запятую)">
+                <textarea id="recipeInstructions" rows="3" placeholder="Приготовление..."></textarea>
+                <input type="text" id="recipeCalories" placeholder="Калорийность (например, 350 ккал)">
+                <button class="btn" onclick="addRecipe()"><i class="fas fa-plus"></i> Добавить рецепт</button>
             </div>
+            <div id="adminRecipesList"></div>
+        </div>
+        
+        <!-- Управление блогом -->
+        <div class="card">
+            <h3><i class="fas fa-newspaper"></i> Управление блогом</h3>
+            <div class="admin-form">
+                <input type="text" id="postTitle" placeholder="Заголовок статьи">
+                <input type="text" id="postCategory" placeholder="Категория (например, Анализы, Питание, Цикл)">
+                <textarea id="postContent" rows="5" placeholder="Текст статьи..."></textarea>
+                <button class="btn" onclick="addBlogPost()"><i class="fas fa-plus"></i> Опубликовать статью</button>
+            </div>
+            <div id="adminBlogList"></div>
+        </div>
+        
+        <!-- Управление форумом -->
+        <div class="card">
+            <h3><i class="fas fa-comments"></i> Управление форумом</h3>
+            <div class="admin-form">
+                <input type="text" id="topicTitle" placeholder="Тема обсуждения">
+                <select id="topicCategory"><option value="Питание">Питание</option><option value="Цикл">Цикл</option><option value="Анализы">Анализы</option><option value="Тренировки">Тренировки</option></select>
+                <textarea id="topicContent" rows="3" placeholder="Первый пост в теме..."></textarea>
+                <button class="btn" onclick="addForumTopic()"><i class="fas fa-plus"></i> Создать тему</button>
+            </div>
+            <div id="adminForumList"></div>
         </div>
     </div>
 </div>
 
 <script>
-    // ========== БАЗА РЕЦЕПТОВ ==========
-    const RECIPES_DB = {
-        "Омлет с говядиной и шпинатом": { name:"Омлет с говядиной и шпинатом", meal:"breakfast", ingredients:"2 яйца, 50 г говядины, шпинат", instructions:"Обжарьте говядину, залейте яйцами, добавьте шпинат.", prepTime:"10 мин", calories:"320 ккал" },
-        "Гречка с печенью": { name:"Гречка с печенью", meal:"lunch", ingredients:"120 г гречки, 100 г печени, лук", instructions:"Отварите гречку. Печень обжарьте с луком.", prepTime:"25 мин", calories:"450 ккал" },
-        "Скумбрия запечённая": { name:"Скумбрия запечённая", meal:"dinner", ingredients:"130 г скумбрии, лимон, специи", instructions:"Запекайте 20 минут при 180°C.", prepTime:"30 мин", calories:"380 ккал" }
-    };
+    // ========== БАЗА ДАННЫХ (localStorage) ==========
+    let recipes = JSON.parse(localStorage.getItem('femmetry_recipes') || '[]');
+    let blogPosts = JSON.parse(localStorage.getItem('femmetry_blog_posts') || '[]');
+    let forumTopics = JSON.parse(localStorage.getItem('femmetry_forum_topics') || '[]');
+    
+    // Инициализация демо-данных
+    if(recipes.length === 0) {
+        recipes = [
+            { name:"Омлет с говядиной и шпинатом", meal:"breakfast", ingredients:"2 яйца, 50 г говядины, шпинат, соль", instructions:"Обжарьте говядину, залейте яйцами, добавьте шпинат.", calories:"320 ккал" },
+            { name:"Гречка с печенью", meal:"lunch", ingredients:"120 г гречки, 100 г печени, лук, морковь", instructions:"Отварите гречку. Печень обжарьте с луком и морковью.", calories:"450 ккал" },
+            { name:"Скумбрия запечённая", meal:"dinner", ingredients:"130 г скумбрии, лимон, специи, зелень", instructions:"Запекайте 20 минут при 180°C.", calories:"380 ккал" },
+            { name:"Творог с ягодами", meal:"snack", ingredients:"150 г творога 5%, 50 г ягод, мёд", instructions:"Смешайте творог с ягодами и мёдом.", calories:"180 ккал" },
+            { name:"Куриная печень с луком", meal:"lunch", ingredients:"150 г куриной печени, лук, сметана", instructions:"Обжарьте печень с луком, добавьте сметану.", calories:"420 ккал" },
+            { name:"Лосось с киноа", meal:"dinner", ingredients:"150 г лосося, 80 г киноа, лимон, спаржа", instructions:"Запеките лосось, отварите киноа и спаржу.", calories:"520 ккал" }
+        ];
+        localStorage.setItem('femmetry_recipes', JSON.stringify(recipes));
+    }
+    if(blogPosts.length === 0) {
+        blogPosts = [
+            { id:1, title:"Ферритин: почему он важен для женского здоровья", category:"Анализы", content:"Разбираемся, как низкий ферритин влияет на энергию, цикл и почему железо лучше усваивается с витамином С. Норма ферритина для женщин — 30-150 нг/мл. При снижении ниже 30 развивается латентный дефицит железа, который проявляется усталостью, ломкостью волос и ногтей.", date:"2025-03-15", comments:[] },
+            { id:2, title:"Питание по фазам цикла: руководство", category:"Цикл", content:"В фолликулярную фазу нужны сложные углеводы и белок, в лютеиновую — магний и меньше сладкого. В менструальную фазу — железо (говядина, печень, гречка).", date:"2025-03-10", comments:[] }
+        ];
+        localStorage.setItem('femmetry_blog_posts', JSON.stringify(blogPosts));
+    }
+    if(forumTopics.length === 0) {
+        forumTopics = [
+            { id:1, title:"Чек-лист: что делать при ферритине ниже 30", category:"Анализы", author:"admin", content:"Сдайте анализ крови, увеличьте потребление гемового железа (говядина, печень), принимайте железо с витамином С.", date:"2025-03-14", comments:[] },
+            { id:2, title:"Как справляться с тягой к сладкому в лютеиновую фазу?", category:"Цикл", author:"admin", content:"Попробуйте магний, тёмный шоколад, финики с орехами, больше белка в каждый приём пищи.", date:"2025-03-12", comments:[] }
+        ];
+        localStorage.setItem('femmetry_forum_topics', JSON.stringify(forumTopics));
+    }
 
-    // ========== МЕНЮ ДЛЯ БЕРЕМЕННЫХ (6 вариантов) ==========
-    const PREGNANCY_MENUS = {
-        first_trimester: [
-            { id:"preg_1_1", title:"Меню для 1 триместра (базовое)", desc:"1800-2000 ккал", breakfast:"Овсянка на молоке (40 г) + черника", lunch:"180 г курицы + 180 г гречки + овощи", dinner:"180 г рыбы + брокколи", snack:"Йогурт + ягоды", research:"ВОЗ (2023). Ежедневное применение железа и фолиевой кислоты." },
-            { id:"preg_1_2", title:"Меню для 1 триместра с железом", desc:"При низком гемоглобине", breakfast:"Омлет с говядиной и шпинатом", lunch:"Гречка с печенью + салат", dinner:"Скумбрия запечённая + овощи", snack:"Творог с ягодами", research:"WHO. Daily iron supplementation during pregnancy. 2023." },
-            { id:"preg_1_3", title:"Меню для 1 триместра при ГСД", desc:"Контроль углеводов", breakfast:"2 яйца пашот + авокадо", lunch:"150 г курицы + 150 г стручковой фасоли", dinner:"Лосось с киноа", snack:"Греческий йогурт + орехи", research:"ВОЗ (2025). Глобальные рекомендации по ведению диабета." },
-            { id:"preg_1_4", title:"Меню для 1 триместра (вегетарианское)", desc:"С бобовыми", breakfast:"Творог с ягодами", lunch:"150 г тофу + киноа + овощи", dinner:"Чечевичный суп + салат", snack:"Йогурт + яблоко", research:"Клинические рекомендации «Нормальная беременность»." },
-            { id:"preg_1_5", title:"Меню для 1 триместра (энергичное)", desc:"При нормальном весе", breakfast:"Овсянка на молоке + банан", lunch:"Куриная печень + гречка + салат", dinner:"Лосось с киноа", snack:"Кефир + орехи", research:"ACOG. Рекомендации по гестационной прибавке веса." },
-            { id:"preg_1_6", title:"Меню для 1 триместра (лёгкое)", desc:"При токсикозе", breakfast:"Смути из йогурта и банана", lunch:"Суп-пюре из тыквы + сухарики", dinner:"Рыба на пару + пюре из цветной капусты", snack:"Яблоко + крекеры", research:"Артымук Н.В. Дефицит витамина D при беременности. 2025." }
-        ],
-        second_trimester: [
-            { id:"preg_2_1", title:"Меню для 2 триместра (базовое)", desc:"+300 ккал", breakfast:"Овсянка на молоке (45 г) + ягоды", lunch:"200 г курицы + 180 г гречки + овощи", dinner:"200 г лосося + киноа", snack:"Творог + орехи", research:"ACOG. Nutrition During Pregnancy. 2025." },
-            { id:"preg_2_2", title:"Меню для 2 триместра с железом", desc:"При анемии", breakfast:"Омлет с говядиной и шпинатом", lunch:"Гречка с печенью + свекольный салат", dinner:"Запечённая скумбрия + брокколи", snack:"Кефир + курага", research:"Клинические рекомендации «Анемия у беременных». 2025." },
-            { id:"preg_2_3", title:"Меню для 2 триместра при ГСД", desc:"Контроль глюкозы", breakfast:"2 яйца + авокадо + тост", lunch:"Курица-гриль + овощной салат + киноа", dinner:"Лосось + стручковая фасоль", snack:"Греческий йогурт + орехи", research:"ВОЗ (2025). Глобальные рекомендации по ведению диабета." },
-            { id:"preg_2_4", title:"Меню для 2 триместра (вегетарианское)", desc:"Растительный белок", breakfast:"Творог с ягодами + тост", lunch:"Чечевица с овощами + тофу", dinner:"Киноа с запечёнными овощами + фета", snack:"Йогурт + яблоко", research:"Питание беременных: клинические рекомендации." },
-            { id:"preg_2_5", title:"Меню для 2 триместра (энергичное)", desc:"Активный образ жизни", breakfast:"Овсянка + 2 яйца + банан", lunch:"Куриная печень + бурый рис + овощи", dinner:"Лосось + запечённые овощи", snack:"Творог + мёд + орехи", research:"IOM. Weight Gain During Pregnancy." },
-            { id:"preg_2_6", title:"Меню для 2 триместра (лёгкое)", desc:"При изжоге", breakfast:"Смути из йогурта и банана", lunch:"Суп-крем из тыквы + сухарики", dinner:"Рыба на пару + цветная капуста", snack:"Яблоко + миндаль", research:"Артымук Н.В. Дефицит витамина D. 2025." }
-        ],
-        third_trimester: [
-            { id:"preg_3_1", title:"Меню для 3 триместра (базовое)", desc:"+450 ккал", breakfast:"Овсянка на молоке (50 г) + ягоды + мёд", lunch:"220 г курицы + 200 г гречки + овощи", dinner:"220 г лосося + киноа + брокколи", snack:"Творог + орехи + мёд", research:"ACOG. Nutrition During Pregnancy. 2025." },
-            { id:"preg_3_2", title:"Меню для 3 триместра с железом", desc:"При анемии", breakfast:"Омлет из 3 яиц с говядиной", lunch:"Гречка с печенью + салат из свеклы", dinner:"Запечённая скумбрия + стручковая фасоль", snack:"Кефир + курага + орехи", research:"Клинические рекомендации «Анемия беременных». 2025." },
-            { id:"preg_3_3", title:"Меню для 3 триместра при ГСД", desc:"Строгий контроль", breakfast:"2 яйца + авокадо + тост", lunch:"Курица-гриль + овощной салат + киноа", dinner:"Лосось + стручковая фасоль", snack:"Греческий йогурт + орехи", research:"ВОЗ (2025). Глобальные рекомендации по ведению диабета." },
-            { id:"preg_3_4", title:"Меню для 3 триместра (вегетарианское)", desc:"Полноценный белок", breakfast:"Творог 5% с ягодами + тост", lunch:"Чечевица с овощами + тофу + киноа", dinner:"Нут с запечёнными овощами + фета", snack:"Йогурт + яблоко + орехи", research:"Клинические рекомендации Минздрава РФ. 2025." },
-            { id:"preg_3_5", title:"Меню для 3 триместра (энергичное)", desc:"Для активных", breakfast:"Овсянка на молоке + 2 яйца + банан", lunch:"Куриная печень + бурый рис + овощи", dinner:"Лосось + запечённые овощи + киноа", snack:"Творог + мёд + орехи", research:"IOM. Weight Gain During Pregnancy." },
-            { id:"preg_3_6", title:"Меню для 3 триместра (щадящее)", desc:"При отёках", breakfast:"Смути из йогурта, банана и шпината", lunch:"Суп-крем из тыквы с семечками", dinner:"Рыба на пару + цветная капуста + рис", snack:"Яблоко + миндаль + кефир", research:"Артымук Н.В. Дефицит витамина D. 2025." }
-        ]
-    };
-
-    // ========== ОБЫЧНОЕ МЕНЮ (6 вариантов) ==========
-    const NORMAL_MENUS = {
-        low_ferritin: [
-            { id:"norm_low_1", title:"Восстанавливающее меню (железо) №1", desc:"Насыщено гемовым железом", breakfast:"Омлет с говядиной и шпинатом", lunch:"Гречка с печенью", dinner:"Скумбрия запечённая + брокколи", snack:"Кефир + черника", research:"WHO. Daily iron supplementation. 2023." },
-            { id:"norm_low_2", title:"Восстанавливающее меню (железо) №2", desc:"Печень и чечевица", breakfast:"2 яйца пашот + 100 г говядины", lunch:"Чечевичный суп + 100 г курицы", dinner:"Куриная печень + цветная капуста", snack:"Яблоко + грецкие орехи", research:"Клинические рекомендации «Железодефицитные состояния». 2025." }
-        ],
-        normal: [
-            { id:"norm_1", title:"Базовое сбалансированное меню", desc:"По рекомендациям ВОЗ", breakfast:"Овсянка на молоке + ягоды", lunch:"Гречка с курицей + овощной салат", dinner:"Рыба на пару + брокколи", snack:"Кефир + яблоко", research:"ВОЗ. Здоровое питание. 2025." },
-            { id:"norm_2", title:"Энергичное утро", desc:"Плотный завтрак", breakfast:"Омлет из 3 яиц + тост + авокадо", lunch:"Рис с индейкой + овощи", dinner:"Курица запечённая + цветная капуста", snack:"Йогурт + груша", research:"ACOG. Nutrition. 2025." }
-        ]
-    };
-
+    // ========== ОБЩИЕ ФУНКЦИИ ==========
+    function saveAllData() {
+        localStorage.setItem('femmetry_recipes', JSON.stringify(recipes));
+        localStorage.setItem('femmetry_blog_posts', JSON.stringify(blogPosts));
+        localStorage.setItem('femmetry_forum_topics', JSON.stringify(forumTopics));
+        renderAdminPanels();
+        renderBlog();
+        renderForum();
+        renderNormalMenus();
+        renderCookbook();
+    }
+    
+    // ========== АДМИНКА ==========
+    function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
+    function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+    function checkAdminLogin() {
+        let pwd = document.getElementById('adminPassword').value;
+        if(pwd === 'admin123') {
+            closeAdminModal();
+            document.getElementById('adminPanel').style.display = 'block';
+            renderAdminPanels();
+        } else { alert('Неверный пароль'); }
+    }
+    function closeAdminPanel() { document.getElementById('adminPanel').style.display = 'none'; }
+    
+    function renderAdminPanels() {
+        // Рецепты
+        let recipesHtml = recipes.map((r,idx) => `<div class="admin-recipe-item"><div><strong>${r.name}</strong><br><span style="font-size:0.75rem">${r.meal} · ${r.calories}</span></div><button class="btn-outline" style="padding:6px 16px" onclick="deleteRecipe(${idx})">Удалить</button></div>`).join('');
+        document.getElementById('adminRecipesList').innerHTML = recipesHtml || '<p>Нет рецептов</p>';
+        
+        // Блог посты
+        let blogHtml = blogPosts.map((p,idx) => `<div class="admin-post-item"><div><strong>${p.title}</strong><br><span style="font-size:0.75rem">${p.category}</span></div><button class="btn-outline" style="padding:6px 16px" onclick="deleteBlogPost(${idx})">Удалить</button></div>`).join('');
+        document.getElementById('adminBlogList').innerHTML = blogHtml || '<p>Нет статей</p>';
+        
+        // Форум темы
+        let forumHtml = forumTopics.map((t,idx) => `<div class="admin-post-item"><div><strong>${t.title}</strong><br><span style="font-size:0.75rem">${t.category}</span></div><button class="btn-outline" style="padding:6px 16px" onclick="deleteForumTopic(${idx})">Удалить</button></div>`).join('');
+        document.getElementById('adminForumList').innerHTML = forumHtml || '<p>Нет тем</p>';
+    }
+    
+    function addRecipe() {
+        let name = document.getElementById('recipeName').value;
+        let meal = document.getElementById('recipeMeal').value;
+        let ingredients = document.getElementById('recipeIngredients').value;
+        let instructions = document.getElementById('recipeInstructions').value;
+        let calories = document.getElementById('recipeCalories').value;
+        if(!name) { alert('Введите название'); return; }
+        recipes.push({ name, meal, ingredients, instructions, calories });
+        saveAllData();
+        document.getElementById('recipeName').value = '';
+        document.getElementById('recipeIngredients').value = '';
+        document.getElementById('recipeInstructions').value = '';
+        document.getElementById('recipeCalories').value = '';
+        alert('Рецепт добавлен!');
+    }
+    function deleteRecipe(idx) { recipes.splice(idx,1); saveAllData(); }
+    
+    function addBlogPost() {
+        let title = document.getElementById('postTitle').value;
+        let category = document.getElementById('postCategory').value;
+        let content = document.getElementById('postContent').value;
+        if(!title) { alert('Введите заголовок'); return; }
+        blogPosts.unshift({ id: Date.now(), title, category, content, date: new Date().toISOString().slice(0,10), comments: [] });
+        saveAllData();
+        document.getElementById('postTitle').value = '';
+        document.getElementById('postCategory').value = '';
+        document.getElementById('postContent').value = '';
+        alert('Статья опубликована!');
+    }
+    function deleteBlogPost(idx) { blogPosts.splice(idx,1); saveAllData(); }
+    
+    function addForumTopic() {
+        let title = document.getElementById('topicTitle').value;
+        let category = document.getElementById('topicCategory').value;
+        let content = document.getElementById('topicContent').value;
+        if(!title) { alert('Введите тему'); return; }
+        forumTopics.unshift({ id: Date.now(), title, category, author: "admin", content, date: new Date().toISOString().slice(0,10), comments: [] });
+        saveAllData();
+        document.getElementById('topicTitle').value = '';
+        document.getElementById('topicContent').value = '';
+        alert('Тема создана!');
+    }
+    function deleteForumTopic(idx) { forumTopics.splice(idx,1); saveAllData(); }
+    
+    // ========== ОСНОВНЫЕ ФУНКЦИИ ==========
     let currentGoal = "maintain";
     let currentNutrition = "harvard";
     let selectedMenu = null;
     let selectedPregnancyMenu = null;
-    let weightChart = null, fullWeightChart = null, measurementsChart = null;
-
-    function getFerritinStatus(val) { if (!val && val!==0) return "normal"; return val < 50 ? "low" : "normal"; }
-    function getTargetCalories(w,h,a,g) { let bmr = 10*w+6.25*h-5*a-161, tdee = bmr*1.375; if(g==="loss") return Math.round(tdee*0.85); if(g==="gain") return Math.round(tdee*1.1); return Math.round(tdee); }
-    function getCyclePhase() { let lp=document.getElementById('lastPeriod').value, cl=parseInt(document.getElementById('cycleLength').value)||28; if(!lp) return null; let start=new Date(lp), today=new Date(), daysDiff=Math.floor((today-start)/(1000*3600*24)), dayInCycle=(daysDiff%cl)+1, ovDay=Math.floor(cl/2); if(dayInCycle<=7) return "menstrual"; if(dayInCycle<=ovDay-2) return "follicular"; if(dayInCycle<=ovDay+2) return "ovulatory"; return "luteal"; }
-    function getPhaseText(p) { if(p==="menstrual") return "🩸 Менструация"; if(p==="follicular") return "🌱 Фолликулярная"; if(p==="ovulatory") return "🥚 Овуляция"; if(p==="luteal") return "🍂 Лютеиновая"; return "—"; }
-
+    let weightChart = null, fullWeightChart = null;
+    
+    function getRecipesByMeal(meal) { return recipes.filter(r => r.meal === meal); }
+    
+    function renderNormalMenus() {
+        let w=parseFloat(document.getElementById('weight').value), h=parseFloat(document.getElementById('height').value), a=parseFloat(document.getElementById('age').value);
+        if(!w||!h||!a) { document.getElementById('menuInfo').innerHTML="⚠️ Сначала сохраните параметры"; document.getElementById('menuOptions').innerHTML=""; return; }
+        let preg=document.getElementById('pregnant').value;
+        if(preg==="yes") { document.getElementById('menuInfo').innerHTML="🤰 Вы отметили беременность. Перейдите на вкладку «Беременность»."; document.getElementById('menuOptions').innerHTML=""; return; }
+        
+        let breakfasts = getRecipesByMeal('breakfast').slice(0,2);
+        let lunches = getRecipesByMeal('lunch').slice(0,2);
+        let dinners = getRecipesByMeal('dinner').slice(0,2);
+        let snacks = getRecipesByMeal('snack').slice(0,1);
+        
+        let menus = [];
+        for(let i=0; i<6; i++) {
+            menus.push({
+                id: i,
+                title: `Меню ${i+1}`,
+                desc: "Сбалансированный рацион",
+                breakfast: breakfasts[i%breakfasts.length]?.name || "Овсянка с ягодами",
+                lunch: lunches[i%lunches.length]?.name || "Курица с гречкой",
+                dinner: dinners[i%dinners.length]?.name || "Рыба с овощами",
+                snack: snacks[0]?.name || "Йогурт",
+                research: "Рекомендации ВОЗ и клинические протоколы"
+            });
+        }
+        
+        document.getElementById('menuInfo').innerHTML = `<strong>6 вариантов меню</strong> — выберите подходящий`;
+        let container=document.getElementById('menuOptions');
+        container.innerHTML=menus.map((m,idx)=>`<div class="menu-card" data-idx="${idx}"><h4>🍽️ ${m.title}</h4><div class="menu-desc">${m.desc}</div><div class="meal-preview"><p>🌅 ${m.breakfast}</p><p>☀️ ${m.lunch}</p><p>🌙 ${m.dinner}</p></div><div class="research-link"><i class="fas fa-book"></i> ${m.research}</div></div>`).join('');
+        document.querySelectorAll('#menuOptions .menu-card').forEach((card,idx)=>{card.onclick=()=>{document.querySelectorAll('#menuOptions .menu-card').forEach(c=>c.classList.remove('selected')); card.classList.add('selected'); selectedMenu=menus[idx]; displaySelectedMenu(selectedMenu);};});
+    }
+    
+    function displaySelectedMenu(menu) {
+        document.getElementById('selectedMenuDetails').innerHTML=`
+            <div class="meal-detail">
+                <div class="meal-item"><h5>🌅 Завтрак</h5><p>${menu.breakfast}</p><button class="save-recipe-btn" onclick="saveRecipeByName('${menu.breakfast}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
+                <div class="meal-item"><h5>☀️ Обед</h5><p>${menu.lunch}</p><button class="save-recipe-btn" onclick="saveRecipeByName('${menu.lunch}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
+                <div class="meal-item"><h5>🌙 Ужин</h5><p>${menu.dinner}</p><button class="save-recipe-btn" onclick="saveRecipeByName('${menu.dinner}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
+                <div class="meal-item"><h5>🍎 Перекус</h5><p>${menu.snack}</p><button class="save-recipe-btn" onclick="saveRecipeByName('${menu.snack}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
+            </div>
+            <div class="research-link"><i class="fas fa-flask"></i> <strong>Источник:</strong> ${menu.research}</div>`;
+        document.getElementById('selectedMenuBlock').classList.remove('hidden');
+    }
+    
+    function saveRecipeByName(recipeName) {
+        let recipe = recipes.find(r => r.name === recipeName);
+        if(!recipe) { alert("Рецепт не найден в базе"); return; }
+        let saved = JSON.parse(localStorage.getItem('femmetry_saved_recipes')||'[]');
+        if(saved.some(r=>r.name===recipeName)) { alert("Рецепт уже сохранён!"); return; }
+        saved.push({ ...recipe, savedAt:new Date().toISOString() });
+        localStorage.setItem('femmetry_saved_recipes',JSON.stringify(saved));
+        renderCookbook();
+        alert(`✅ Рецепт "${recipeName}" сохранён!`);
+    }
+    
+    function renderCookbook() {
+        let saved = JSON.parse(localStorage.getItem('femmetry_saved_recipes')||'[]');
+        let container = document.getElementById('cookbookList');
+        if(saved.length===0) { container.innerHTML="<p style='color:#A89F8E'>Нет сохранённых рецептов.</p>"; return; }
+        container.innerHTML = saved.map((r,idx)=>`<div class="saved-recipe-item"><div><strong>📖 ${r.name}</strong><br><span style="font-size:0.7rem;color:#A89F8E">${r.calories || '—'}</span><br><span style="font-size:0.8rem">${r.ingredients || ''}</span></div><button class="btn-outline" style="padding:6px 16px" onclick="removeSavedRecipe(${idx})">Удалить</button></div>`).join('');
+    }
+    
+    function removeSavedRecipe(idx) { let saved=JSON.parse(localStorage.getItem('femmetry_saved_recipes')||'[]'); saved.splice(idx,1); localStorage.setItem('femmetry_saved_recipes',JSON.stringify(saved)); renderCookbook(); }
+    
+    function renderBlog() {
+        let container = document.getElementById('blogList');
+        container.innerHTML = blogPosts.map(post => `
+            <div class="blog-post">
+                <span class="forum-category">${post.category}</span>
+                <h3>${post.title}</h3>
+                <div style="font-size:0.7rem;color:#A89F8E;margin:8px 0">${post.date}</div>
+                <p>${post.content.substring(0,200)}${post.content.length>200?'...':''}</p>
+                <button class="btn-outline" style="margin-top:12px;padding:6px 16px" onclick="toggleComments('blog', ${post.id})">💬 ${post.comments.length} комментариев</button>
+                <div id="blog-comments-${post.id}" class="comment-section hidden">
+                    <div id="blog-comments-list-${post.id}">${(post.comments || []).map(c => `<div class="comment"><strong>${c.author}</strong>: ${c.text}</div>`).join('')}</div>
+                    <textarea id="blog-comment-text-${post.id}" class="comment-input" placeholder="Ваш комментарий..."></textarea>
+                    <button class="btn-outline" style="margin-top:8px" onclick="addComment('blog', ${post.id})">Отправить</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function renderForum() {
+        let container = document.getElementById('forumList');
+        container.innerHTML = forumTopics.map(topic => `
+            <div class="forum-topic">
+                <span class="forum-category">${topic.category}</span>
+                <h3>${topic.title}</h3>
+                <div style="font-size:0.7rem;color:#A89F8E;margin:8px 0">${topic.author} · ${topic.date}</div>
+                <p>${topic.content}</p>
+                <button class="btn-outline" style="margin-top:12px;padding:6px 16px" onclick="toggleComments('forum', ${topic.id})">💬 ${(topic.comments || []).length} комментариев</button>
+                <div id="forum-comments-${topic.id}" class="comment-section hidden">
+                    <div id="forum-comments-list-${topic.id}">${(topic.comments || []).map(c => `<div class="comment"><strong>${c.author}</strong>: ${c.text}</div>`).join('')}</div>
+                    <textarea id="forum-comment-text-${topic.id}" class="comment-input" placeholder="Ваш комментарий..."></textarea>
+                    <button class="btn-outline" style="margin-top:8px" onclick="addComment('forum', ${topic.id})">Отправить</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    window.toggleComments = function(type, id) {
+        let el = document.getElementById(`${type}-comments-${id}`);
+        el.classList.toggle('hidden');
+    };
+    
+    window.addComment = function(type, id) {
+        let textarea = document.getElementById(`${type}-comment-text-${id}`);
+        let text = textarea.value.trim();
+        if(!text) { alert('Введите комментарий'); return; }
+        let comment = { author: "Пользователь", text: text, date: new Date().toISOString() };
+        if(type === 'blog') {
+            let post = blogPosts.find(p => p.id === id);
+            if(post) { post.comments = post.comments || []; post.comments.push(comment); }
+        } else {
+            let topic = forumTopics.find(t => t.id === id);
+            if(topic) { topic.comments = topic.comments || []; topic.comments.push(comment); }
+        }
+        saveAllData();
+        textarea.value = '';
+        renderBlog();
+        renderForum();
+    };
+    
+    function renderPregnancyMenus() {
+        let trimester=document.getElementById('pregnancyTrimester').value;
+        let hemoglobin=document.getElementById('pregnancyHemoglobin').value;
+        let gsd=document.getElementById('pregnancyGSD').value;
+        
+        let menus = [];
+        for(let i=0; i<6; i++) {
+            menus.push({
+                id: i,
+                title: `Меню для ${trimester==='1'?'1':(trimester==='2'?'2':'3')} триместра ${i+1}`,
+                desc: hemoglobin==='low'?'С повышенным содержанием железа':(gsd==='yes'?'Контроль углеводов':'Сбалансированное'),
+                breakfast: "Овсянка на молоке с ягодами",
+                lunch: "Куриная грудка с гречкой и овощами",
+                dinner: "Запечённая рыба с брокколи",
+                snack: "Йогурт и орехи",
+                research: "ВОЗ. Рекомендации по питанию беременных. 2025"
+            });
+        }
+        if(hemoglobin==='low' || hemoglobin==='very_low') menus = menus.slice(0,3);
+        document.getElementById('pregnancyMenuInfo').innerHTML = `<strong>🤰 Персонализированные меню</strong><br>${menus.length} вариантов с учётом ваших параметров`;
+        let container=document.getElementById('pregnancyMenuOptions');
+        container.innerHTML=menus.map((m,idx)=>`<div class="menu-card" data-idx="${idx}"><h4>🍽️ ${m.title}</h4><div class="menu-desc">${m.desc}</div><div class="meal-preview"><p>🌅 ${m.breakfast}</p><p>☀️ ${m.lunch}</p><p>🌙 ${m.dinner}</p></div><div class="research-link"><i class="fas fa-book"></i> ${m.research.substring(0,80)}…</div></div>`).join('');
+        document.querySelectorAll('#pregnancyMenuOptions .menu-card').forEach((card,idx)=>{card.onclick=()=>{document.querySelectorAll('#pregnancyMenuOptions .menu-card').forEach(c=>c.classList.remove('selected')); card.classList.add('selected'); selectedPregnancyMenu=menus[idx]; displaySelectedPregnancyMenu(selectedPregnancyMenu);};});
+    }
+    
+    function displaySelectedPregnancyMenu(menu) {
+        document.getElementById('selectedPregnancyMenuDetails').innerHTML=`
+            <div class="meal-detail">
+                <div class="meal-item"><h5>🌅 Завтрак</h5><p>${menu.breakfast}</p><button class="save-recipe-btn" onclick="saveRecipeByName('${menu.breakfast.split(' ')[0]}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
+                <div class="meal-item"><h5>☀️ Обед</h5><p>${menu.lunch}</p><button class="save-recipe-btn" onclick="saveRecipeByName('${menu.lunch.split(' ')[0]}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
+                <div class="meal-item"><h5>🌙 Ужин</h5><p>${menu.dinner}</p><button class="save-recipe-btn" onclick="saveRecipeByName('${menu.dinner.split(' ')[0]}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
+            </div>
+            <div class="research-link"><i class="fas fa-flask"></i> <strong>Источник:</strong> ${menu.research}</div>`;
+        document.getElementById('selectedPregnancyMenuBlock').classList.remove('hidden');
+    }
+    
+    function updateDashboard() {
+        let params=JSON.parse(localStorage.getItem('femmetry_params')||'{}'), ferritin=localStorage.getItem('femmetry_ferritin');
+        document.getElementById('currentWeight').innerHTML=params.weight?`${params.weight} кг`:"—";
+        document.getElementById('currentFerritin').innerHTML=ferritin?`${ferritin} нг/мл`:"—";
+        let history=JSON.parse(localStorage.getItem('femmetry_measurements')||'[]');
+        if(history.length>=2) { let change=(history[history.length-1].weight-history[0].weight).toFixed(1); document.getElementById('weightChange').innerHTML=change>0?`+${change} кг`: `${change} кг`; }
+        document.getElementById('dailyTip').innerHTML=ferritin&&ferritin<50?"🩸 Ваш ферритин ниже 50. Добавьте в рацион печень, говядину, шпинат.":"🥗 Напоминаем: половина тарелки — овощи, четверть — белок, четверть — углеводы.";
+        let lp=document.getElementById('lastPeriod').value;
+        if(lp) { let start=new Date(lp), today=new Date(), daysDiff=Math.floor((today-start)/(1000*3600*24)); document.getElementById('currentPhase').innerHTML=`День цикла: ${(daysDiff%28)+1}`; }
+        else document.getElementById('currentPhase').innerHTML="—";
+    }
+    
+    function updateCharts() {
+        let history=JSON.parse(localStorage.getItem('femmetry_measurements')||'[]'), dates=history.map(h=>new Date(h.date).toLocaleDateString()), weights=history.map(h=>h.weight);
+        let ctx1=document.getElementById('weightChart').getContext('2d'); if(weightChart) weightChart.destroy(); if(weights.length) weightChart=new Chart(ctx1,{type:'line',data:{labels:dates,datasets:[{label:'Вес (кг)',data:weights,borderColor:'#C6A27A',fill:true,tension:0.3}]},options:{responsive:true}});
+        let ctx2=document.getElementById('fullWeightChart').getContext('2d'); if(fullWeightChart) fullWeightChart.destroy(); if(weights.length) fullWeightChart=new Chart(ctx2,{type:'line',data:{labels:dates,datasets:[{label:'Вес (кг)',data:weights,borderColor:'#1A1A2E',fill:true,tension:0.3}]},options:{responsive:true}});
+    }
+    
+    function renderHistory() {
+        let history=JSON.parse(localStorage.getItem('femmetry_measurements')||'[]'), tbody=document.getElementById('historyBody');
+        if(history.length===0) { tbody.innerHTML='<tr><td colspan="7">Нет сохранённых замеров</td></tr>'; return; }
+        tbody.innerHTML=history.slice().reverse().map(h=>`<tr><td>${new Date(h.date).toLocaleDateString()}</td><td>${h.weight||"-"} кг</td><td>${h.height||"-"} см</td><td>${h.age||"-"}</td><td>${h.waist||"-"}</td><td>${h.hips||"-"}</td><td>${h.goal==="loss"?"похудение":(h.goal==="gain"?"набор":"поддержание")}</td></tr>`).join('');
+    }
+    
     function saveParams() {
         let w=parseFloat(document.getElementById('weight').value), h=parseFloat(document.getElementById('height').value), a=parseFloat(document.getElementById('age').value), waist=document.getElementById('waist').value, hips=document.getElementById('hips').value;
         if(!w||!h||!a) { alert("❌ Заполните вес, рост и возраст"); return false; }
@@ -256,18 +560,18 @@
         let history=JSON.parse(localStorage.getItem('femmetry_measurements')||'[]');
         history.push({date:new Date().toISOString(),weight:w,height:h,age:a,waist:waist||"",hips:hips||"",goal:currentGoal});
         localStorage.setItem('femmetry_measurements',JSON.stringify(history));
-        updateCalorieDisplay(); renderNormalMenus(); renderHistory(); updateDashboard(); updateCharts();
+        updateDashboard(); updateCharts(); renderHistory(); renderNormalMenus();
         alert("✅ Параметры сохранены!"); return true;
     }
-
+    
     function saveCycleData() {
         let lp=document.getElementById('lastPeriod').value, cl=document.getElementById('cycleLength').value, preg=document.getElementById('pregnant').value, fer=document.getElementById('ferritin').value;
         if(lp) localStorage.setItem('femmetry_last_period',lp);
         localStorage.setItem('femmetry_cycle_length',cl); localStorage.setItem('femmetry_pregnant',preg);
         if(fer) localStorage.setItem('femmetry_ferritin',fer);
-        updateCycleDisplay(); renderNormalMenus(); updateDashboard(); alert("✅ Данные сохранены");
+        updateDashboard(); renderNormalMenus(); alert("✅ Данные сохранены");
     }
-
+    
     function savePregnancyData() {
         let trimester=document.getElementById('pregnancyTrimester').value;
         let hemoglobin=document.getElementById('pregnancyHemoglobin').value;
@@ -280,139 +584,9 @@
         renderPregnancyMenus();
         alert("✅ Параметры беременности сохранены!");
     }
-
-    function updateCalorieDisplay() {
-        let w=parseFloat(document.getElementById('weight').value), h=parseFloat(document.getElementById('height').value), a=parseFloat(document.getElementById('age').value);
-        if(w&&h&&a) { let cal=getTargetCalories(w,h,a,currentGoal); document.getElementById('calorieDisplay').innerHTML=`Ваша норма: ${cal} ккал/день`; document.getElementById('calorieDisplay').classList.remove('hidden'); }
-    }
-
-    function updateCycleDisplay() {
-        let lp=document.getElementById('lastPeriod').value, cl=parseInt(document.getElementById('cycleLength').value)||28, preg=document.getElementById('pregnant').value;
-        if(preg==="yes") { document.getElementById('cycleDisplay').innerHTML="🤰 Беременность — перейдите на вкладку «Беременность» для персонализированных меню"; return; }
-        if(!lp) { document.getElementById('cycleDisplay').innerHTML="📅 Заполните дату начала последних месячных"; return; }
-        let start=new Date(lp), today=new Date(), daysDiff=Math.floor((today-start)/(1000*3600*24)), dayInCycle=(daysDiff%cl)+1, ovDay=Math.floor(cl/2), phase="";
-        if(dayInCycle<=7) phase="🩸 Менструация — нужны продукты, богатые железом";
-        else if(dayInCycle<=ovDay-2) phase="🌱 Фолликулярная фаза — больше энергии и белка";
-        else if(dayInCycle<=ovDay+2) phase="🥚 Овуляция — поддерживаем гормоны";
-        else phase="🍂 Лютеиновая фаза — меньше сладкого, больше магния";
-        document.getElementById('cycleDisplay').innerHTML=`📅 День цикла: ${dayInCycle} — ${phase}`;
-        document.getElementById('cycleDisplay').classList.remove('hidden');
-    }
-
-    function renderNormalMenus() {
-        let w=parseFloat(document.getElementById('weight').value), h=parseFloat(document.getElementById('height').value), a=parseFloat(document.getElementById('age').value);
-        if(!w||!h||!a) { document.getElementById('menuInfo').innerHTML="⚠️ Сначала сохраните параметры"; document.getElementById('menuOptions').innerHTML=""; return; }
-        let preg=document.getElementById('pregnant').value;
-        if(preg==="yes") { document.getElementById('menuInfo').innerHTML="🤰 Вы отметили беременность. Перейдите на вкладку «Беременность»."; document.getElementById('menuOptions').innerHTML=""; return; }
-        let ferVal=document.getElementById('ferritin').value?parseFloat(document.getElementById('ferritin').value):null, ferStatus=getFerritinStatus(ferVal);
-        let menus = ferStatus==="low" ? NORMAL_MENUS.low_ferritin : NORMAL_MENUS.normal;
-        document.getElementById('menuInfo').innerHTML = `Ферритин: ${ferStatus==="low"?"низкий (меню с железом)":"норма"}<br><strong>6 вариантов меню</strong> — выберите подходящий`;
-        let container=document.getElementById('menuOptions');
-        container.innerHTML=menus.map((m,idx)=>`<div class="menu-card" data-idx="${idx}"><h4>🍽️ ${m.title}</h4><div class="menu-desc">${m.desc}</div><div class="meal-preview"><p>🌅 ${m.breakfast}</p><p>☀️ ${m.lunch}</p><p>🌙 ${m.dinner}</p></div><div class="research-link"><i class="fas fa-book"></i> ${m.research}</div></div>`).join('');
-        document.querySelectorAll('#menuOptions .menu-card').forEach((card,idx)=>{card.onclick=()=>{document.querySelectorAll('#menuOptions .menu-card').forEach(c=>c.classList.remove('selected')); card.classList.add('selected'); selectedMenu=menus[idx]; displaySelectedMenu(selectedMenu);};});
-    }
-
-    function displaySelectedMenu(menu) {
-        document.getElementById('selectedMenuDetails').innerHTML=`
-            <div class="meal-detail">
-                <div class="meal-item"><h5>🌅 Завтрак</h5><p>${menu.breakfast}</p><button class="save-recipe-btn" onclick="saveRecipe('${menu.breakfast.split('+')[0].trim()}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
-                <div class="meal-item"><h5>☀️ Обед</h5><p>${menu.lunch}</p><button class="save-recipe-btn" onclick="saveRecipe('${menu.lunch.split('+')[0].trim()}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
-                <div class="meal-item"><h5>🌙 Ужин</h5><p>${menu.dinner}</p><button class="save-recipe-btn" onclick="saveRecipe('${menu.dinner.split('+')[0].trim()}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
-                <div class="meal-item"><h5>🍎 Перекус</h5><p>${menu.snack}</p><button class="save-recipe-btn" onclick="saveRecipe('${menu.snack.split(' ')[0]}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
-            </div>
-            <div class="research-link"><i class="fas fa-flask"></i> <strong>Источник:</strong> ${menu.research}</div>`;
-        document.getElementById('selectedMenuBlock').classList.remove('hidden');
-    }
-
-    function renderPregnancyMenus() {
-        let trimester=localStorage.getItem('femmetry_pregnancy_trimester') || '1';
-        let hemoglobin=localStorage.getItem('femmetry_pregnancy_hemoglobin') || 'normal';
-        let gsd=localStorage.getItem('femmetry_pregnancy_gsd') || 'no';
-        
-        let menus = [];
-        if(trimester==='1') menus = PREGNANCY_MENUS.first_trimester;
-        else if(trimester==='2') menus = PREGNANCY_MENUS.second_trimester;
-        else menus = PREGNANCY_MENUS.third_trimester;
-        
-        if(hemoglobin==='low' || hemoglobin==='very_low') {
-            menus = menus.filter(m => m.title.includes("железом") || m.title.includes("анемии"));
-        }
-        if(gsd==='yes') {
-            menus = menus.filter(m => m.title.includes("ГСД") || m.desc.includes("ГСД"));
-        }
-        while(menus.length<6) menus = [...menus, ...PREGNANCY_MENUS.second_trimester];
-        menus = menus.slice(0,6);
-        
-        let trimesterText = trimester==='1'?"первый триместр":(trimester==='2'?"второй триместр":"третий триместр");
-        let hemoglobinText = hemoglobin==='normal'?"норма":(hemoglobin==='low'?"90-109 г/л":"<90 г/л");
-        document.getElementById('pregnancyMenuInfo').innerHTML = `<strong>🤰 Беременность, ${trimesterText}</strong><br>📊 Гемоглобин: ${hemoglobinText} | ГСД: ${gsd==='yes'?'Да':'Нет'}<br><strong>6 вариантов меню</strong> — с учётом ваших параметров`;
-        let container=document.getElementById('pregnancyMenuOptions');
-        container.innerHTML=menus.map((m,idx)=>`<div class="menu-card" data-idx="${idx}"><h4>🍽️ ${m.title}</h4><div class="menu-desc">${m.desc}</div><div class="meal-preview"><p>🌅 ${m.breakfast}</p><p>☀️ ${m.lunch}</p><p>🌙 ${m.dinner}</p></div><div class="research-link"><i class="fas fa-book"></i> ${m.research.substring(0,80)}…</div></div>`).join('');
-        document.querySelectorAll('#pregnancyMenuOptions .menu-card').forEach((card,idx)=>{card.onclick=()=>{document.querySelectorAll('#pregnancyMenuOptions .menu-card').forEach(c=>c.classList.remove('selected')); card.classList.add('selected'); selectedPregnancyMenu=menus[idx]; displaySelectedPregnancyMenu(selectedPregnancyMenu);};});
-    }
-
-    function displaySelectedPregnancyMenu(menu) {
-        document.getElementById('selectedPregnancyMenuDetails').innerHTML=`
-            <div class="meal-detail">
-                <div class="meal-item"><h5>🌅 Завтрак</h5><p>${menu.breakfast}</p><button class="save-recipe-btn" onclick="saveRecipe('${menu.breakfast.split('+')[0].trim()}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
-                <div class="meal-item"><h5>☀️ Обед</h5><p>${menu.lunch}</p><button class="save-recipe-btn" onclick="saveRecipe('${menu.lunch.split('+')[0].trim()}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
-                <div class="meal-item"><h5>🌙 Ужин</h5><p>${menu.dinner}</p><button class="save-recipe-btn" onclick="saveRecipe('${menu.dinner.split('+')[0].trim()}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
-                <div class="meal-item"><h5>🍎 Перекус</h5><p>${menu.snack}</p><button class="save-recipe-btn" onclick="saveRecipe('${menu.snack.split(' ')[0]}')"><i class="fas fa-bookmark"></i> Сохранить рецепт</button></div>
-            </div>
-            <div class="research-link"><i class="fas fa-flask"></i> <strong>Источник:</strong> ${menu.research}</div>
-            <div class="info-text" style="margin-top:16px"><i class="fas fa-heartbeat"></i> Рекомендация основана на клинических протоколах. Пожалуйста, согласуйте рацион с вашим врачом.</div>`;
-        document.getElementById('selectedPregnancyMenuBlock').classList.remove('hidden');
-    }
-
-    function saveRecipe(recipeName) {
-        let recipe = RECIPES_DB[recipeName] || { name:recipeName, ingredients:"Ингредиенты уточняйте", instructions:"Приготовление по вкусу", prepTime:"—", calories:"—" };
-        let saved = JSON.parse(localStorage.getItem('femmetry_saved_recipes')||'[]');
-        if(saved.some(r=>r.name===recipeName)) { alert("Этот рецепт уже сохранён!"); return; }
-        saved.push({ ...recipe, savedAt:new Date().toISOString() });
-        localStorage.setItem('femmetry_saved_recipes',JSON.stringify(saved));
-        renderCookbook();
-        alert(`✅ Рецепт "${recipeName}" сохранён!`);
-    }
-
-    function renderCookbook() {
-        let saved = JSON.parse(localStorage.getItem('femmetry_saved_recipes')||'[]');
-        let container = document.getElementById('cookbookList');
-        if(saved.length===0) { container.innerHTML="<p style='color:#A89F8E'>Нет сохранённых рецептов.</p>"; return; }
-        container.innerHTML = saved.map((r,idx)=>`<div class="saved-recipe-item"><div><strong>📖 ${r.name}</strong><br><span style="font-size:0.7rem;color:#A89F8E">${r.prepTime} · ${r.calories}</span><br><span style="font-size:0.8rem">${r.ingredients}</span></div><button class="btn-outline" style="padding:6px 16px" onclick="removeSavedRecipe(${idx})">Удалить</button></div>`).join('');
-    }
-
-    function removeSavedRecipe(idx) { let saved=JSON.parse(localStorage.getItem('femmetry_saved_recipes')||'[]'); saved.splice(idx,1); localStorage.setItem('femmetry_saved_recipes',JSON.stringify(saved)); renderCookbook(); }
     
-    function renderHistory() {
-        let history=JSON.parse(localStorage.getItem('femmetry_measurements')||'[]'), tbody=document.getElementById('historyBody');
-        if(history.length===0) { tbody.innerHTML='<tr><td colspan="7">Нет сохранённых замеров</td></tr>'; return; }
-        tbody.innerHTML=history.slice().reverse().map(h=>`<tr><td>${new Date(h.date).toLocaleDateString()}</td><td>${h.weight||"-"} кг</td><td>${h.height||"-"} см</td><td>${h.age||"-"}</td><td>${h.waist||"-"}</td><td>${h.hips||"-"}</td><td>${h.goal==="loss"?"похудение":(h.goal==="gain"?"набор":"поддержание")}</td></tr>`).join('');
-    }
-
-    function renderBlog() { document.getElementById('blogList').innerHTML=`<div class="blog-post"><span class="forum-category">Анализы</span><h3>Ферритин: почему он важен для женского здоровья</h3><div class="blog-post-meta">15 марта 2025</div><p>Разбираемся, как низкий ферритин влияет на энергию, цикл и почему железо лучше усваивается с витамином С.</p></div>`; }
-    function renderForum() { document.getElementById('forumList').innerHTML=`<div class="forum-topic"><span class="forum-category">Протоколы</span><h3>Чек-лист: что делать при ферритине ниже 30</h3><div style="font-size:0.7rem;color:#A89F8E">Валерия Радькова · 12 ответов · сегодня</div></div>`; }
-
-    function updateDashboard() {
-        let params=JSON.parse(localStorage.getItem('femmetry_params')||'{}'), ferritin=localStorage.getItem('femmetry_ferritin'), phase=getCyclePhase();
-        document.getElementById('currentWeight').innerHTML=params.weight?`${params.weight} кг`:"—";
-        document.getElementById('currentFerritin').innerHTML=ferritin?`${ferritin} нг/мл`:"—";
-        document.getElementById('currentPhase').innerHTML=getPhaseText(phase);
-        let history=JSON.parse(localStorage.getItem('femmetry_measurements')||'[]');
-        if(history.length>=2) { let change=(history[history.length-1].weight-history[0].weight).toFixed(1); document.getElementById('weightChange').innerHTML=change>0?`+${change} кг`: `${change} кг`; }
-        else document.getElementById('weightChange').innerHTML="недостаточно данных";
-        let tip="🌟 Заполните параметры для персональных рекомендаций!";
-        if(params.weight) tip=ferritin&&ferritin<50?"🩸 Ваш ферритин ниже 50. Добавьте в рацион печень, говядину, шпинат.":"🥗 Напоминаем: половина тарелки — овощи, четверть — белок, четверть — углеводы.";
-        document.getElementById('dailyTip').innerHTML=`💡 ${tip}`;
-    }
-
-    function updateCharts() {
-        let history=JSON.parse(localStorage.getItem('femmetry_measurements')||'[]'), dates=history.map(h=>new Date(h.date).toLocaleDateString()), weights=history.map(h=>h.weight);
-        let ctx1=document.getElementById('weightChart').getContext('2d'); if(weightChart) weightChart.destroy(); if(weights.length) weightChart=new Chart(ctx1,{type:'line',data:{labels:dates,datasets:[{label:'Вес (кг)',data:weights,borderColor:'#C4A87C',fill:true,tension:0.3}]},options:{responsive:true}});
-        let ctx2=document.getElementById('fullWeightChart').getContext('2d'); if(fullWeightChart) fullWeightChart.destroy(); if(weights.length) fullWeightChart=new Chart(ctx2,{type:'line',data:{labels:dates,datasets:[{label:'Вес (кг)',data:weights,borderColor:'#1A1A2E',fill:true,tension:0.3}]},options:{responsive:true}});
-    }
-
     function loadSavedData() {
-        let p=localStorage.getItem('femmetry_params'); if(p){ let params=JSON.parse(p); document.getElementById('weight').value=params.weight; document.getElementById('height').value=params.height; document.getElementById('age').value=params.age; if(params.waist) document.getElementById('waist').value=params.waist; if(params.hips) document.getElementById('hips').value=params.hips; if(params.goal){ currentGoal=params.goal; document.querySelectorAll('.goal-btn[data-goal]').forEach(b=>{if(b.dataset.goal===currentGoal)b.classList.add('active'); else b.classList.remove('active');}); } if(params.nutrition){ currentNutrition=params.nutrition; document.querySelectorAll('[data-nutrition]').forEach(b=>{if(b.dataset.nutrition===currentNutrition)b.classList.add('active'); else b.classList.remove('active');}); } updateCalorieDisplay(); }
+        let p=localStorage.getItem('femmetry_params'); if(p){ let params=JSON.parse(p); document.getElementById('weight').value=params.weight; document.getElementById('height').value=params.height; document.getElementById('age').value=params.age; if(params.waist) document.getElementById('waist').value=params.waist; if(params.hips) document.getElementById('hips').value=params.hips; if(params.goal){ currentGoal=params.goal; document.querySelectorAll('.goal-btn[data-goal]').forEach(b=>{if(b.dataset.goal===currentGoal)b.classList.add('active'); else b.classList.remove('active');}); } if(params.nutrition){ currentNutrition=params.nutrition; document.querySelectorAll('[data-nutrition]').forEach(b=>{if(b.dataset.nutrition===currentNutrition)b.classList.add('active'); else b.classList.remove('active');}); } }
         let lp=localStorage.getItem('femmetry_last_period'); if(lp) document.getElementById('lastPeriod').value=lp;
         let cl=localStorage.getItem('femmetry_cycle_length'); if(cl) document.getElementById('cycleLength').value=cl;
         let preg=localStorage.getItem('femmetry_pregnant'); if(preg) document.getElementById('pregnant').value=preg;
@@ -420,25 +594,27 @@
         let pregTrim=localStorage.getItem('femmetry_pregnancy_trimester'); if(pregTrim) document.getElementById('pregnancyTrimester').value=pregTrim;
         let pregHem=localStorage.getItem('femmetry_pregnancy_hemoglobin'); if(pregHem) document.getElementById('pregnancyHemoglobin').value=pregHem;
         let pregGSD=localStorage.getItem('femmetry_pregnancy_gsd'); if(pregGSD) document.getElementById('pregnancyGSD').value=pregGSD;
-        let preWeight=localStorage.getItem('femmetry_pre_pregnancy_weight'); if(preWeight) document.getElementById('prePregnancyWeight').value=preWeight;
-        updateCycleDisplay(); renderNormalMenus(); renderHistory(); renderCookbook(); renderBlog(); renderForum(); updateDashboard(); updateCharts(); renderPregnancyMenus();
+        updateDashboard(); renderNormalMenus(); renderHistory(); renderCookbook(); renderBlog(); renderForum(); updateCharts(); renderPregnancyMenus();
         let trialStart=localStorage.getItem('femmetry_trial_start'); if(trialStart){ let daysLeft=7-Math.floor((new Date()-new Date(trialStart))/(1000*3600*24)); document.getElementById('trialStatus').innerHTML=daysLeft>0?`🎁 Пробный: осталось ${daysLeft} дней`:"💳 Подписка активна · 790 ₽/мес"; }
     }
-
+    
     function logout() { localStorage.removeItem('femmetry_auth'); window.location.href='index.html'; }
-
+    
     document.querySelectorAll('.tab-btn').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); document.getElementById(btn.dataset.tab).classList.add('active');};});
     document.addEventListener('DOMContentLoaded',()=>{
         if(localStorage.getItem('femmetry_auth')!=='true'){window.location.href='index.html';return;}
-        document.querySelectorAll('.goal-btn[data-goal]').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('.goal-btn[data-goal]').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentGoal=btn.dataset.goal; updateCalorieDisplay(); renderNormalMenus();};});
-        document.querySelectorAll('[data-nutrition]').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('[data-nutrition]').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentNutrition=btn.dataset.nutrition; document.getElementById('nutritionInfo').innerHTML=currentNutrition==="harvard"?"🍽️ Гарвардская тарелка: 1/2 овощи, 1/4 белок, 1/4 сложные углеводы":"🥩 Подход по КБЖУ: точный расчёт"; renderNormalMenus();};});
+        document.querySelectorAll('.goal-btn[data-goal]').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('.goal-btn[data-goal]').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentGoal=btn.dataset.goal; renderNormalMenus();};});
+        document.querySelectorAll('[data-nutrition]').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('[data-nutrition]').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentNutrition=btn.dataset.nutrition; document.getElementById('nutritionInfo').innerHTML=currentNutrition==="harvard"?"🍽️ Гарвардская тарелка: 1/2 овощи, 1/4 белок, 1/4 сложные углеводы":"🥩 Подход по КБЖУ: точный расчёт";};});
         document.getElementById('saveParamsBtn').onclick=saveParams;
         document.getElementById('saveCycleBtn').onclick=saveCycleData;
         document.getElementById('savePregnancyBtn').onclick=savePregnancyData;
         loadSavedData();
     });
-    window.saveRecipe = saveRecipe;
+    window.saveRecipeByName = saveRecipeByName;
     window.removeSavedRecipe = removeSavedRecipe;
+    window.addComment = addComment;
+    window.toggleComments = toggleComments;
 </script>
 </body>
 </html>
+```
