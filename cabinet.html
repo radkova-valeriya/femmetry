@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Femmetry — женское здоровье</title>
+    <title>Femmetry — цикл как основа</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -19,9 +19,9 @@
         
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
         .logo { font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg, #1C1C2A, #C6A27A); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .trial-badge { background: rgba(198,162,122,0.15); padding: 6px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 500; color: #C6A27A; }
-        .logout-btn { background: transparent; border: 1px solid #E2DCD3; padding: 6px 18px; border-radius: 100px; cursor: pointer; font-size: 0.8rem; transition: 0.2s; }
+        .header-right { display: flex; align-items: center; gap: 12px; }
+        .trial-badge { background: rgba(198,162,122,0.15); padding: 6px 14px; border-radius: 100px; font-size: 0.7rem; }
+        .logout-btn { background: transparent; border: 1px solid #E2DCD3; padding: 6px 18px; border-radius: 100px; cursor: pointer; font-size: 0.8rem; }
         .logout-btn:hover { background: #1C1C2A; color: white; }
         
         .nav { display: flex; gap: 4px; margin-bottom: 28px; flex-wrap: wrap; border-bottom: 1px solid #EFEAE3; padding-bottom: 10px; }
@@ -32,78 +32,81 @@
         .page.active { display: block; }
         @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .card { background: white; border-radius: 28px; padding: 24px; margin-bottom: 20px; border: 1px solid #EFEAE3; transition: all 0.2s; }
+        .card { background: white; border-radius: 28px; padding: 24px; margin-bottom: 20px; border: 1px solid #EFEAE3; }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
         .card-header h2 { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
         
-        /* Phase banner */
-        .phase-banner { background: linear-gradient(135deg, #C6A27A15, #C6A27A08); border-radius: 20px; padding: 16px 20px; margin-bottom: 20px; border-left: 3px solid #C6A27A; }
-        .phase-name { font-size: 0.9rem; font-weight: 700; color: #C6A27A; margin-bottom: 6px; }
-        .phase-recommendation { font-size: 0.8rem; color: #5A5A6E; }
+        /* Phase Banner — главный блок */
+        .phase-banner { 
+            background: linear-gradient(135deg, #C6A27A 0%, #D4B896 100%);
+            border-radius: 24px; 
+            padding: 20px 24px; 
+            margin-bottom: 24px;
+            color: white;
+        }
+        .phase-banner .phase-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .phase-banner .phase-badge { background: rgba(255,255,255,0.25); padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; font-weight: 500; }
+        .phase-banner .phase-recommendation { font-size: 0.85rem; opacity: 0.95; margin-bottom: 12px; }
+        .phase-banner .phase-nutrients { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+        .phase-banner .nutrient-tag { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; }
         
-        /* Два блока в ряд */
+        /* Stats row */
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-        
-        /* Прогресс-кольцо */
         .progress-card { text-align: center; }
-        .ring-container { position: relative; width: 140px; height: 140px; margin: 0 auto 12px; }
-        .ring-bg { fill: none; stroke: #EFEAE3; stroke-width: 10; }
-        .ring-fill { fill: none; stroke: #C6A27A; stroke-width: 10; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dasharray 0.5s; }
+        .ring-container { position: relative; width: 120px; height: 120px; margin: 0 auto 12px; }
+        .ring-bg { fill: none; stroke: #EFEAE3; stroke-width: 8; }
+        .ring-fill { fill: none; stroke: #C6A27A; stroke-width: 8; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dasharray 0.5s; }
         .ring-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
-        .ring-value { font-size: 1.8rem; font-weight: 800; }
-        .progress-stats { margin-top: 12px; }
-        .progress-stats div { font-size: 0.85rem; margin: 4px 0; }
-        .progress-stats strong { font-size: 1rem; }
+        .ring-value { font-size: 1.5rem; font-weight: 800; }
+        .progress-stats { font-size: 0.8rem; margin-top: 8px; }
         
-        /* Быстрый вес */
-        .weight-card { display: flex; flex-direction: column; justify-content: center; }
         .weight-input-group { display: flex; gap: 12px; margin: 12px 0; align-items: flex-end; }
-        .weight-input-group .field { flex: 1; margin-bottom: 0; padding: 12px; }
-        .weight-trend { font-size: 0.8rem; color: #7CB342; margin-top: 8px; }
-        .weight-trend.negative { color: #E57373; }
+        .weight-input-group .field { flex: 1; margin-bottom: 0; padding: 12px; background: #FCFAF8; border-radius: 16px; border: 1px solid #EFEAE3; }
+        .weight-input-group .field label { font-size: 0.65rem; color: #A89F8E; display: block; margin-bottom: 4px; }
+        .weight-input-group .field input { width: 100%; border: none; background: transparent; font-size: 1rem; font-weight: 500; outline: none; }
+        .weight-trend { font-size: 0.75rem; margin-top: 8px; padding: 8px; background: #F0EDE8; border-radius: 12px; text-align: center; }
+        .weight-trend.down { color: #7CB342; background: #E8F5E9; }
+        .weight-trend.up { color: #E57373; background: #FFEBEE; }
         
-        /* Быстрое добавление еды */
-        .quick-add { margin-top: 16px; padding-top: 16px; border-top: 1px solid #EFEAE3; }
-        .meal-buttons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-        .meal-btn { background: #F0EDE8; border: none; padding: 8px 16px; border-radius: 40px; font-size: 0.75rem; cursor: pointer; transition: 0.2s; }
-        .meal-btn:hover { background: #C6A27A; color: white; }
+        .btn { background: #1C1C2A; color: white; padding: 10px 24px; border: none; border-radius: 100px; font-weight: 500; cursor: pointer; font-size: 0.85rem; }
+        .btn:hover { background: #2D2D3A; transform: translateY(-1px); }
+        .btn-outline { background: transparent; border: 1.5px solid #1C1C2A; padding: 8px 20px; border-radius: 100px; cursor: pointer; font-size: 0.8rem; }
+        .btn-outline:hover { background: #1C1C2A; color: white; }
         
         .menu-preview { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 16px 0; }
-        .meal-preview-card { background: #FCFAF8; border-radius: 20px; padding: 16px; text-align: center; border: 1px solid #EFEAE3; transition: 0.2s; }
+        .meal-preview-card { background: #FCFAF8; border-radius: 20px; padding: 16px; text-align: center; border: 1px solid #EFEAE3; transition: 0.2s; cursor: pointer; }
         .meal-preview-card:hover { transform: translateY(-2px); border-color: #C6A27A; }
+        .meal-preview-card .icon { font-size: 1.5rem; margin-bottom: 8px; }
         .meal-preview-card .name { font-weight: 600; font-size: 0.85rem; margin-bottom: 4px; }
         .meal-preview-card .kcal { font-size: 0.7rem; color: #A89F8E; }
         
-        .btn { background: #1C1C2A; color: white; padding: 10px 24px; border: none; border-radius: 100px; font-weight: 500; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
-        .btn:hover { background: #2D2D3A; transform: translateY(-1px); }
-        .btn-outline { background: transparent; border: 1.5px solid #1C1C2A; padding: 8px 20px; border-radius: 100px; cursor: pointer; transition: 0.2s; font-size: 0.8rem; }
-        .btn-outline:hover { background: #1C1C2A; color: white; }
-        
-        .field { background: #FCFAF8; border-radius: 16px; padding: 12px; border: 1px solid #EFEAE3; }
-        .field label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; color: #A89F8E; display: block; margin-bottom: 4px; }
-        .field input { width: 100%; padding: 8px; border: none; background: transparent; font-size: 1rem; font-weight: 500; outline: none; }
+        /* Harvard Plate with image */
+        .harvard-plate { text-align: center; }
+        .plate-image { max-width: 100%; border-radius: 24px; margin: 16px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .plate-legend { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 20px; }
+        .legend-item { text-align: center; padding: 12px; background: #FCFAF8; border-radius: 20px; }
+        .legend-color { width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 8px; }
+        .legend-color.green { background: #7CB342; }
+        .legend-color.orange { background: #FFB74D; }
+        .legend-color.purple { background: #BA68C8; }
         
         .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
-        .goal-group { display: flex; gap: 8px; margin: 16px 0; flex-wrap: wrap; }
-        .goal-btn { background: #F0EDE8; border: none; padding: 8px 20px; border-radius: 100px; cursor: pointer; font-size: 0.8rem; transition: 0.2s; }
-        .goal-btn.active { background: #1C1C2A; color: white; }
+        .blog-item, .forum-item { background: #FCFAF8; padding: 12px; border-radius: 16px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; border: 1px solid #EFEAE3; }
+        .blog-item:hover, .forum-item:hover { transform: translateX(4px); border-color: #C6A27A; }
+        .tag { background: #1C1C2A; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; display: inline-block; margin-bottom: 6px; }
         
-        .empty-state { text-align: center; padding: 30px 20px; color: #A89F8E; font-size: 0.85rem; }
-        .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1C1C2A; color: white; padding: 10px 20px; border-radius: 100px; font-size: 0.8rem; z-index: 3000; animation: fadeOut 2s ease forwards; }
-        @keyframes fadeOut { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
-        
-        .research-note { background: #FFF8F0; padding: 12px; border-radius: 16px; font-size: 0.65rem; margin-top: 16px; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 2000; align-items: center; justify-content: center; }
         .modal-content { background: white; border-radius: 32px; padding: 24px; max-width: 450px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1C1C2A; color: white; padding: 10px 20px; border-radius: 100px; font-size: 0.8rem; z-index: 3000; animation: fadeOut 2s ease forwards; }
+        @keyframes fadeOut { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+        .empty-state { text-align: center; padding: 30px 20px; color: #A89F8E; }
         
         @media (max-width: 680px) {
             .app { padding: 16px; }
-            .stats-row, .grid-2, .menu-preview { grid-template-columns: 1fr; }
+            .stats-row, .grid-2, .menu-preview, .plate-legend { grid-template-columns: 1fr; }
             .nav-btn { padding: 6px 14px; font-size: 0.75rem; }
-            .card { padding: 18px; }
         }
         .hidden { display: none; }
-        .text-accent { color: #C6A27A; }
     </style>
 </head>
 <body>
@@ -128,38 +131,31 @@
         
         <!-- Главная -->
         <div id="dashboardPage" class="page active">
+            <!-- Баннер фазы цикла — главный блок -->
             <div class="phase-banner" id="phaseBanner"></div>
             
-            <!-- Ряд: Прогресс дня + Быстрый вес -->
+            <!-- Ряд: Прогресс + Вес -->
             <div class="stats-row">
-                <!-- Прогресс дня -->
                 <div class="card progress-card">
-                    <div class="card-header"><h2><i class="fas fa-chart-pie text-accent"></i> Прогресс дня</h2></div>
+                    <div class="card-header"><h2><i class="fas fa-chart-pie"></i> Прогресс дня</h2></div>
                     <div class="ring-container">
-                        <svg width="140" height="140">
-                            <circle class="ring-bg" cx="70" cy="70" r="60"></circle>
-                            <circle class="ring-fill" id="progressRing" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="377"></circle>
+                        <svg width="120" height="120">
+                            <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="ring-fill" id="progressRing" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="314"></circle>
                         </svg>
                         <div class="ring-center"><span id="ringPercent" class="ring-value">0%</span></div>
                     </div>
                     <div class="progress-stats">
                         <div><strong><span id="todayKcal">0</span></strong> / <span id="targetKcalDisplay">2000</span> ккал</div>
-                        <div>🥩 Белок: <strong><span id="todayProtein">0</span></strong> / <span id="targetProtein">0</span> г</div>
+                        <div>🥩 <span id="todayProtein">0</span> / <span id="targetProtein">0</span> г белка</div>
                     </div>
-                    <div class="quick-add">
-                        <div style="font-size:0.7rem; color:#A89F8E; margin-bottom:8px;"><i class="fas fa-plus-circle"></i> Добавить приём</div>
-                        <div class="meal-buttons">
-                            <button class="meal-btn" onclick="quickAddMeal('breakfast')">🌅 Завтрак</button>
-                            <button class="meal-btn" onclick="quickAddMeal('lunch')">☀️ Обед</button>
-                            <button class="meal-btn" onclick="quickAddMeal('dinner')">🌙 Ужин</button>
-                            <button class="meal-btn" onclick="quickAddMeal('snack')">🍎 Перекус</button>
-                        </div>
+                    <div style="margin-top: 12px;">
+                        <button class="btn-outline" style="font-size:0.7rem; padding:6px 12px;" onclick="openMealModal()"><i class="fas fa-plus"></i> Добавить приём</button>
                     </div>
                 </div>
                 
-                <!-- Быстрый вес -->
-                <div class="card weight-card">
-                    <div class="card-header"><h2><i class="fas fa-weight-scale text-accent"></i> Быстрый вес</h2></div>
+                <div class="card">
+                    <div class="card-header"><h2><i class="fas fa-weight-scale"></i> Быстрый вес</h2></div>
                     <div class="weight-input-group">
                         <div class="field"><label>Вес сегодня (кг)</label><input type="number" id="quickWeight" step="0.1" placeholder="65.5"></div>
                         <button class="btn" id="quickWeightBtn" style="padding:10px 20px;">Записать</button>
@@ -168,9 +164,12 @@
                 </div>
             </div>
             
-            <!-- Меню на сегодня -->
+            <!-- Меню на сегодня (адаптировано под фазу) -->
             <div class="card">
-                <div class="card-header"><h2><i class="fas fa-calendar-day text-accent"></i> Меню на сегодня</h2></div>
+                <div class="card-header">
+                    <h2><i class="fas fa-calendar-day"></i> Меню на сегодня</h2>
+                    <span class="phase-badge" id="phaseBadge" style="background:#F0EDE8; padding:4px 12px; border-radius:40px; font-size:0.7rem;"></span>
+                </div>
                 <div id="todayMenuPreview" class="menu-preview"></div>
                 <div style="text-align: center;"><button class="btn-outline" onclick="document.querySelector('[data-page=\'menu\']').click()">🍽️ Все меню на неделю →</button></div>
             </div>
@@ -182,134 +181,281 @@
             </div>
         </div>
         
-        <!-- Остальные страницы (упрощённо для краткости) -->
-        <div id="menuPage" class="page"><div class="card"><div class="card-header"><h2>🍽️ План питания</h2></div><div id="menuPlaceholder">Выберите тип питания в разделе "Замеры"</div></div></div>
-        <div id="cookbookPage" class="page"><div class="card"><div class="card-header"><h2>📚 Мои рецепты</h2></div><div id="cookbookPlaceholder"></div></div></div>
-        <div id="measurementsPage" class="page"><div class="card"><div class="card-header"><h2>📏 Параметры</h2></div><div id="measurementsPlaceholder"></div></div></div>
-        <div id="statsPage" class="page"><div class="card"><div class="card-header"><h2>📈 Статистика</h2></div><div id="statsPlaceholder"></div></div></div>
+        <!-- Страница Меню с Гарвардской тарелкой -->
+        <div id="menuPage" class="page">
+            <div class="card harvard-plate">
+                <div class="card-header"><h2><i class="fas fa-plate-wheat"></i> Гарвардская тарелка</h2></div>
+                <p style="margin-bottom: 16px; color: #5A5A6E;">Визуальный метод здорового питания без подсчёта калорий. Мысленно делите тарелку на три части.</p>
+                
+                <!-- ВАША КАРТИНКА tarelka.jpg -->
+                <img src="tarelka.jpg" alt="Гарвардская тарелка" class="plate-image" onerror="this.src='https://placehold.co/600x400/F0EDE8/C6A27A?text=1/2+овощи+1/4+белок+1/4+углеводы'">
+                
+                <div class="plate-legend">
+                    <div class="legend-item"><div class="legend-color green"></div><strong>½ тарелки — овощи и фрукты</strong><p style="font-size:0.7rem; margin-top:6px;">Огурцы, помидоры, кабачки, брокколи, листовая зелень, ягоды, яблоки</p></div>
+                    <div class="legend-item"><div class="legend-color orange"></div><strong>¼ тарелки — белок</strong><p style="font-size:0.7rem; margin-top:6px;">Рыба, курица, индейка, яйца, творог, тофу, бобовые</p></div>
+                    <div class="legend-item"><div class="legend-color purple"></div><strong>¼ тарелки — сложные углеводы</strong><p style="font-size:0.7rem; margin-top:6px;">Гречка, киноа, бурый рис, овсянка, цельнозерновой хлеб, картофель</p></div>
+                </div>
+                <div style="margin-top: 20px; padding: 12px; background: #FFF8F0; border-radius: 16px; font-size: 0.7rem;">
+                    <i class="fas fa-oil-can"></i> <strong>Полезные жиры:</strong> 1–2 ст.л. оливкового масла, горсть орехов, авокадо
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header"><h2><i class="fas fa-chart-line"></i> Примеры по фазам цикла</h2></div>
+                <div id="phaseExamples"></div>
+            </div>
+        </div>
+        
+        <!-- Заглушки для остальных страниц -->
+        <div id="cookbookPage" class="page"><div class="card"><div class="card-header"><h2>📚 Мои рецепты</h2></div><div id="cookbookPlaceholder" class="empty-state">Сохраняйте рецепты из меню</div></div></div>
+        <div id="measurementsPage" class="page"><div class="card"><div class="card-header"><h2>📏 Параметры</h2></div><div id="measurementsPlaceholder" class="empty-state">Настройте профиль для персонализации</div></div></div>
+        <div id="statsPage" class="page"><div class="card"><div class="card-header"><h2>📈 Статистика</h2></div><div id="statsPlaceholder" class="empty-state">Графики появятся после нескольких замеров</div></div></div>
+    </div>
+</div>
+
+<!-- Модалка добавления приёма -->
+<div id="mealModal" class="modal">
+    <div class="modal-content">
+        <span onclick="closeMealModal()" style="float:right; font-size:1.5rem; cursor:pointer;">&times;</span>
+        <h3>🍽️ Добавить приём пищи</h3>
+        <div id="mealOptions" style="margin-top: 20px;"></div>
     </div>
 </div>
 
 <script>
-    // База рецептов (упрощённая)
-    const RECIPES = {
-        breakfast: [{ name:"Овсянка с ягодами", kcal:290, protein:12 }],
-        lunch: [{ name:"Гречка с печенью", kcal:450, protein:32 }],
-        dinner: [{ name:"Скумбрия запечённая", kcal:380, protein:28 }],
-        snack: [{ name:"Греческий йогурт", kcal:150, protein:12 }]
+    // Блюда с привязкой к фазам цикла
+    const RECIPES_BY_PHASE = {
+        menstrual: {  // Железо
+            breakfast: [{ name:"Омлет с говядиной", kcal:320, protein:28, tags:["железо"] }],
+            lunch: [{ name:"Гречка с печенью", kcal:450, protein:32, tags:["железо"] }],
+            dinner: [{ name:"Куриная печень с луком", kcal:420, protein:30, tags:["железо"] }]
+        },
+        follicular: {  // Белок + витамины B
+            breakfast: [{ name:"Овсянка с ягодами", kcal:290, protein:12, tags:["витамины B"] }],
+            lunch: [{ name:"Киноа с курицей", kcal:480, protein:35, tags:["белок"] }],
+            dinner: [{ name:"Лосось с овощами", kcal:520, protein:34, tags:["Омега-3"] }]
+        },
+        ovulatory: {  // Омега-3, антиоксиданты
+            breakfast: [{ name:"Смузи со шпинатом", kcal:210, protein:8, tags:["антиоксиданты"] }],
+            lunch: [{ name:"Салат с тунцом", kcal:380, protein:28, tags:["Омега-3"] }],
+            dinner: [{ name:"Скумбрия запечённая", kcal:380, protein:28, tags:["Омега-3"] }]
+        },
+        luteal: {  // Магний + клетчатка
+            breakfast: [{ name:"Льняная каша", kcal:260, protein:10, tags:["магний"] }],
+            lunch: [{ name:"Чечевичный суп", kcal:350, protein:18, tags:["клетчатка"] }],
+            dinner: [{ name:"Индейка с брокколи", kcal:390, protein:40, tags:["магний"] }]
+        }
     };
     
     const PHASES = {
-        menstrual: { name:"🩸 Менструация", days:"1–5", focus:"Железо", multiplier:1.0 },
-        follicular: { name:"🌱 Фолликулярная", days:"6–14", focus:"Белок + витамины B", multiplier:1.05 },
-        ovulatory: { name:"🌟 Овуляция", days:"15–17", focus:"Омега-3", multiplier:1.03 },
-        luteal: { name:"🌕 Лютеиновая", days:"18–28", focus:"Магний + клетчатка", multiplier:0.95 }
+        menstrual: { name:"🩸 Менструальная фаза", days:"1–5", focus:"Железо", emoji:"🩸", nutrients:["Железо","Витамин C","Магний"], recommendation:"Восполняем потерю железа. Добавьте красное мясо, печень, гречку, шпинат." },
+        follicular: { name:"🌱 Фолликулярная фаза", days:"6–14", focus:"Белок + витамины B", emoji:"🌱", nutrients:["Белок","Витамины B","Цинк"], recommendation:"Энергия растёт. Ешьте больше белка и сложных углеводов." },
+        ovulatory: { name:"🌟 Овуляция", days:"15–17", focus:"Омега-3 + антиоксиданты", emoji:"🌟", nutrients:["Омега-3","Антиоксиданты","Селен"], recommendation:"Пик энергии. Жирная рыба, авокадо, ягоды." },
+        luteal: { name:"🌕 Лютеиновая фаза", days:"18–28", focus:"Магний + клетчатка", emoji:"🌕", nutrients:["Магний","Клетчатка","Витамин B6"], recommendation:"Снижаем углеводы, добавляем белок и клетчатку. Магний против ПМС." }
     };
     
-    let weeklyMeals = JSON.parse(localStorage.getItem('femmetry_weekly')) || (() => { let w={}; for(let i=0;i<7;i++) w[i]={breakfast:RECIPES.breakfast[0], lunch:RECIPES.lunch[0], dinner:RECIPES.dinner[0], snack:RECIPES.snack[0]}; return w; })();
+    let weeklyMeals = JSON.parse(localStorage.getItem('femmetry_weekly')) || null;
+    if(!weeklyMeals){
+        weeklyMeals = {};
+        for(let i=0;i<7;i++) weeklyMeals[i] = {
+            breakfast: RECIPES_BY_PHASE.follicular.breakfast[0],
+            lunch: RECIPES_BY_PHASE.follicular.lunch[0],
+            dinner: RECIPES_BY_PHASE.follicular.dinner[0]
+        };
+    }
+    
     let currentGoal = "maintain", ageGroup = "18-35";
-    let userTargetKcal = 2000, targetProtein = 60, currentPhase = "follicular";
+    let userTargetKcal = 2000, targetProtein = 60;
+    let weightChart = null;
     
     function showToast(msg){ let t=document.createElement('div'); t.className='toast'; t.innerText=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2000); }
     function calculateProteinNorm(w){ if(ageGroup==="46+") return Math.round(w*1.3); if(ageGroup==="36-45") return Math.round(w*1.1); return Math.round(w*0.9); }
     function calculateBMR(w,h,a){ return 447.6 + (9.2*w) + (3.1*h) - (4.3*a); }
-    function getTargetKcal(w,h,a,act,goal,phaseMult){ let tdee = Math.round(calculateBMR(w,h,a) * act); let base = goal==='loss'?tdee*0.85:(goal==='gain'?tdee*1.1:tdee); return Math.round(base * phaseMult); }
-    function getCyclePhase(date){ if(!date) return { name:PHASES.follicular, key:"follicular", day:1 };
-        let diff=Math.floor((new Date()-new Date(date))/(86400000)), cycleDay=(diff%28)+1;
-        if(cycleDay<=5) return { name:PHASES.menstrual, key:"menstrual", day:cycleDay };
-        if(cycleDay<=14) return { name:PHASES.follicular, key:"follicular", day:cycleDay };
-        if(cycleDay<=17) return { name:PHASES.ovulatory, key:"ovulatory", day:cycleDay };
-        return { name:PHASES.luteal, key:"luteal", day:cycleDay };
+    
+    function getCyclePhase(date){
+        if(!date) return { key:"follicular", day:1, name:PHASES.follicular };
+        let diff=Math.floor((new Date()-new Date(date))/(86400000));
+        let cycleDay=(diff%28)+1;
+        if(cycleDay<=5) return { key:"menstrual", day:cycleDay, name:PHASES.menstrual };
+        if(cycleDay<=14) return { key:"follicular", day:cycleDay, name:PHASES.follicular };
+        if(cycleDay<=17) return { key:"ovulatory", day:cycleDay, name:PHASES.ovulatory };
+        return { key:"luteal", day:cycleDay, name:PHASES.luteal };
+    }
+    
+    function getMenuForPhase(phaseKey){
+        let phaseRecipes = RECIPES_BY_PHASE[phaseKey] || RECIPES_BY_PHASE.follicular;
+        return {
+            breakfast: phaseRecipes.breakfast[0],
+            lunch: phaseRecipes.lunch[0],
+            dinner: phaseRecipes.dinner[0]
+        };
+    }
+    
+    function updateMealsByPhase(){
+        let lastPeriod = localStorage.getItem('femmetry_last_period') || '';
+        let phase = getCyclePhase(lastPeriod);
+        let phaseMeals = getMenuForPhase(phase.key);
+        let today = new Date().getDay();
+        weeklyMeals[today] = phaseMeals;
+        localStorage.setItem('femmetry_weekly', JSON.stringify(weeklyMeals));
+        return phase;
     }
     
     function loadUserData(){
         let p=JSON.parse(localStorage.getItem('femmetry_params')||'{}');
         let w=p.weight||65, h=p.height||165, a=p.age||30, act=parseFloat(localStorage.getItem('femmetry_activity'))||1.375;
         currentGoal=p.goal||"maintain"; ageGroup=localStorage.getItem('femmetry_age_group')||"18-35";
-        let phase=getCyclePhase(localStorage.getItem('femmetry_last_period')||'');
-        currentPhase=phase.key;
-        userTargetKcal=getTargetKcal(w,h,a,act,currentGoal,PHASES[currentPhase].multiplier);
-        targetProtein=calculateProteinNorm(w);
-    }
-    
-    function updateProgress(){
-        let today=weeklyMeals[new Date().getDay()];
-        let totalKcal=(today.breakfast?.kcal||0)+(today.lunch?.kcal||0)+(today.dinner?.kcal||0)+(today.snack?.kcal||0);
-        let totalProtein=(today.breakfast?.protein||0)+(today.lunch?.protein||0)+(today.dinner?.protein||0)+(today.snack?.protein||0);
-        document.getElementById('todayKcal').innerText=totalKcal;
-        document.getElementById('targetKcalDisplay').innerText=userTargetKcal;
-        document.getElementById('todayProtein').innerText=totalProtein;
-        document.getElementById('targetProtein').innerText=targetProtein;
-        let percent=Math.min(100,Math.round(totalKcal/userTargetKcal*100));
-        let circumference=2*Math.PI*60;
-        let offset=circumference-(percent/100)*circumference;
-        let ring=document.getElementById('progressRing');
-        if(ring) ring.style.strokeDasharray=`${circumference} ${circumference}`;
-        if(ring) ring.style.strokeDashoffset=offset;
-        document.getElementById('ringPercent').innerText=percent+'%';
+        let tdee = Math.round(calculateBMR(w,h,a) * act);
+        userTargetKcal = currentGoal==='loss'?Math.round(tdee*0.85):(currentGoal==='gain'?Math.round(tdee*1.1):Math.round(tdee));
+        targetProtein = calculateProteinNorm(w);
     }
     
     function renderPhaseBanner(){
-        let last=localStorage.getItem('femmetry_last_period')||'';
-        if(!last){ document.getElementById('phaseBanner').innerHTML=`<div class="phase-banner"><div class="phase-name">📅 Укажите дату месячных</div><div class="phase-recommendation">Это поможет адаптировать рекомендации под ваш цикл.</div></div>`; return; }
-        let phase=getCyclePhase(last);
-        document.getElementById('phaseBanner').innerHTML=`<div class="phase-banner"><div class="phase-name">${phase.name.name} • ${phase.name.days} день цикла</div><div class="phase-recommendation"><i class="fas fa-lightbulb"></i> Фокус: ${phase.name.focus}. ${phase.name.focus==="Железо"?"Добавьте красное мясо, печень, гречку.":phase.name.focus==="Омега-3"?"Жирная рыба, авокадо.":"Белок, овощи, цельнозерновые."}</div></div>`;
+        let lastPeriod = localStorage.getItem('femmetry_last_period') || '';
+        let phase = getCyclePhase(lastPeriod);
+        document.getElementById('phaseBanner').innerHTML = `
+            <div class="phase-name">
+                ${phase.name.emoji} ${phase.name.name} • ${phase.name.days} день цикла
+                <span class="phase-badge">День ${phase.day}</span>
+            </div>
+            <div class="phase-recommendation">${phase.name.recommendation}</div>
+            <div class="phase-nutrients">
+                ${phase.name.nutrients.map(n => `<span class="nutrient-tag">✨ ${n}</span>`).join('')}
+            </div>
+        `;
+        document.getElementById('phaseBadge').innerHTML = `${phase.name.emoji} ${phase.name.name}`;
+        
+        // Примеры для страницы меню
+        let examplesHtml = Object.entries(PHASES).map(([key, p]) => `
+            <div style="margin-bottom: 16px; padding: 12px; background: #FCFAF8; border-radius: 16px; border-left: 3px solid #C6A27A;">
+                <strong>${p.emoji} ${p.name}</strong><br>
+                <span style="font-size:0.75rem; color:#5A5A6E;">${p.recommendation.substring(0, 80)}...</span>
+            </div>
+        `).join('');
+        document.getElementById('phaseExamples').innerHTML = examplesHtml;
+        
+        return phase;
+    }
+    
+    function updateProgress(){
+        let today = weeklyMeals[new Date().getDay()];
+        let totalKcal = (today.breakfast?.kcal||0) + (today.lunch?.kcal||0) + (today.dinner?.kcal||0);
+        let totalProtein = (today.breakfast?.protein||0) + (today.lunch?.protein||0) + (today.dinner?.protein||0);
+        document.getElementById('todayKcal').innerText = totalKcal;
+        document.getElementById('targetKcalDisplay').innerText = userTargetKcal;
+        document.getElementById('todayProtein').innerText = totalProtein;
+        document.getElementById('targetProtein').innerText = targetProtein;
+        let percent = Math.min(100, Math.round(totalKcal/userTargetKcal*100));
+        let circumference = 2 * Math.PI * 50;
+        let offset = circumference - (percent/100) * circumference;
+        let ring = document.getElementById('progressRing');
+        if(ring){
+            ring.style.strokeDasharray = `${circumference} ${circumference}`;
+            ring.style.strokeDashoffset = offset;
+        }
+        document.getElementById('ringPercent').innerText = percent+'%';
     }
     
     function renderDashboard(){
-        renderPhaseBanner();
-        let today=weeklyMeals[new Date().getDay()];
-        document.getElementById('todayMenuPreview').innerHTML=`
-            <div class="meal-preview-card"><div class="name">🌅 ${today.breakfast?.name||'—'}</div><div class="kcal">${today.breakfast?.kcal||0} ккал</div></div>
-            <div class="meal-preview-card"><div class="name">☀️ ${today.lunch?.name||'—'}</div><div class="kcal">${today.lunch?.kcal||0} ккал</div></div>
-            <div class="meal-preview-card"><div class="name">🌙 ${today.dinner?.name||'—'}</div><div class="kcal">${today.dinner?.kcal||0} ккал</div></div>
+        let phase = renderPhaseBanner();
+        let todayMeals = weeklyMeals[new Date().getDay()];
+        if(!todayMeals || !todayMeals.breakfast){
+            todayMeals = getMenuForPhase(phase.key);
+            weeklyMeals[new Date().getDay()] = todayMeals;
+            localStorage.setItem('femmetry_weekly', JSON.stringify(weeklyMeals));
+        }
+        document.getElementById('todayMenuPreview').innerHTML = `
+            <div class="meal-preview-card"><div class="icon">🌅</div><div class="name">${todayMeals.breakfast?.name||'—'}</div><div class="kcal">${todayMeals.breakfast?.kcal||0} ккал</div></div>
+            <div class="meal-preview-card"><div class="icon">☀️</div><div class="name">${todayMeals.lunch?.name||'—'}</div><div class="kcal">${todayMeals.lunch?.kcal||0} ккал</div></div>
+            <div class="meal-preview-card"><div class="icon">🌙</div><div class="name">${todayMeals.dinner?.name||'—'}</div><div class="kcal">${todayMeals.dinner?.kcal||0} ккал</div></div>
         `;
         
         // Тренд веса
-        let history=JSON.parse(localStorage.getItem('femmetry_measurements')||'[]');
-        if(history.length>=2){
-            let last=history[history.length-1].weight;
-            let prev=history[history.length-7]?.weight || history[0].weight;
-            let diff=(last-prev).toFixed(1);
-            if(diff<0) document.getElementById('weightTrend').innerHTML=`📉 За неделю: <strong style="color:#7CB342;">−${Math.abs(diff)} кг</strong> (отлично!)`;
-            else if(diff>0) document.getElementById('weightTrend').innerHTML=`📈 За неделю: <strong style="color:#E57373;">+${diff} кг</strong>`;
-            else document.getElementById('weightTrend').innerHTML=`📊 За неделю: стабильно`;
+        let history = JSON.parse(localStorage.getItem('femmetry_measurements')||'[]');
+        if(history.length >= 2){
+            let last = history[history.length-1].weight;
+            let prev = history[history.length-7]?.weight || history[0].weight;
+            let diff = (last - prev).toFixed(1);
+            if(diff < 0){
+                document.getElementById('weightTrend').innerHTML = `📉 За неделю: <strong>−${Math.abs(diff)} кг</strong> · отличный темп!`;
+                document.getElementById('weightTrend').className = 'weight-trend down';
+            } else if(diff > 0){
+                document.getElementById('weightTrend').innerHTML = `📈 За неделю: <strong>+${diff} кг</strong> · обратите внимание на питание`;
+                document.getElementById('weightTrend').className = 'weight-trend up';
+            } else {
+                document.getElementById('weightTrend').innerHTML = `📊 За неделю: стабильно · держите курс!`;
+                document.getElementById('weightTrend').className = 'weight-trend';
+            }
         } else {
-            document.getElementById('weightTrend').innerHTML=`📊 Добавьте ещё замеров через неделю`;
+            document.getElementById('weightTrend').innerHTML = `📊 Добавьте ещё замеров через неделю для анализа тренда`;
+            document.getElementById('weightTrend').className = 'weight-trend';
         }
         
-        let blog=JSON.parse(localStorage.getItem('femmetry_blog_posts')||'[]');
-        let forum=JSON.parse(localStorage.getItem('femmetry_forum_topics')||'[]');
-        document.getElementById('blogPreview').innerHTML=blog.slice(0,2).map(b=>`<div class="blog-item" style="background:#FCFAF8; padding:12px; border-radius:16px; margin-bottom:8px;"><span style="background:#1C1C2A; color:white; padding:2px 8px; border-radius:20px; font-size:0.6rem;">${b.category||'Статья'}</span><div style="margin-top:6px;"><strong>${b.title}</strong><p style="font-size:0.7rem; color:#666;">${b.content?.substring(0,60)}...</p></div></div>`).join('')||'<div class="empty-state">📝 Скоро появятся статьи</div>';
-        document.getElementById('forumPreview').innerHTML=forum.slice(0,2).map(t=>`<div class="forum-item" style="background:#FCFAF8; padding:12px; border-radius:16px; margin-bottom:8px;"><span style="background:#1C1C2A; color:white; padding:2px 8px; border-radius:20px; font-size:0.6rem;">${t.category||'Обсуждение'}</span><div style="margin-top:6px;"><strong>${t.title}</strong><p style="font-size:0.7rem; color:#666;">${t.content?.substring(0,50)}...</p></div></div>`).join('')||'<div class="empty-state">💬 Будьте первой</div>';
+        let blog = JSON.parse(localStorage.getItem('femmetry_blog_posts')||'[]');
+        let forum = JSON.parse(localStorage.getItem('femmetry_forum_topics')||'[]');
+        document.getElementById('blogPreview').innerHTML = blog.slice(0,2).map(b=>`<div class="blog-item"><span class="tag">${b.category||'Статья'}</span><div><strong>${b.title}</strong><p style="font-size:0.7rem; margin-top:4px;">${b.content?.substring(0,60)}...</p></div></div>`).join('')||'<div class="empty-state">📝 Скоро появятся статьи</div>';
+        document.getElementById('forumPreview').innerHTML = forum.slice(0,2).map(t=>`<div class="forum-item"><span class="tag">${t.category||'Обсуждение'}</span><div><strong>${t.title}</strong><p style="font-size:0.7rem; margin-top:4px;">${t.content?.substring(0,50)}...</p></div></div>`).join('')||'<div class="empty-state">💬 Будьте первой</div>';
+        
         updateProgress();
     }
     
     function quickWeight(){
-        let w=parseFloat(document.getElementById('quickWeight').value);
+        let w = parseFloat(document.getElementById('quickWeight').value);
         if(!w){ showToast("Введите вес"); return; }
-        let history=JSON.parse(localStorage.getItem('femmetry_measurements')||'[]');
-        let p=JSON.parse(localStorage.getItem('femmetry_params')||'{}');
-        history.push({weight:w,height:p.height||165,age:p.age||30,goal:currentGoal,date:new Date().toISOString()});
-        localStorage.setItem('femmetry_measurements',JSON.stringify(history));
-        localStorage.setItem('femmetry_params',JSON.stringify({...p,weight:w,date:new Date().toISOString()}));
+        let history = JSON.parse(localStorage.getItem('femmetry_measurements')||'[]');
+        let p = JSON.parse(localStorage.getItem('femmetry_params')||'{}');
+        history.push({weight:w, height:p.height||165, age:p.age||30, goal:currentGoal, date:new Date().toISOString()});
+        localStorage.setItem('femmetry_measurements', JSON.stringify(history));
+        localStorage.setItem('femmetry_params', JSON.stringify({...p, weight:w, date:new Date().toISOString()}));
         showToast(`✅ Вес ${w} кг записан`);
-        document.getElementById('quickWeight').value='';
+        document.getElementById('quickWeight').value = '';
         renderDashboard();
     }
     
-    function quickAddMeal(type){
-        let mealNames = { breakfast:"🌅 завтрак", lunch:"☀️ обед", dinner:"🌙 ужин", snack:"🍎 перекус" };
-        showToast(`🍽️ Блюдо на ${mealNames[type]} уже в вашем меню. Чтобы изменить, перейдите во вкладку "Меню"`);
+    function openMealModal(){
+        let phase = getCyclePhase(localStorage.getItem('femmetry_last_period')||'');
+        let options = `
+            <div style="margin-bottom:12px;"><strong>🌅 Завтрак</strong><br>
+            <button class="btn-outline" style="margin-top:6px;" onclick="addMealAndClose('breakfast')">+ Добавить завтрак</button></div>
+            <div style="margin-bottom:12px;"><strong>☀️ Обед</strong><br>
+            <button class="btn-outline" style="margin-top:6px;" onclick="addMealAndClose('lunch')">+ Добавить обед</button></div>
+            <div style="margin-bottom:12px;"><strong>🌙 Ужин</strong><br>
+            <button class="btn-outline" style="margin-top:6px;" onclick="addMealAndClose('dinner')">+ Добавить ужин</button></div>
+            <div style="margin-top:12px; padding-top:12px; border-top:1px solid #EFEAE3; font-size:0.7rem; color:#A89F8E;">
+                💡 Блюда уже подобраны под фазу ${phase.name.name}. Чтобы изменить конкретное блюдо, перейдите во вкладку "Меню".
+            </div>
+        `;
+        document.getElementById('mealOptions').innerHTML = options;
+        document.getElementById('mealModal').style.display = 'flex';
     }
     
+    function addMealAndClose(type){
+        showToast(`🍽️ Блюдо на ${type} уже в вашем меню на сегодня`);
+        closeMealModal();
+    }
+    
+    function closeMealModal(){ document.getElementById('mealModal').style.display = 'none'; }
     function logout(){ localStorage.removeItem('femmetry_auth'); window.location.href='index.html'; }
     
-    document.querySelectorAll('.nav-btn').forEach(b=>{b.onclick=()=>{document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active')); document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); b.classList.add('active'); document.getElementById(b.dataset.page+'Page').classList.add('active'); if(b.dataset.page==='dashboard') renderDashboard(); if(b.dataset.page==='menu') document.getElementById('menuPlaceholder').innerHTML='<div class="empty-state">🍽️ Полное меню появится после настройки параметров</div>'; if(b.dataset.page==='cookbook') document.getElementById('cookbookPlaceholder').innerHTML='<div class="empty-state">📖 Сохраняйте рецепты из меню</div>'; if(b.dataset.page==='measurements') document.getElementById('measurementsPlaceholder').innerHTML='<div class="empty-state">📏 Настройки появятся в следующей версии</div>'; if(b.dataset.page==='stats') document.getElementById('statsPlaceholder').innerHTML='<div class="empty-state">📊 Графики появятся после нескольких замеров</div>';};});
-    document.getElementById('quickWeightBtn').onclick=quickWeight;
+    document.querySelectorAll('.nav-btn').forEach(b=>{
+        b.onclick = () => {
+            document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active'));
+            document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+            b.classList.add('active');
+            document.getElementById(b.dataset.page+'Page').classList.add('active');
+            if(b.dataset.page === 'dashboard') renderDashboard();
+        };
+    });
+    document.getElementById('quickWeightBtn').onclick = quickWeight;
     
-    if(localStorage.getItem('femmetry_auth')!=='true') window.location.href='index.html';
-    else { document.getElementById('mainApp').style.display='block'; loadUserData(); renderDashboard(); }
+    if(localStorage.getItem('femmetry_auth') !== 'true'){
+        window.location.href = 'index.html';
+    } else {
+        document.getElementById('mainApp').style.display = 'block';
+        loadUserData();
+        updateMealsByPhase();
+        renderDashboard();
+    }
 </script>
 </body>
 </html>
