@@ -341,7 +341,7 @@
         <h2 style="font-size: 1.6rem; font-weight: 500; margin-bottom: 8px;">Вход</h2>
         <p style="color: var(--text-secondary); margin-bottom: 24px;">7 дней бесплатно</p>
         <div style="display: flex; gap: 16px; margin-bottom: 24px;">
-            <button onclick="handleMockLogin()" style="flex:1; display:flex; align-items:center; justify-content:center; gap:12px; padding:14px; border:1px solid var(--border); border-radius:100px; background:var(--card); cursor:pointer;"><i class="fab fa-google"></i> Войти как гость</button>
+            <button onclick="handleGoogleLogin()" style="flex:1; display:flex; align-items:center; justify-content:center; gap:12px; padding:14px; border:1px solid var(--border); border-radius:100px; background:var(--card); cursor:pointer;"><i class="fab fa-google"></i> Google</button>
         </div>
         <div style="text-align:center; margin:20px 0; color:var(--text-tertiary);">или по email</div>
         <input type="email" id="loginEmail" placeholder="Email" style="width:100%; padding:14px; border-radius:100px; border:1px solid var(--border); background:var(--card); margin-bottom:12px;">
@@ -360,7 +360,7 @@
         <h2 style="font-size: 1.6rem; font-weight: 500; margin-bottom: 8px;">Регистрация</h2>
         <p style="color: var(--text-secondary); margin-bottom: 24px;">Создайте аккаунт</p>
         <div style="display: flex; gap: 16px; margin-bottom: 24px;">
-            <button onclick="handleMockRegister()" style="flex:1; display:flex; align-items:center; justify-content:center; gap:12px; padding:14px; border:1px solid var(--border); border-radius:100px; background:var(--card); cursor:pointer;"><i class="fab fa-google"></i> Продолжить как гость</button>
+            <button onclick="handleGoogleRegister()" style="flex:1; display:flex; align-items:center; justify-content:center; gap:12px; padding:14px; border:1px solid var(--border); border-radius:100px; background:var(--card); cursor:pointer;"><i class="fab fa-google"></i> Google</button>
         </div>
         <div style="text-align:center; margin:20px 0; color:var(--text-tertiary);">или по email</div>
         <input type="text" id="regName" placeholder="Имя" style="width:100%; padding:14px; border-radius:100px; border:1px solid var(--border); background:var(--card); margin-bottom:12px;">
@@ -470,6 +470,9 @@
 </div>
 
 <script>
+    // ========== КОНФИГУРАЦИЯ ==========
+    const API_URL = 'http://89.108.98.233:3000';
+    
     // Сохранение позиции скролла
     let scrollPosition = 0;
     
@@ -488,70 +491,107 @@
     
     function closeInfoModal() { document.getElementById('infoModal').style.display = 'none'; restoreScrollPosition(); }
     
-    // Mock-авторизация (работает без бэкенда, но с Back4App можно заменить на реальную)
-    function handleMockLogin() {
-        if(!document.getElementById('consentCheckbox').checked){ 
-            alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); 
-            return; 
-        }
-        localStorage.setItem('femmetry_auth', 'true');
-        localStorage.setItem('femmetry_user_name', 'Гость');
-        localStorage.setItem('femmetry_consent', 'true');
-        localStorage.setItem('femmetry_trial_start', new Date().toISOString());
-        window.location.href = 'cabinet.html';
+    // Функции API
+    async function apiRequest(endpoint, method, body, token = null) {
+        const headers = { 'Content-Type': 'application/json' };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+        
+        const response = await fetch(`${API_URL}${endpoint}`, {
+            method: method,
+            headers: headers,
+            body: body ? JSON.stringify(body) : undefined
+        });
+        return response.json();
     }
     
-    function handleMockRegister() {
-        if(!document.getElementById('regConsentCheckbox').checked){ 
-            alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); 
-            return; 
-        }
-        let name = document.getElementById('regName').value || 'Гость';
-        localStorage.setItem('femmetry_user_name', name);
-        localStorage.setItem('femmetry_auth', 'true');
-        localStorage.setItem('femmetry_consent', 'true');
-        localStorage.setItem('femmetry_trial_start', new Date().toISOString());
-        window.location.href = 'cabinet.html';
+    async function register(email, password, name) {
+        return apiRequest('/api/register', 'POST', { email, password, name });
     }
     
-    function handleEmailLogin() {
-        let email = document.getElementById('loginEmail').value;
-        let pwd = document.getElementById('loginPassword').value;
-        if(!email || !pwd){ 
-            alert("Введите email и пароль"); 
-            return; 
-        }
-        if(!document.getElementById('consentCheckbox').checked){ 
-            alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); 
-            return; 
-        }
-        // Здесь будет запрос к Back4App для реального входа
-        localStorage.setItem('femmetry_auth', 'true');
-        localStorage.setItem('femmetry_user_email', email);
-        localStorage.setItem('femmetry_consent', 'true');
-        localStorage.setItem('femmetry_trial_start', new Date().toISOString());
-        window.location.href = 'cabinet.html';
+    async function login(email, password) {
+        return apiRequest('/api/login', 'POST', { email, password });
     }
     
-    function handleEmailRegister() {
-        let name = document.getElementById('regName').value;
-        let email = document.getElementById('regEmail').value;
-        let pwd = document.getElementById('regPassword').value;
-        if(!name || !email || !pwd){ 
-            alert("Заполните все поля"); 
-            return; 
+    // Обработчики
+    async function handleEmailLogin() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const consent = document.getElementById('consentCheckbox').checked;
+        
+        if (!email || !password) {
+            showToast("Введите email и пароль");
+            return;
         }
-        if(!document.getElementById('regConsentCheckbox').checked){ 
-            alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); 
-            return; 
+        if (!consent) {
+            showToast("Пожалуйста, подтвердите, что вы ознакомились с информацией");
+            return;
         }
-        // Здесь будет запрос к Back4App для реальной регистрации
-        localStorage.setItem('femmetry_user_name', name);
-        localStorage.setItem('femmetry_user_email', email);
-        localStorage.setItem('femmetry_auth', 'true');
-        localStorage.setItem('femmetry_consent', 'true');
-        localStorage.setItem('femmetry_trial_start', new Date().toISOString());
-        window.location.href = 'cabinet.html';
+        
+        try {
+            const result = await login(email, password);
+            if (result.success) {
+                localStorage.setItem('femmetry_token', result.token);
+                localStorage.setItem('femmetry_user', JSON.stringify(result.user));
+                showToast("✅ Добро пожаловать!");
+                window.location.href = 'cabinet.html';
+            } else {
+                showToast("❌ " + (result.error || "Ошибка входа"));
+            }
+        } catch (error) {
+            showToast("❌ Сервер недоступен. Попробуйте позже.");
+        }
+    }
+    
+    async function handleEmailRegister() {
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const password = document.getElementById('regPassword').value;
+        const consent = document.getElementById('regConsentCheckbox').checked;
+        
+        if (!name || !email || !password) {
+            showToast("Заполните все поля");
+            return;
+        }
+        if (password.length < 6) {
+            showToast("Пароль должен быть не менее 6 символов");
+            return;
+        }
+        if (!consent) {
+            showToast("Пожалуйста, подтвердите, что вы ознакомились с информацией");
+            return;
+        }
+        
+        try {
+            const result = await register(email, password, name);
+            if (result.success) {
+                localStorage.setItem('femmetry_token', result.token);
+                localStorage.setItem('femmetry_user', JSON.stringify(result.user));
+                showToast("✅ Регистрация успешна! Подтвердите email (проверьте почту)");
+                setTimeout(() => {
+                    window.location.href = 'cabinet.html';
+                }, 2000);
+            } else {
+                showToast("❌ " + (result.error || "Ошибка регистрации"));
+            }
+        } catch (error) {
+            showToast("❌ Сервер недоступен. Попробуйте позже.");
+        }
+    }
+    
+    function handleGoogleLogin() {
+        showToast("🔧 Google вход в разработке. Используйте email для регистрации");
+    }
+    
+    function handleGoogleRegister() {
+        showToast("🔧 Google вход в разработке. Используйте email для регистрации");
+    }
+    
+    function showToast(msg) {
+        let t = document.createElement('div');
+        t.className = 'toast';
+        t.innerText = msg;
+        document.body.appendChild(t);
+        setTimeout(() => t.remove(), 3000);
     }
     
     // Контент для модальных окон
@@ -584,8 +624,8 @@
     window.closeRegisterModal = closeRegisterModal;
     window.switchToRegister = switchToRegister;
     window.switchToLogin = switchToLogin;
-    window.handleMockLogin = handleMockLogin;
-    window.handleMockRegister = handleMockRegister;
+    window.handleGoogleLogin = handleGoogleLogin;
+    window.handleGoogleRegister = handleGoogleRegister;
     window.handleEmailLogin = handleEmailLogin;
     window.handleEmailRegister = handleEmailRegister;
 </script>
