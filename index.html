@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#F5F5F0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
     <title>Femmetry — женское здоровье</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -27,7 +28,7 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.5;
@@ -36,14 +37,10 @@
         
         .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
         
-        /* Typography — иерархия как у Apple */
         h1 { font-size: 3.5rem; font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; }
         h2 { font-size: 2rem; font-weight: 500; letter-spacing: -0.01em; }
-        h3 { font-size: 1.25rem; font-weight: 500; }
-        .text-large { font-size: 1.1rem; color: var(--text-secondary); }
-        .text-small { font-size: 0.8rem; color: var(--text-tertiary); }
         
-        /* Navbar — прозрачный, только нужное */
+        /* Navbar */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -62,7 +59,6 @@
             font-weight: 600;
             letter-spacing: -0.5px;
             color: var(--text);
-            text-decoration: none;
         }
         .logo-light { font-weight: 300; color: var(--text-secondary); }
         .nav-links { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
@@ -74,7 +70,6 @@
             transition: all 0.25s ease;
             position: relative;
         }
-        /* Подсветка при наведении — как у Apple */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -88,42 +83,6 @@
         .nav-links a:hover::after { width: 100%; }
         .nav-links a:hover { color: var(--accent); }
         
-        /* Buttons — чёткие, с анимацией */
-        .btn-primary {
-            background: var(--text);
-            color: white;
-            padding: 14px 36px;
-            border: none;
-            border-radius: var(--radius-btn);
-            font-weight: 500;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.25s ease;
-        }
-        .btn-primary:hover { 
-            background: #2A2A2A; 
-            transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--border);
-            padding: 12px 28px;
-            border-radius: var(--radius-btn);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            color: var(--text);
-        }
-        .btn-outline:hover { 
-            border-color: var(--text); 
-            background: var(--text); 
-            color: white; 
-            transform: translateY(-1px);
-        }
         .btn-login {
             background: transparent;
             border: 1px solid var(--border);
@@ -134,12 +93,18 @@
             transition: all 0.25s ease;
             color: var(--text);
         }
-        .btn-login:hover { 
-            border-color: var(--text); 
-            background: var(--text); 
-            color: white; 
-            transform: translateY(-1px);
+        .btn-login:hover { border-color: var(--text); background: var(--text); color: white; transform: translateY(-1px); }
+        .btn-primary {
+            background: var(--text);
+            color: white;
+            padding: 14px 36px;
+            border: none;
+            border-radius: var(--radius-btn);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
         }
+        .btn-primary:hover { background: #2A2A2A; transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         
         /* Hero */
         .hero {
@@ -150,22 +115,19 @@
             padding: 80px 0 100px;
         }
         .hero h1 .accent { color: var(--accent); font-weight: 600; }
-        .hero-description { margin: 28px 0 32px; line-height: 1.6; }
         .hero-stats { display: flex; gap: 48px; margin-top: 48px; }
-        .stat .number { font-size: 1.8rem; font-weight: 600; color: var(--text); }
-        .stat .label { font-size: 0.7rem; color: var(--text-tertiary); letter-spacing: 0.5px; text-transform: uppercase; }
+        .stat .number { font-size: 1.8rem; font-weight: 600; }
+        .stat .label { font-size: 0.7rem; color: var(--text-tertiary); text-transform: uppercase; }
         .hero-visual {
             background: var(--card);
             border-radius: var(--radius-card);
             padding: 40px;
             text-align: center;
             box-shadow: var(--shadow-md);
-            transition: all 0.25s ease;
         }
-        .hero-visual:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
         .hero-visual img { max-width: 100%; border-radius: 20px; }
         
-        /* Features — карточки с подсветкой */
+        /* Features */
         .features { padding: 100px 0; background: var(--card); }
         .section-title { text-align: center; margin-bottom: 64px; }
         .section-title span { color: var(--accent); font-weight: 600; }
@@ -182,22 +144,12 @@
             transition: all 0.25s ease;
             cursor: pointer;
         }
-        .feature-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-md);
-            background: var(--card);
-        }
-        .feature-icon {
-            font-size: 2.2rem;
-            color: var(--accent);
-            margin-bottom: 20px;
-            transition: transform 0.25s ease;
-        }
-        .feature-card:hover .feature-icon { transform: scale(1.05); }
+        .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); background: var(--card); }
+        .feature-icon { font-size: 2.2rem; color: var(--accent); margin-bottom: 20px; }
         .feature-card h3 { margin-bottom: 12px; }
-        .feature-card p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5; }
+        .feature-card p { color: var(--text-secondary); font-size: 0.85rem; }
         
-        /* Steps — минималистично */
+        /* Steps */
         .how-section { padding: 100px 0; background: var(--bg); }
         .steps-grid {
             display: grid;
@@ -220,13 +172,7 @@
             box-shadow: var(--shadow-sm);
             transition: all 0.25s ease;
         }
-        .steps-grid > div:hover .step-number {
-            transform: scale(1.08);
-            background: var(--accent);
-            color: white;
-        }
-        .steps-grid h3 { font-size: 1rem; margin-bottom: 8px; }
-        .steps-grid p { color: var(--text-secondary); font-size: 0.8rem; }
+        .steps-grid > div:hover .step-number { transform: scale(1.08); background: var(--accent); color: white; }
         
         /* Blog */
         .blog-section { padding: 100px 0; background: var(--card); }
@@ -242,20 +188,8 @@
             transition: all 0.25s ease;
             cursor: pointer;
         }
-        .blog-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-md);
-            background: var(--card);
-        }
-        .blog-category {
-            font-size: 0.7rem;
-            color: var(--accent);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-        .blog-card h3 { margin-bottom: 12px; font-size: 1.1rem; }
-        .blog-card p { color: var(--text-secondary); font-size: 0.8rem; line-height: 1.5; }
+        .blog-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); background: var(--card); }
+        .blog-category { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
         
         /* Pricing */
         .pricing { padding: 100px 0; background: var(--bg); }
@@ -271,16 +205,11 @@
             border-radius: var(--radius-card);
             padding: 48px 40px;
             text-align: center;
-            box-shadow: var(--shadow-sm);
             transition: all 0.25s ease;
         }
         .price-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-        .price-card.popular {
-            border: 1px solid var(--accent);
-            box-shadow: var(--shadow-md);
-        }
+        .price-card.popular { border: 1px solid var(--accent); }
         .price { font-size: 2.5rem; font-weight: 600; margin: 20px 0; }
-        .price small { font-size: 0.9rem; font-weight: 400; color: var(--text-secondary); }
         
         /* Footer */
         .footer {
@@ -294,14 +223,7 @@
             gap: 48px;
             margin-bottom: 48px;
         }
-        .footer-col h4 {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            color: var(--text);
-        }
+        .footer-col h4 { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 20px; }
         .footer-col a {
             display: block;
             color: var(--text-secondary);
@@ -311,13 +233,7 @@
             transition: all 0.2s ease;
         }
         .footer-col a:hover { color: var(--accent); transform: translateX(4px); }
-        .copyright {
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--text-tertiary);
-            padding-top: 32px;
-            border-top: 1px solid var(--border);
-        }
+        .copyright { text-align: center; font-size: 0.7rem; color: var(--text-tertiary); padding-top: 32px; border-top: 1px solid var(--border); }
         
         /* Modal */
         .modal {
@@ -342,10 +258,7 @@
             position: relative;
             animation: modalFade 0.2s ease;
         }
-        @keyframes modalFade {
-            from { opacity: 0; transform: scale(0.96); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        @keyframes modalFade { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
         .close-modal {
             position: absolute;
             top: 24px;
@@ -353,30 +266,19 @@
             font-size: 1.3rem;
             cursor: pointer;
             color: var(--text-tertiary);
-            transition: color 0.2s;
         }
-        .close-modal:hover { color: var(--text); }
         .checkbox-label {
             display: flex;
             align-items: center;
             gap: 12px;
             font-size: 0.7rem;
-            color: var(--text-secondary);
             margin: 20px 0;
             cursor: pointer;
         }
-        .trial-banner {
-            background: var(--bg);
-            padding: 16px;
-            border-radius: 24px;
-            text-align: center;
-            margin-top: 24px;
-            font-size: 0.8rem;
-        }
+        .trial-banner { background: var(--bg); padding: 16px; border-radius: 24px; text-align: center; margin-top: 24px; }
         
         @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; text-align: center; gap: 48px; padding: 48px 0; }
-            .hero-description { max-width: 100%; }
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 48px; }
             .hero-stats { justify-content: center; }
             .features-grid, .steps-grid, .blog-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
         }
@@ -384,7 +286,6 @@
             .container { padding: 0 20px; }
             .features-grid, .steps-grid, .blog-grid, .pricing-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2.2rem; }
-            h2 { font-size: 1.5rem; }
             .navbar { flex-direction: column; }
             .nav-links { justify-content: center; }
         }
@@ -398,11 +299,11 @@
         <h2 style="font-size: 1.6rem; font-weight: 500; margin-bottom: 8px;">Вход</h2>
         <p style="color: var(--text-secondary); margin-bottom: 24px;">7 дней бесплатно</p>
         <div style="display: flex; gap: 16px; margin-bottom: 24px;">
-            <button onclick="handleGoogleLogin()" style="flex:1; display:flex; align-items:center; justify-content:center; gap:12px; padding:14px; border:1px solid var(--border); border-radius:100px; background:var(--card); cursor:pointer; transition:0.2s;"><i class="fab fa-google"></i> Google</button>
+            <button onclick="handleGoogleLogin()" style="flex:1; display:flex; align-items:center; justify-content:center; gap:12px; padding:14px; border:1px solid var(--border); border-radius:100px; background:var(--card); cursor:pointer;"><i class="fab fa-google"></i> Google</button>
         </div>
-        <div style="text-align:center; margin:20px 0; color:var(--text-tertiary); font-size:0.8rem;">или по email</div>
-        <input type="email" id="loginEmail" placeholder="Email" style="width:100%; padding:14px; border-radius:100px; border:1px solid var(--border); background:var(--card); margin-bottom:12px; font-size:0.9rem;">
-        <input type="password" id="loginPassword" placeholder="Пароль" style="width:100%; padding:14px; border-radius:100px; border:1px solid var(--border); background:var(--card); margin-bottom:20px; font-size:0.9rem;">
+        <div style="text-align:center; margin:20px 0; color:var(--text-tertiary);">или по email</div>
+        <input type="email" id="loginEmail" placeholder="Email" style="width:100%; padding:14px; border-radius:100px; border:1px solid var(--border); background:var(--card); margin-bottom:12px;">
+        <input type="password" id="loginPassword" placeholder="Пароль" style="width:100%; padding:14px; border-radius:100px; border:1px solid var(--border); background:var(--card); margin-bottom:20px;">
         <label class="checkbox-label"><input type="checkbox" id="consentCheckbox"> <span>Я понимаю, что Femmetry — информационная платформа, а Валерия Радькова не является врачом.</span></label>
         <button class="btn-primary" style="width:100%; justify-content:center;" onclick="handleEmailLogin()">Войти</button>
         <div class="trial-banner">🎁 7 дней бесплатно — полный доступ</div>
@@ -424,7 +325,7 @@
     <div class="hero">
         <div class="hero-content">
             <h1>Ваше тело — <span class="accent">это данные.</span><br>Научитесь <span class="accent">их читать.</span></h1>
-            <p class="hero-description text-large">Femmetry — первая экосистема женского здоровья. Анализы, цикл, питание и тренировки в единой научной картине.</p>
+            <p class="hero-description" style="margin: 28px 0 32px; color: var(--text-secondary);">Femmetry — первая экосистема женского здоровья. Анализы, цикл, питание и тренировки в единой научной картине.</p>
             <button class="btn-primary" onclick="openAuthModal()"><i class="fas fa-chart-line"></i> Начать 7 дней бесплатно</button>
             <div class="hero-stats">
                 <div class="stat"><div class="number">5000+</div><div class="label">женщин</div></div>
@@ -478,8 +379,8 @@
     <div class="container">
         <h2 class="section-title">Выберите <span>доступ</span></h2>
         <div class="pricing-grid">
-            <div class="price-card"><h3>Пробный</h3><div class="price">0 ₽</div><p style="color: var(--accent); font-size: 0.85rem;">7 дней полного доступа</p><button class="btn-outline" onclick="openAuthModal()" style="margin-top: 24px;">Активировать</button></div>
-            <div class="price-card popular"><div style="background: var(--bg); color: var(--accent); display: inline-block; padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; margin-bottom: 16px;">🔥 Популярный</div><h3>Premium</h3><div class="price">790 ₽<small>/мес</small></div><p style="color: var(--accent); font-size: 0.8rem;">или 5 900 ₽/год (экономия 37%)</p><button class="btn-primary" onclick="openAuthModal()" style="margin-top: 24px;">Начать 7 дней</button></div>
+            <div class="price-card"><h3>Пробный</h3><div class="price">0 ₽</div><p style="color: var(--accent);">7 дней полного доступа</p><button class="btn-outline" onclick="openAuthModal()" style="margin-top: 24px;">Активировать</button></div>
+            <div class="price-card popular"><div style="background: var(--bg); color: var(--accent); display: inline-block; padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; margin-bottom: 16px;">🔥 Популярный</div><h3>Premium</h3><div class="price">790 ₽<small>/мес</small></div><p style="color: var(--accent);">или 5 900 ₽/год (экономия 37%)</p><button class="btn-primary" onclick="openAuthModal()" style="margin-top: 24px;">Начать 7 дней</button></div>
         </div>
     </div>
 </div>
@@ -522,6 +423,11 @@
     function handleEmailLogin() { let email=document.getElementById('loginEmail').value, pwd=document.getElementById('loginPassword').value; if(!email||!pwd){ alert("Введите email и пароль"); return; } if(!document.getElementById('consentCheckbox').checked){ alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); return; } localStorage.setItem('femmetry_auth','true'); localStorage.setItem('femmetry_user_email',email); localStorage.setItem('femmetry_consent','true'); localStorage.setItem('femmetry_trial_start',new Date().toISOString()); window.location.href='cabinet.html'; }
     
     window.onclick = function(e) { if(e.target===document.getElementById('authModal')) closeAuthModal(); if(e.target===document.getElementById('infoModal')) closeInfoModal(); }
+    
+    // Регистрация Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(reg => console.log('✅ SW registered:', reg)).catch(err => console.log('❌ SW error:', err));
+    }
     
     window.showModal = showModal;
     window.closeInfoModal = closeInfoModal;
