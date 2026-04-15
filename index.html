@@ -19,6 +19,7 @@
             --text-secondary: #6B6B6B;
             --text-tertiary: #A0A0A0;
             --accent: #D4A574;
+            --accent-dark: #B8875A;
             --border: #E8E8E3;
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.02);
             --shadow-md: 0 8px 24px rgba(0,0,0,0.04);
@@ -39,7 +40,6 @@
         h1 { font-size: 3.5rem; font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; }
         h2 { font-size: 2rem; font-weight: 500; letter-spacing: -0.01em; }
         
-        /* Navbar */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -70,6 +70,7 @@
             font-size: 0.9rem;
             transition: all 0.25s ease;
             position: relative;
+            cursor: pointer;
         }
         .nav-links a::after {
             content: '';
@@ -132,7 +133,6 @@
         }
         .btn-outline:hover { border-color: var(--text); background: var(--text); color: white; }
         
-        /* Hero */
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -141,6 +141,7 @@
             padding: 80px 0 100px;
         }
         .hero h1 .accent { color: var(--accent); font-weight: 600; }
+        .hero-description { margin: 28px 0 32px; color: var(--text-secondary); }
         .hero-stats { display: flex; gap: 48px; margin-top: 48px; }
         .stat .number { font-size: 1.8rem; font-weight: 600; }
         .stat .label { font-size: 0.7rem; color: var(--text-tertiary); text-transform: uppercase; }
@@ -153,7 +154,6 @@
         }
         .hero-visual img { max-width: 100%; border-radius: 20px; }
         
-        /* Features */
         .features { padding: 100px 0; background: var(--card); }
         .section-title { text-align: center; margin-bottom: 64px; }
         .section-title span { color: var(--accent); font-weight: 600; }
@@ -175,7 +175,6 @@
         .feature-card h3 { margin-bottom: 12px; }
         .feature-card p { color: var(--text-secondary); font-size: 0.85rem; }
         
-        /* Steps */
         .how-section { padding: 100px 0; background: var(--bg); }
         .steps-grid {
             display: grid;
@@ -200,7 +199,6 @@
         }
         .steps-grid > div:hover .step-number { transform: scale(1.08); background: var(--accent); color: white; }
         
-        /* Blog */
         .blog-section { padding: 100px 0; background: var(--card); }
         .blog-grid {
             display: grid;
@@ -217,7 +215,6 @@
         .blog-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); background: var(--card); }
         .blog-category { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
         
-        /* Pricing */
         .pricing { padding: 100px 0; background: var(--bg); }
         .pricing-grid {
             display: grid;
@@ -237,7 +234,6 @@
         .price-card.popular { border: 1px solid var(--accent); }
         .price { font-size: 2.5rem; font-weight: 600; margin: 20px 0; }
         
-        /* Footer */
         .footer {
             background: var(--card);
             padding: 64px 0 32px;
@@ -262,7 +258,6 @@
         .footer-col a:hover { color: var(--accent); transform: translateX(4px); }
         .copyright { text-align: center; font-size: 0.7rem; color: var(--text-tertiary); padding-top: 32px; border-top: 1px solid var(--border); }
         
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -284,6 +279,8 @@
             width: 90%;
             position: relative;
             animation: modalFade 0.2s ease;
+            max-height: 85vh;
+            overflow-y: auto;
         }
         @keyframes modalFade { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
         .close-modal {
@@ -306,8 +303,23 @@
         }
         .trial-banner { background: var(--bg); padding: 16px; border-radius: 24px; text-align: center; margin-top: 24px; }
         
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            z-index: 3000;
+            animation: fadeOut 2s ease forwards;
+        }
+        @keyframes fadeOut { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+        
         @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; text-align: center; gap: 48px; }
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 48px; padding: 48px 0; }
             .hero-stats { justify-content: center; }
             .features-grid, .steps-grid, .blog-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
         }
@@ -329,7 +341,7 @@
         <h2 style="font-size: 1.6rem; font-weight: 500; margin-bottom: 8px;">Вход</h2>
         <p style="color: var(--text-secondary); margin-bottom: 24px;">7 дней бесплатно</p>
         <div style="display: flex; gap: 16px; margin-bottom: 24px;">
-            <button onclick="handleGoogleLogin()" style="flex:1; display:flex; align-items:center; justify-content:center; gap:12px; padding:14px; border:1px solid var(--border); border-radius:100px; background:var(--card); cursor:pointer;"><i class="fab fa-google"></i> Google</button>
+            <button onclick="handleMockLogin()" style="flex:1; display:flex; align-items:center; justify-content:center; gap:12px; padding:14px; border:1px solid var(--border); border-radius:100px; background:var(--card); cursor:pointer;"><i class="fab fa-google"></i> Войти как гость</button>
         </div>
         <div style="text-align:center; margin:20px 0; color:var(--text-tertiary);">или по email</div>
         <input type="email" id="loginEmail" placeholder="Email" style="width:100%; padding:14px; border-radius:100px; border:1px solid var(--border); background:var(--card); margin-bottom:12px;">
@@ -348,7 +360,7 @@
         <h2 style="font-size: 1.6rem; font-weight: 500; margin-bottom: 8px;">Регистрация</h2>
         <p style="color: var(--text-secondary); margin-bottom: 24px;">Создайте аккаунт</p>
         <div style="display: flex; gap: 16px; margin-bottom: 24px;">
-            <button onclick="handleGoogleRegister()" style="flex:1; display:flex; align-items:center; justify-content:center; gap:12px; padding:14px; border:1px solid var(--border); border-radius:100px; background:var(--card); cursor:pointer;"><i class="fab fa-google"></i> Google</button>
+            <button onclick="handleMockRegister()" style="flex:1; display:flex; align-items:center; justify-content:center; gap:12px; padding:14px; border:1px solid var(--border); border-radius:100px; background:var(--card); cursor:pointer;"><i class="fab fa-google"></i> Продолжить как гость</button>
         </div>
         <div style="text-align:center; margin:20px 0; color:var(--text-tertiary);">или по email</div>
         <input type="text" id="regName" placeholder="Имя" style="width:100%; padding:14px; border-radius:100px; border:1px solid var(--border); background:var(--card); margin-bottom:12px;">
@@ -361,7 +373,7 @@
     </div>
 </div>
 
-<!-- Модалка для страниц (О проекте, Научная база и т.д.) -->
+<!-- Модалка для страниц -->
 <div id="infoModal" class="modal">
     <div class="modal-content" style="max-width: 600px;">
         <span class="close-modal" onclick="closeInfoModal()">&times;</span>
@@ -371,7 +383,7 @@
 
 <div class="container">
     <div class="navbar">
-        <div class="logo" onclick="goToHome()">Femmetry<span class="logo-light">.</span></div>
+        <div class="logo" onclick="location.href='index.html'">Femmetry<span class="logo-light">.</span></div>
         <div class="nav-links">
             <a href="#features">Метод</a>
             <a href="#how">Как работает</a>
@@ -385,7 +397,7 @@
     <div class="hero">
         <div class="hero-content">
             <h1>Ваше тело — <span class="accent">это данные.</span><br>Научитесь <span class="accent">их читать.</span></h1>
-            <p class="hero-description" style="margin: 28px 0 32px; color: var(--text-secondary);">Femmetry — первая экосистема женского здоровья. Анализы, цикл, питание и тренировки в единой научной картине.</p>
+            <p class="hero-description">Femmetry — первая экосистема женского здоровья. Анализы, цикл, питание и тренировки в единой научной картине.</p>
             <button class="btn-primary" onclick="openRegisterModal()"><i class="fas fa-chart-line"></i> Начать 7 дней бесплатно</button>
             <div class="hero-stats">
                 <div class="stat"><div class="number">5000+</div><div class="label">женщин</div></div>
@@ -428,9 +440,9 @@
     <div class="container">
         <h2 class="section-title">Последние <span>статьи</span></h2>
         <div class="blog-grid">
-            <div class="blog-card" onclick="openAuthModal()"><div class="blog-category">Анализы</div><h3>Ферритин: энергия и гормоны</h3><p>Как низкий ферритин влияет на усталость, волосы и цикл</p></div>
-            <div class="blog-card" onclick="openAuthModal()"><div class="blog-category">Цикл</div><h3>Питание по фазам цикла</h3><p>Что есть в фолликулярную, а что в лютеиновую фазу</p></div>
-            <div class="blog-card" onclick="openAuthModal()"><div class="blog-category">Беременность</div><h3>Триместр за триместром</h3><p>Потребности в калориях, белке и железе</p></div>
+            <div class="blog-card" onclick="openRegisterModal()"><div class="blog-category">Анализы</div><h3>Ферритин: энергия и гормоны</h3><p>Как низкий ферритин влияет на усталость, волосы и цикл</p></div>
+            <div class="blog-card" onclick="openRegisterModal()"><div class="blog-category">Цикл</div><h3>Питание по фазам цикла</h3><p>Что есть в фолликулярную, а что в лютеиновую фазу</p></div>
+            <div class="blog-card" onclick="openRegisterModal()"><div class="blog-category">Беременность</div><h3>Триместр за триместром</h3><p>Потребности в калориях, белке и железе</p></div>
         </div>
     </div>
 </div>
@@ -458,7 +470,7 @@
 </div>
 
 <script>
-    // Сохранение позиции скролла для модалок
+    // Сохранение позиции скролла
     let scrollPosition = 0;
     
     function saveScrollPosition() { scrollPosition = window.scrollY; }
@@ -476,6 +488,72 @@
     
     function closeInfoModal() { document.getElementById('infoModal').style.display = 'none'; restoreScrollPosition(); }
     
+    // Mock-авторизация (работает без бэкенда, но с Back4App можно заменить на реальную)
+    function handleMockLogin() {
+        if(!document.getElementById('consentCheckbox').checked){ 
+            alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); 
+            return; 
+        }
+        localStorage.setItem('femmetry_auth', 'true');
+        localStorage.setItem('femmetry_user_name', 'Гость');
+        localStorage.setItem('femmetry_consent', 'true');
+        localStorage.setItem('femmetry_trial_start', new Date().toISOString());
+        window.location.href = 'cabinet.html';
+    }
+    
+    function handleMockRegister() {
+        if(!document.getElementById('regConsentCheckbox').checked){ 
+            alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); 
+            return; 
+        }
+        let name = document.getElementById('regName').value || 'Гость';
+        localStorage.setItem('femmetry_user_name', name);
+        localStorage.setItem('femmetry_auth', 'true');
+        localStorage.setItem('femmetry_consent', 'true');
+        localStorage.setItem('femmetry_trial_start', new Date().toISOString());
+        window.location.href = 'cabinet.html';
+    }
+    
+    function handleEmailLogin() {
+        let email = document.getElementById('loginEmail').value;
+        let pwd = document.getElementById('loginPassword').value;
+        if(!email || !pwd){ 
+            alert("Введите email и пароль"); 
+            return; 
+        }
+        if(!document.getElementById('consentCheckbox').checked){ 
+            alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); 
+            return; 
+        }
+        // Здесь будет запрос к Back4App для реального входа
+        localStorage.setItem('femmetry_auth', 'true');
+        localStorage.setItem('femmetry_user_email', email);
+        localStorage.setItem('femmetry_consent', 'true');
+        localStorage.setItem('femmetry_trial_start', new Date().toISOString());
+        window.location.href = 'cabinet.html';
+    }
+    
+    function handleEmailRegister() {
+        let name = document.getElementById('regName').value;
+        let email = document.getElementById('regEmail').value;
+        let pwd = document.getElementById('regPassword').value;
+        if(!name || !email || !pwd){ 
+            alert("Заполните все поля"); 
+            return; 
+        }
+        if(!document.getElementById('regConsentCheckbox').checked){ 
+            alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); 
+            return; 
+        }
+        // Здесь будет запрос к Back4App для реальной регистрации
+        localStorage.setItem('femmetry_user_name', name);
+        localStorage.setItem('femmetry_user_email', email);
+        localStorage.setItem('femmetry_auth', 'true');
+        localStorage.setItem('femmetry_consent', 'true');
+        localStorage.setItem('femmetry_trial_start', new Date().toISOString());
+        window.location.href = 'cabinet.html';
+    }
+    
     // Контент для модальных окон
     const modalContents = {
         about: `<h2 style="font-size:1.4rem; font-weight:500; margin-bottom:16px;">О проекте</h2><p style="margin-bottom:16px; color:var(--text-secondary);">Меня зовут Валерия Радькова. Я сертифицированный тренер, специалист по женской физиологии.</p><p style="margin-bottom:16px; color:var(--text-secondary);"><strong>Важное примечание:</strong> Я не врач. Femmetry — информационная платформа для поддержки здорового образа жизни.</p><button class="btn-primary" onclick="openRegisterModal(); closeInfoModal();" style="margin-top:16px;">Попробовать 7 дней</button>`,
@@ -492,44 +570,11 @@
         document.getElementById('infoModal').style.display = 'flex'; 
     }
     
-    // Авторизация
-    function handleGoogleLogin() { if(!document.getElementById('consentCheckbox').checked){ alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); return; } localStorage.setItem('femmetry_auth','true'); localStorage.setItem('femmetry_consent','true'); localStorage.setItem('femmetry_trial_start',new Date().toISOString()); window.location.href='cabinet.html'; }
-    function handleGoogleRegister() { if(!document.getElementById('regConsentCheckbox').checked){ alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); return; } let name=document.getElementById('regName').value; if(name) localStorage.setItem('femmetry_user_name',name); localStorage.setItem('femmetry_auth','true'); localStorage.setItem('femmetry_consent','true'); localStorage.setItem('femmetry_trial_start',new Date().toISOString()); window.location.href='cabinet.html'; }
-    
-    function handleEmailLogin() { let email=document.getElementById('loginEmail').value, pwd=document.getElementById('loginPassword').value; if(!email||!pwd){ alert("Введите email и пароль"); return; } if(!document.getElementById('consentCheckbox').checked){ alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); return; } localStorage.setItem('femmetry_auth','true'); localStorage.setItem('femmetry_user_email',email); localStorage.setItem('femmetry_consent','true'); localStorage.setItem('femmetry_trial_start',new Date().toISOString()); window.location.href='cabinet.html'; }
-    
-    function handleEmailRegister() { let name=document.getElementById('regName').value, email=document.getElementById('regEmail').value, pwd=document.getElementById('regPassword').value; if(!name||!email||!pwd){ alert("Заполните все поля"); return; } if(!document.getElementById('regConsentCheckbox').checked){ alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); return; } localStorage.setItem('femmetry_user_name',name); localStorage.setItem('femmetry_user_email',email); localStorage.setItem('femmetry_auth','true'); localStorage.setItem('femmetry_consent','true'); localStorage.setItem('femmetry_trial_start',new Date().toISOString()); window.location.href='cabinet.html'; }
-    
-    function goToHome() { 
-        // Проверяем, авторизован ли пользователь
-        if (localStorage.getItem('femmetry_auth') === 'true') {
-            // Просто переходим на главную, сессия сохраняется
-            window.location.href = 'index.html';
-        } else {
-            window.location.href = 'index.html';
-        }
-    }
-    
-    // Проверка авторизации при загрузке главной
-    function checkAuth() {
-        if (localStorage.getItem('femmetry_auth') === 'true') {
-            // Показываем приветствие (можно добавить виджет)
-            console.log('Пользователь авторизован');
-        }
-    }
-    
     window.onclick = function(e) { 
         if(e.target===document.getElementById('authModal')) closeAuthModal(); 
         if(e.target===document.getElementById('registerModal')) closeRegisterModal();
         if(e.target===document.getElementById('infoModal')) closeInfoModal(); 
     }
-    
-    // Регистрация Service Worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').then(reg => console.log('✅ SW registered:', reg)).catch(err => console.log('❌ SW error:', err));
-    }
-    
-    checkAuth();
     
     window.showModal = showModal;
     window.closeInfoModal = closeInfoModal;
@@ -539,11 +584,10 @@
     window.closeRegisterModal = closeRegisterModal;
     window.switchToRegister = switchToRegister;
     window.switchToLogin = switchToLogin;
-    window.handleGoogleLogin = handleGoogleLogin;
+    window.handleMockLogin = handleMockLogin;
+    window.handleMockRegister = handleMockRegister;
     window.handleEmailLogin = handleEmailLogin;
-    window.handleGoogleRegister = handleGoogleRegister;
     window.handleEmailRegister = handleEmailRegister;
-    window.goToHome = goToHome;
 </script>
 </body>
 </html>
