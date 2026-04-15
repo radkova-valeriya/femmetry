@@ -172,7 +172,31 @@
         .ring-bg { fill: none; stroke: var(--border); stroke-width: 8; }
         .ring-fill { fill: none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dasharray 0.5s ease; }
         .ring-value { font-size: 1.3rem; font-weight: 600; }
-        .progress-stats { font-size: 0.75rem; margin-top: 8px; }
+        
+        /* Исправленный блок прогресса дня — ничего не наезжает */
+        .progress-stats {
+            font-size: 0.75rem;
+            margin-top: 8px;
+            line-height: 1.4;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .progress-stats div {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .progress-stats strong {
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .protein-exceed {
+            color: #E57373;
+        }
+        
         .meal-check { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 0.75rem; border-bottom: 1px solid var(--border); transition: var(--transition); }
         .meal-check:hover { background: var(--bg); margin: 0 -8px; padding: 8px; border-radius: 12px; }
         .meal-check input { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
@@ -363,6 +387,15 @@
             .swipe-card { padding: 30px 20px; }
             .swipe-container { min-height: 450px; }
         }
+        
+        @media (max-width: 480px) {
+            .progress-stats {
+                font-size: 0.7rem;
+            }
+            .progress-stats strong {
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -393,7 +426,10 @@
                 <div class="card progress-card">
                     <div class="card-header"><h2><i class="fas fa-chart-pie"></i> Прогресс дня</h2></div>
                     <div class="ring-container"><svg width="100" height="100"><circle class="ring-bg" cx="50" cy="50" r="42"></circle><circle class="ring-fill" id="progressRing" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="264"></circle></svg><div class="ring-center"><span id="ringPercent" class="ring-value">0%</span></div></div>
-                    <div class="progress-stats"><div><strong><span id="todayKcal">0</span></strong> / <span id="targetKcalDisplay">2000</span> ккал</div><div>🥩 <span id="todayProtein">0</span> / <span id="targetProtein">0</span> г</div></div>
+                    <div class="progress-stats">
+                        <div><strong><span id="todayKcal">0</span></strong> <span>/ <span id="targetKcalDisplay">2000</span> ккал</span></div>
+                        <div><span>🥩 <strong><span id="todayProtein">0</span></strong> / <span id="targetProtein">68</span> г белка</span></div>
+                    </div>
                     <div><div class="meal-check"><span>🌅 Завтрак</span><input type="checkbox" id="checkBreakfast" onchange="updateProgressFromCheckboxes()"></div><div class="meal-check"><span>☀️ Обед</span><input type="checkbox" id="checkLunch" onchange="updateProgressFromCheckboxes()"></div><div class="meal-check"><span>🌙 Ужин</span><input type="checkbox" id="checkDinner" onchange="updateProgressFromCheckboxes()"></div><div class="meal-check"><span>🍎 Перекус</span><input type="checkbox" id="checkSnack" onchange="updateProgressFromCheckboxes()"></div></div>
                 </div>
                 <div class="card weight-compact">
@@ -479,7 +515,7 @@
     let forumTopics = [];
     let selectedMeals = JSON.parse(localStorage.getItem('femmetry_selected_meals')) || { breakfast: null, lunch: null, dinner: null, snack: null };
     let currentGoal = "maintain", ageGroup = "18-35";
-    let userTargetKcal = 2000, targetProtein = 60;
+    let userTargetKcal = 2000, targetProtein = 68;
     let weightChart = null;
     let pendingRecipe = null;
     
@@ -557,6 +593,21 @@
     function showToast(msg){ let t=document.createElement('div'); t.className='toast'; t.innerText=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2000); }
     function calculateProteinNorm(w){ if(ageGroup==="46+") return Math.round(w*1.3); if(ageGroup==="36-45") return Math.round(w*1.1); return Math.round(w*0.9); }
     function calculateBMR(w,h,a){ return 447.6 + (9.2*w) + (3.1*h) - (4.3*a); }
+    
+    function updateProgressColors() {
+        let proteinValue = parseInt(document.getElementById('todayProtein').innerText) || 0;
+        let proteinTarget = parseInt(document.getElementById('targetProtein').innerText) || 68;
+        let proteinSpan = document.getElementById('todayProtein');
+        if (proteinSpan) {
+            if (proteinValue > proteinTarget) {
+                proteinSpan.style.color = '#E57373';
+                proteinSpan.style.fontWeight = '600';
+            } else {
+                proteinSpan.style.color = '';
+                proteinSpan.style.fontWeight = '';
+            }
+        }
+    }
     
     function togglePregnancyFields(){
         let isPregnant = document.getElementById('pregnant').value === 'yes';
@@ -672,6 +723,7 @@
         let ring = document.getElementById('progressRing');
         if(ring) ring.style.strokeDashoffset = offset;
         document.getElementById('ringPercent').innerText = percent+'%';
+        updateProgressColors();
     }
     
     function updateProgressFromCheckboxes(){
@@ -688,6 +740,7 @@
         let ring = document.getElementById('progressRing');
         if(ring) ring.style.strokeDashoffset = offset;
         document.getElementById('ringPercent').innerText = percent+'%';
+        updateProgressColors();
     }
     
     function loadUserData(){
@@ -697,6 +750,7 @@
         let tdee = Math.round(calculateBMR(w,h,a) * act);
         userTargetKcal = currentGoal==='loss'?Math.round(tdee*0.85):(currentGoal==='gain'?Math.round(tdee*1.1):Math.round(tdee));
         targetProtein = calculateProteinNorm(w);
+        document.getElementById('targetProtein').innerText = targetProtein;
         document.getElementById('weight').value=p.weight||''; document.getElementById('height').value=p.height||''; document.getElementById('age').value=p.age||'';
         document.getElementById('waist').value=p.waist||''; document.getElementById('hips').value=p.hips||'';
         document.getElementById('lastPeriod').value=localStorage.getItem('femmetry_last_period')||''; document.getElementById('ferritin').value=localStorage.getItem('femmetry_ferritin')||'';
