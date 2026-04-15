@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#F5F5F0">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
     <title>Femmetry — личный кабинет</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -36,7 +37,6 @@
         
         .app { max-width: 1280px; margin: 0 auto; padding: 20px 28px; }
         
-        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -79,7 +79,6 @@
             transform: translateY(-1px);
         }
         
-        /* Navigation */
         .nav {
             display: flex;
             gap: 6px;
@@ -145,7 +144,6 @@
             gap: 8px;
         }
         
-        /* Phase Banner */
         .phase-banner {
             background: var(--card);
             border-radius: 24px;
@@ -165,9 +163,7 @@
             color: var(--accent);
             transition: var(--transition);
         }
-        .nutrient-tag:hover { background: var(--accent); color: white; transform: scale(1.02); }
         
-        /* Stats Row */
         .stats-row { display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; margin-bottom: 24px; }
         .progress-card { text-align: center; }
         .ring-container { position: relative; width: 100px; height: 100px; margin: 0 auto 12px; }
@@ -198,7 +194,6 @@
         .btn-small:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
         .weight-trend { font-size: 0.65rem; padding: 8px; border-radius: 10px; text-align: center; background: var(--bg); }
         
-        /* Swipe Card */
         .swipe-container { display: flex; justify-content: center; align-items: center; min-height: 520px; margin-bottom: 24px; }
         .swipe-card {
             width: 100%;
@@ -213,20 +208,11 @@
             cursor: grab;
             transition: var(--transition);
         }
-        .swipe-card:hover { transform: scale(1.01); box-shadow: var(--shadow-md); }
-        .swipe-card:active { cursor: grabbing; }
+        .swipe-card:hover { transform: scale(1.01); }
         .meal-icon { font-size: 4rem; margin-bottom: 20px; transition: var(--transition); }
         .swipe-card:hover .meal-icon { transform: scale(1.05); }
-        .swipe-card h2 { font-size: 1.6rem; font-weight: 500; margin-bottom: 8px; }
         .meal-stats { display: flex; justify-content: center; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
-        .stat-badge {
-            background: var(--bg);
-            padding: 6px 14px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            transition: var(--transition);
-        }
-        .stat-badge:hover { background: var(--accent); color: white; transform: translateY(-1px); }
+        .stat-badge { background: var(--bg); padding: 6px 14px; border-radius: 40px; font-size: 0.7rem; transition: var(--transition); }
         .swipe-buttons { display: flex; justify-content: center; gap: 20px; margin-top: 32px; }
         .swipe-btn {
             width: 65px;
@@ -248,17 +234,10 @@
         .swipe-btn.no { color: #E57373; }
         .swipe-btn.yes { color: #66BB6A; }
         .swipe-btn.skip { width: 50px; height: 50px; color: var(--text-tertiary); }
-        .swipe-btn:hover { transform: scale(1.08); box-shadow: var(--shadow-md); }
+        .swipe-btn:hover { transform: scale(1.08); }
         .swipe-hint { text-align: center; font-size: 0.7rem; color: var(--text-tertiary); margin: 20px 0; }
         .selected-meals { background: var(--bg); border-radius: 24px; padding: 20px; margin-top: 20px; }
-        .selected-meal-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-            transition: var(--transition);
-        }
+        .selected-meal-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); transition: var(--transition); }
         .selected-meal-item:hover { padding-left: 8px; background: var(--card); border-radius: 12px; }
         
         .btn {
@@ -273,7 +252,6 @@
             width: 100%;
         }
         .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         .btn-outline {
             background: transparent;
             border: 1px solid var(--border);
@@ -364,7 +342,6 @@
             font-size: 0.8rem;
             z-index: 3000;
             animation: fadeOut 2s ease forwards;
-            box-shadow: var(--shadow-md);
         }
         @keyframes fadeOut { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
         
@@ -464,27 +441,17 @@
 </div>
 
 <script>
-    // ========== ДАННЫЕ ==========
-    let recipes = [
-        { id: "b1", name: "🥣 Овсянка с ягодами", meal: "breakfast", kcal: 320, protein: 12, time: "10 мин", icon: "🥣", ingredients: "Овсянка, молоко, ягоды, мёд", desc: "быстрый завтрак" },
-        { id: "b2", name: "🍰 Творожная запеканка", meal: "breakfast", kcal: 340, protein: 24, time: "5 мин", icon: "🍰", ingredients: "Творог, яйцо, манка, сметана", desc: "из холодильника" },
-        { id: "l1", name: "🍗 Гречка с курицей", meal: "lunch", kcal: 450, protein: 35, time: "5 мин", icon: "🍗", ingredients: "Гречка, курица, овощи", desc: "из холодильника" },
-        { id: "l2", name: "🥗 Салат с тунцом", meal: "lunch", kcal: 420, protein: 32, time: "15 мин", icon: "🥗", ingredients: "Тунец, яйцо, листья салата", desc: "быстрый обед" },
-        { id: "d1", name: "🐟 Рыба с киноа", meal: "dinner", kcal: 430, protein: 35, time: "5 мин", icon: "🐟", ingredients: "Рыба, киноа, овощи", desc: "из холодильника" },
-        { id: "d2", name: "🍳 Омлет с сыром", meal: "dinner", kcal: 380, protein: 28, time: "10 мин", icon: "🍳", ingredients: "3 яйца, сыр, зелень", desc: "быстрый ужин" },
-        { id: "s1", name: "🥛 Йогурт с ягодами", meal: "snack", kcal: 150, protein: 12, time: "2 мин", icon: "🥛", ingredients: "Йогурт, ягоды", desc: "из холодильника" }
-    ];
+    // ========== КОНФИГУРАЦИЯ — ЗАМЕНИТЕ НА ВАШИ ДАННЫЕ ==========
+    const GITHUB_USERNAME = 'ваш_логин';      // <- СЮДА ВАШ USERNAME
+    const DATA_REPO = 'femmetry-data';         // <- НАЗВАНИЕ РЕПОЗИТОРИЯ С ДАННЫМИ
     
-    let blogPosts = JSON.parse(localStorage.getItem('femmetry_blog_posts')) || [
-        { id: 1, title: "Ферритин: энергия и гормоны", category: "Анализы", content: "Норма ферритина для женщин — 30-150 нг/мл. При снижении ниже 30 развивается скрытый дефицит железа.", date: "2025-03-15" },
-        { id: 2, title: "Питание по фазам цикла", category: "Цикл", content: "В фолликулярную фазу нужны сложные углеводы и белок, в лютеиновую — магний и меньше сладкого.", date: "2025-03-10" }
-    ];
+    const DATA_URL = `https://${GITHUB_USERNAME}.github.io/${DATA_REPO}/data/`;
     
-    let forumTopics = JSON.parse(localStorage.getItem('femmetry_forum_topics')) || [
-        { id: 1, title: "Как повысить ферритин?", category: "Анализы", author: "Мария", content: "Печень, гречка, шпинат + витамин С.", date: "2025-03-14" },
-        { id: 2, title: "Тяга к сладкому перед месячными", category: "Цикл", author: "Анна", content: "Магний, тёмный шоколад, больше белка.", date: "2025-03-12" }
-    ];
-    
+    // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+    let recipesDB = [];
+    let psyDB = null;
+    let blogPosts = [];
+    let forumTopics = [];
     let selectedMeals = JSON.parse(localStorage.getItem('femmetry_selected_meals')) || { breakfast: null, lunch: null, dinner: null, snack: null };
     let checkboxesState = { breakfast: false, lunch: false, dinner: false, snack: false };
     let currentGoal = "maintain", ageGroup = "18-35";
@@ -496,6 +463,83 @@
     let currentMealIndex = 0, currentMealKey = "breakfast";
     const MEAL_TYPES = [{ key: "breakfast", title: "🌅 ЗАВТРАК" }, { key: "lunch", title: "☀️ ОБЕД" }, { key: "dinner", title: "🌙 УЖИН" }, { key: "snack", title: "🍎 ПЕРЕКУС" }];
     
+    // ========== ЗАГРУЗКА ДАННЫХ ИЗ GITHUB ==========
+    async function fetchJSON(url, fallback = null) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.warn(`⚠️ Не удалось загрузить ${url}:`, error);
+            return fallback;
+        }
+    }
+    
+    async function loadRecipesFromGitHub() {
+        const data = await fetchJSON(DATA_URL + 'recipes.json', null);
+        if (data && data.meals) {
+            recipesDB = data.meals;
+            console.log(`🍽️ Загружено ${recipesDB.length} рецептов из ${DATA_URL}`);
+            return recipesDB;
+        }
+        return useFallbackRecipes();
+    }
+    
+    async function loadPsyFromGitHub() {
+        const data = await fetchJSON(DATA_URL + 'psy_tasks.json', null);
+        if (data) {
+            psyDB = data;
+            console.log(`🧠 Загружены PSY-данные`);
+            return data;
+        }
+        return null;
+    }
+    
+    async function loadBlogFromGitHub() {
+        const data = await fetchJSON(DATA_URL + 'blog_posts.json', null);
+        if (data && data.posts) {
+            blogPosts = data.posts;
+            console.log(`📰 Загружено ${blogPosts.length} статей`);
+            return blogPosts;
+        }
+        return [];
+    }
+    
+    async function loadForumFromGitHub() {
+        const data = await fetchJSON(DATA_URL + 'forum_topics.json', null);
+        if (data && data.topics) {
+            forumTopics = data.topics;
+            console.log(`💬 Загружено ${forumTopics.length} тем форума`);
+            return forumTopics;
+        }
+        return [];
+    }
+    
+    async function initDataFromGitHub() {
+        showToast("📡 Загрузка данных...");
+        await Promise.all([
+            loadRecipesFromGitHub(),
+            loadPsyFromGitHub(),
+            loadBlogFromGitHub(),
+            loadForumFromGitHub()
+        ]);
+        showToast("✅ Данные загружены");
+        renderDashboard();
+        renderBlog();
+        renderForum();
+    }
+    
+    function useFallbackRecipes() {
+        console.warn("⚠️ Используются встроенные рецепты");
+        return [
+            { id: "b1", name: "🥣 Овсянка с ягодами", meal: "breakfast", kcal: 320, protein: 12, time: "10 мин", icon: "🥣", ingredients: "Овсянка, молоко, ягоды", desc: "быстрый завтрак" },
+            { id: "l1", name: "🍗 Гречка с курицей", meal: "lunch", kcal: 450, protein: 35, time: "5 мин", icon: "🍗", ingredients: "Гречка, курица, овощи", desc: "из холодильника" },
+            { id: "d1", name: "🐟 Рыба с киноа", meal: "dinner", kcal: 430, protein: 35, time: "5 мин", icon: "🐟", ingredients: "Рыба, киноа, овощи", desc: "из холодильника" },
+            { id: "s1", name: "🥛 Йогурт с ягодами", meal: "snack", kcal: 150, protein: 12, time: "2 мин", icon: "🥛", ingredients: "Йогурт, ягоды", desc: "из холодильника" }
+        ];
+    }
+    
+    // ========== ОСНОВНЫЕ ФУНКЦИИ ==========
     function showToast(msg){ let t=document.createElement('div'); t.className='toast'; t.innerText=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2000); }
     function calculateProteinNorm(w){ if(ageGroup==="46+") return Math.round(w*1.3); if(ageGroup==="36-45") return Math.round(w*1.1); return Math.round(w*0.9); }
     function calculateBMR(w,h,a){ return 447.6 + (9.2*w) + (3.1*h) - (4.3*a); }
@@ -515,10 +559,14 @@
         return { name: "🌕 Лютеиновая фаза", nutrients: ["Магний","Клетчатка"] };
     }
     
-    function getMealsByType(type){ return recipes.filter(r => r.meal === type); }
+    function getRecipesByMeal(mealType){
+        if(recipesDB.length) return recipesDB.filter(r => r.category === mealType || r.meal === mealType);
+        const fallback = useFallbackRecipes();
+        return fallback.filter(r => r.meal === mealType);
+    }
     
     function updateSwipeCard(){
-        let meals = getMealsByType(currentMealKey);
+        let meals = getRecipesByMeal(currentMealKey);
         let meal = meals[currentMealIndex];
         if(meal){
             document.getElementById('swipeIcon').innerHTML = meal.icon || "🍽️";
@@ -544,13 +592,13 @@
     }
     
     function swipeLeft(){
-        let meals = getMealsByType(currentMealKey);
+        let meals = getRecipesByMeal(currentMealKey);
         if(currentMealIndex + 1 < meals.length){ currentMealIndex++; updateSwipeCard(); }
         else { showToast("Это был последний вариант"); }
     }
     
     function swipeRight(){
-        let meals = getMealsByType(currentMealKey);
+        let meals = getRecipesByMeal(currentMealKey);
         selectedMeals[currentMealKey] = meals[currentMealIndex];
         localStorage.setItem('femmetry_selected_meals', JSON.stringify(selectedMeals));
         renderSwipeSummary();
@@ -710,8 +758,26 @@
         if(ctx && history.length){ if(weightChart) weightChart.destroy(); weightChart = new Chart(ctx,{type:'line',data:{labels:history.map(h=>new Date(h.date).toLocaleDateString()),datasets:[{label:'Вес (кг)',data:history.map(h=>h.weight),borderColor:'#D4A574',borderWidth:2,fill:false,tension:0.3}]},options:{responsive:true,plugins:{legend:{display:false}}}}); }
     }
     
-    function renderBlog(){ document.getElementById('blogFullList').innerHTML = blogPosts.map(p=>`<div class="blog-item"><span class="tag">${p.category}</span><h3 style="margin:8px 0;">${p.title}</h3><p>${p.content}</p><div style="font-size:0.7rem; color:var(--text-tertiary);">${p.date}</div></div>`).join('') || '<div class="empty-state"><i class="fas fa-newspaper"></i><p>Статьи появятся скоро</p></div>'; }
-    function renderForum(){ document.getElementById('forumFullList').innerHTML = forumTopics.map(t=>`<div class="forum-item"><span class="tag">${t.category}</span><h3 style="margin:8px 0;">${t.title}</h3><p>${t.content}</p><div style="font-size:0.7rem; color:var(--text-tertiary);">${t.author} · ${t.date}</div></div>`).join('') || '<div class="empty-state"><i class="fas fa-comments"></i><p>Будьте первой, кто начнёт тему</p></div>'; }
+    function renderBlog(){
+        if(blogPosts.length){
+            document.getElementById('blogFullList').innerHTML = blogPosts.map(p=>`<div class="blog-item"><span class="tag">${p.category}</span><h3 style="margin:8px 0;">${p.title}</h3><p>${p.content}</p><div style="font-size:0.7rem; color:var(--text-tertiary);">${p.date}</div></div>`).join('');
+        } else {
+            document.getElementById('blogFullList').innerHTML = '<div class="empty-state"><i class="fas fa-newspaper"></i><p>Статьи появятся скоро</p></div>';
+        }
+        let blogPreview = blogPosts.slice(0,2).map(b=>`<div class="blog-item"><span class="tag">${b.category}</span><div><strong>${b.title}</strong><p style="font-size:0.7rem;">${b.content?.substring(0,80)}...</p></div></div>`).join('');
+        document.getElementById('blogPreview').innerHTML = blogPreview || '<div class="empty-state">📝 Скоро появятся статьи</div>';
+    }
+    
+    function renderForum(){
+        if(forumTopics.length){
+            document.getElementById('forumFullList').innerHTML = forumTopics.map(t=>`<div class="forum-item"><span class="tag">${t.category}</span><h3 style="margin:8px 0;">${t.title}</h3><p>${t.content}</p><div style="font-size:0.7rem; color:var(--text-tertiary);">${t.author} · ${t.date}</div></div>`).join('');
+        } else {
+            document.getElementById('forumFullList').innerHTML = '<div class="empty-state"><i class="fas fa-comments"></i><p>Будьте первой, кто начнёт тему</p></div>';
+        }
+        let forumPreview = forumTopics.slice(0,2).map(t=>`<div class="forum-item"><span class="tag">${t.category}</span><div><strong>${t.title}</strong><p style="font-size:0.7rem;">${t.content?.substring(0,60)}...</p></div></div>`).join('');
+        document.getElementById('forumPreview').innerHTML = forumPreview || '<div class="empty-state">💬 Будьте первой</div>';
+    }
+    
     function renderMyRecipes(){ let userRecipes = JSON.parse(localStorage.getItem('femmetry_user_recipes')||'[]'); document.getElementById('myRecipesList').innerHTML = userRecipes.length ? userRecipes.map((r,i)=>`<div class="recipe-item"><div><strong>${r.name}</strong><br><span style="font-size:0.7rem;">${r.kcalPer100} ккал/100г | ${r.kcalPerServing} ккал/порция</span></div><button class="btn-outline" style="padding:4px 12px;" onclick="deleteUserRecipe(${i})">Удалить</button></div>`).join('') : '<div class="empty-state"><i class="fas fa-book-open"></i><p>У вас пока нет сохранённых рецептов</p><button class="btn-outline" onclick="document.querySelector(\'[data-page=\'menu\']\').click()">Добавить из меню →</button></div>'; }
     function deleteUserRecipe(i){ let r=JSON.parse(localStorage.getItem('femmetry_user_recipes')||'[]'); r.splice(i,1); localStorage.setItem('femmetry_user_recipes',JSON.stringify(r)); renderMyRecipes(); showToast("Рецепт удалён"); }
     
@@ -736,6 +802,18 @@
         showToast("✅ Тема создана"); document.getElementById('newTopicTitle').value=''; document.getElementById('newTopicContent').value=''; renderForum();
     }
     
+    function renderDashboard(){
+        renderPhaseBanner();
+        let history = JSON.parse(localStorage.getItem('femmetry_measurements')||'[]');
+        if(history.length >= 2){
+            let last = history[history.length-1].weight, prev = history[history.length-7]?.weight || history[0].weight;
+            let diff = (last - prev).toFixed(1);
+            if(diff < 0) document.getElementById('weightTrend').innerHTML = `📉 За неделю: −${Math.abs(diff)} кг · отлично!`;
+            else if(diff > 0) document.getElementById('weightTrend').innerHTML = `📈 За неделю: +${diff} кг · обратите внимание`;
+            else document.getElementById('weightTrend').innerHTML = `📊 За неделю: стабильно · держите курс!`;
+        } else { document.getElementById('weightTrend').innerHTML = `📊 Добавьте ещё замеров через неделю`; }
+    }
+    
     function logout(){ if(confirm("Выйти из аккаунта?")){ localStorage.removeItem('femmetry_auth'); window.location.href='index.html'; } }
     
     // Event listeners
@@ -748,25 +826,24 @@
     document.getElementById('createTopicBtn').onclick = createTopic;
     document.querySelectorAll('.goal-btn').forEach(b=>{b.onclick=()=>{document.querySelectorAll('.goal-btn').forEach(g=>g.classList.remove('active')); b.classList.add('active'); currentGoal=b.dataset.goal; saveMeasurements();};});
     
-    function renderDashboard(){
-        renderPhaseBanner();
-        let history = JSON.parse(localStorage.getItem('femmetry_measurements')||'[]');
-        if(history.length >= 2){
-            let last = history[history.length-1].weight, prev = history[history.length-7]?.weight || history[0].weight;
-            let diff = (last - prev).toFixed(1);
-            if(diff < 0) document.getElementById('weightTrend').innerHTML = `📉 За неделю: −${Math.abs(diff)} кг · отлично!`;
-            else if(diff > 0) document.getElementById('weightTrend').innerHTML = `📈 За неделю: +${diff} кг · обратите внимание`;
-            else document.getElementById('weightTrend').innerHTML = `📊 За неделю: стабильно · держите курс!`;
-        } else { document.getElementById('weightTrend').innerHTML = `📊 Добавьте ещё замеров через неделю`; }
-        
-        let blogPreview = blogPosts.slice(0,2).map(b=>`<div class="blog-item"><span class="tag">${b.category}</span><div><strong>${b.title}</strong><p style="font-size:0.7rem; margin-top:4px;">${b.content.substring(0,80)}...</p></div></div>`).join('');
-        let forumPreview = forumTopics.slice(0,2).map(t=>`<div class="forum-item"><span class="tag">${t.category}</span><div><strong>${t.title}</strong><p style="font-size:0.7rem; margin-top:4px;">${t.content.substring(0,60)}...</p></div></div>`).join('');
-        document.getElementById('blogPreview').innerHTML = blogPreview || '<div class="empty-state">📝 Скоро появятся статьи</div>';
-        document.getElementById('forumPreview').innerHTML = forumPreview || '<div class="empty-state">💬 Будьте первой</div>';
+    // Регистрация Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(reg => console.log('✅ SW registered:', reg)).catch(err => console.log('❌ SW error:', err));
     }
     
-    loadUserData(); renderDashboard(); renderHistoryAndChart(); renderBlog(); renderForum(); renderMyRecipes();
-    window.swipeLeft = swipeLeft; window.swipeRight = swipeRight; window.skipMeal = skipMeal; window.resetSwipeSelections = resetSwipeSelections; window.saveSwipeSelections = saveSwipeSelections; window.togglePregnancyFields = togglePregnancyFields; window.updateProgressFromCheckboxes = updateProgressFromCheckboxes;
+    // Инициализация
+    loadUserData();
+    initDataFromGitHub();
+    renderHistoryAndChart();
+    renderMyRecipes();
+    
+    window.swipeLeft = swipeLeft;
+    window.swipeRight = swipeRight;
+    window.skipMeal = skipMeal;
+    window.resetSwipeSelections = resetSwipeSelections;
+    window.saveSwipeSelections = saveSwipeSelections;
+    window.togglePregnancyFields = togglePregnancyFields;
+    window.updateProgressFromCheckboxes = updateProgressFromCheckboxes;
 </script>
 </body>
 </html>
