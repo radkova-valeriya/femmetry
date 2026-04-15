@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <meta name="theme-color" content="#F5F5F0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="manifest" href="manifest.json">
@@ -50,6 +50,8 @@
             font-weight: 600;
             letter-spacing: -0.5px;
             color: var(--text);
+            text-decoration: none;
+            cursor: pointer;
         }
         .logo-light { font-weight: 300; color: var(--text-secondary); }
         .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -194,7 +196,15 @@
         .btn-small:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
         .weight-trend { font-size: 0.65rem; padding: 8px; border-radius: 10px; text-align: center; background: var(--bg); }
         
-        .swipe-container { display: flex; justify-content: center; align-items: center; min-height: 520px; margin-bottom: 24px; }
+        /* SWIPE CARD — ЦЕНТРИРОВАНИЕ ИСПРАВЛЕНО */
+        .swipe-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 520px;
+            margin-bottom: 24px;
+            width: 100%;
+        }
         .swipe-card {
             width: 100%;
             max-width: 500px;
@@ -206,9 +216,10 @@
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border);
             cursor: grab;
-            transition: var(--transition);
+            transition: transform 0.1s linear;
+            position: relative;
         }
-        .swipe-card:hover { transform: scale(1.01); }
+        .swipe-card:active { cursor: grabbing; }
         .meal-icon { font-size: 4rem; margin-bottom: 20px; transition: var(--transition); }
         .swipe-card:hover .meal-icon { transform: scale(1.05); }
         .meal-stats { display: flex; justify-content: center; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
@@ -350,6 +361,7 @@
             .stats-row, .grid-2, .form-grid { grid-template-columns: 1fr; }
             .nav-btn { padding: 6px 16px; font-size: 0.75rem; }
             .swipe-card { padding: 30px 20px; }
+            .swipe-container { min-height: 450px; }
         }
     </style>
 </head>
@@ -357,7 +369,7 @@
 <div id="mainApp">
     <div class="app">
         <div class="header">
-            <div class="logo">Femmetry<span class="logo-light">.</span></div>
+            <div class="logo" onclick="location.href='index.html'">Femmetry<span class="logo-light">.</span></div>
             <div class="header-right">
                 <div class="trial-badge" id="trialStatus">🎁 7 дней</div>
                 <button class="btn-icon" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Выйти</button>
@@ -405,7 +417,20 @@
         <div id="menuPage" class="page">
             <div class="card">
                 <div class="card-header"><h2><i class="fas fa-fire"></i> Выбери, что хочешь сегодня</h2><div><span id="swipeMealType" style="background:var(--bg); padding:4px 12px; border-radius:40px; font-size:0.7rem;">🌅 Завтрак</span><span id="swipeCounter" style="margin-left:8px; font-size:0.7rem; color:var(--text-tertiary);">вариант 1/3</span></div></div>
-                <div class="swipe-container"><div class="swipe-card" id="swipeCard"><div class="meal-icon" id="swipeIcon">🥣</div><h2 id="swipeTitle">Овсянка с ягодами</h2><div class="meal-desc" id="swipeDesc" style="color:var(--text-secondary); font-size:0.8rem;">быстрый завтрак · 10 мин</div><div class="meal-stats"><span class="stat-badge" id="swipeKcal">320 ккал</span><span class="stat-badge" id="swipeProtein">12г белка</span><span class="stat-badge" id="swipeTime">⏱️ 10 мин</span></div><div class="ingredients" id="swipeIngredients" style="font-size:0.7rem; color:var(--text-tertiary); margin-top:16px;">🥣 Овсянка, молоко, ягоды, мёд</div><div class="swipe-buttons"><button class="swipe-btn skip" onclick="skipMeal()"><i class="fas fa-forward"></i></button><button class="swipe-btn no" onclick="swipeLeft()"><i class="fas fa-times"></i> НЕТ</button><button class="swipe-btn yes" onclick="swipeRight()"><i class="fas fa-heart"></i> ДА</button></div></div></div>
+                <div class="swipe-container">
+                    <div class="swipe-card" id="swipeCard">
+                        <div class="meal-icon" id="swipeIcon">🥣</div>
+                        <h2 id="swipeTitle">Овсянка с ягодами</h2>
+                        <div class="meal-desc" id="swipeDesc" style="color:var(--text-secondary); font-size:0.8rem;">быстрый завтрак · 10 мин</div>
+                        <div class="meal-stats"><span class="stat-badge" id="swipeKcal">320 ккал</span><span class="stat-badge" id="swipeProtein">12г белка</span><span class="stat-badge" id="swipeTime">⏱️ 10 мин</span></div>
+                        <div class="ingredients" id="swipeIngredients" style="font-size:0.7rem; color:var(--text-tertiary); margin-top:16px;">🥣 Овсянка, молоко, ягоды, мёд</div>
+                        <div class="swipe-buttons">
+                            <button class="swipe-btn skip" onclick="skipMeal()"><i class="fas fa-forward"></i></button>
+                            <button class="swipe-btn no" onclick="swipeLeft()"><i class="fas fa-times"></i> НЕТ</button>
+                            <button class="swipe-btn yes" onclick="swipeRight()"><i class="fas fa-heart"></i> ДА</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="swipe-hint"><i class="fas fa-arrow-left"></i> Свайп влево — не нравится <span style="margin:0 20px">|</span> Свайп вправо — выбираю <i class="fas fa-arrow-right"></i></div>
                 <div class="selected-meals"><h3 style="font-size:0.9rem; margin-bottom:12px;"><i class="fas fa-check-circle" style="color:#66BB6A;"></i> Твой выбор:</h3><div id="selectedSummary"></div></div>
                 <div style="text-align:center; margin-top:20px;"><button class="btn-outline" onclick="resetSwipeSelections()">⟳ Начать заново</button><button class="btn" onclick="saveSwipeSelections()" style="margin-left:12px; width:auto; padding:12px 28px;">✅ Сохранить меню</button></div>
@@ -453,7 +478,6 @@
     let blogPosts = [];
     let forumTopics = [];
     let selectedMeals = JSON.parse(localStorage.getItem('femmetry_selected_meals')) || { breakfast: null, lunch: null, dinner: null, snack: null };
-    let checkboxesState = { breakfast: false, lunch: false, dinner: false, snack: false };
     let currentGoal = "maintain", ageGroup = "18-35";
     let userTargetKcal = 2000, targetProtein = 60;
     let weightChart = null;
@@ -461,6 +485,7 @@
     
     // Swipe state
     let currentMealIndex = 0, currentMealKey = "breakfast";
+    let dragStartX = 0, isDragging = false, currentX = 0;
     const MEAL_TYPES = [{ key: "breakfast", title: "🌅 ЗАВТРАК" }, { key: "lunch", title: "☀️ ОБЕД" }, { key: "dinner", title: "🌙 УЖИН" }, { key: "snack", title: "🍎 ПЕРЕКУС" }];
     
     // ========== ЗАГРУЗКА ДАННЫХ ИЗ GITHUB ==========
@@ -479,20 +504,10 @@
         const data = await fetchJSON(DATA_URL + 'recipes.json', null);
         if (data && data.meals) {
             recipesDB = data.meals;
-            console.log(`🍽️ Загружено ${recipesDB.length} рецептов из ${DATA_URL}`);
+            console.log(`🍽️ Загружено ${recipesDB.length} рецептов`);
             return recipesDB;
         }
         return useFallbackRecipes();
-    }
-    
-    async function loadPsyFromGitHub() {
-        const data = await fetchJSON(DATA_URL + 'psy_tasks.json', null);
-        if (data) {
-            psyDB = data;
-            console.log(`🧠 Загружены PSY-данные`);
-            return data;
-        }
-        return null;
     }
     
     async function loadBlogFromGitHub() {
@@ -519,7 +534,6 @@
         showToast("📡 Загрузка данных...");
         await Promise.all([
             loadRecipesFromGitHub(),
-            loadPsyFromGitHub(),
             loadBlogFromGitHub(),
             loadForumFromGitHub()
         ]);
@@ -532,10 +546,10 @@
     function useFallbackRecipes() {
         console.warn("⚠️ Используются встроенные рецепты");
         return [
-            { id: "b1", name: "🥣 Овсянка с ягодами", meal: "breakfast", kcal: 320, protein: 12, time: "10 мин", icon: "🥣", ingredients: "Овсянка, молоко, ягоды", desc: "быстрый завтрак" },
-            { id: "l1", name: "🍗 Гречка с курицей", meal: "lunch", kcal: 450, protein: 35, time: "5 мин", icon: "🍗", ingredients: "Гречка, курица, овощи", desc: "из холодильника" },
-            { id: "d1", name: "🐟 Рыба с киноа", meal: "dinner", kcal: 430, protein: 35, time: "5 мин", icon: "🐟", ingredients: "Рыба, киноа, овощи", desc: "из холодильника" },
-            { id: "s1", name: "🥛 Йогурт с ягодами", meal: "snack", kcal: 150, protein: 12, time: "2 мин", icon: "🥛", ingredients: "Йогурт, ягоды", desc: "из холодильника" }
+            { id: "b1", name: "🥣 Овсянка с ягодами", category: "breakfast", kcal: 320, protein: 12, time: "10 мин", icon: "🥣", ingredients: "Овсянка, молоко, ягоды", desc: "быстрый завтрак" },
+            { id: "l1", name: "🍗 Гречка с курицей", category: "lunch", kcal: 450, protein: 35, time: "5 мин", icon: "🍗", ingredients: "Гречка, курица, овощи", desc: "из холодильника" },
+            { id: "d1", name: "🐟 Рыба с киноа", category: "dinner", kcal: 430, protein: 35, time: "5 мин", icon: "🐟", ingredients: "Рыба, киноа, овощи", desc: "из холодильника" },
+            { id: "s1", name: "🥛 Йогурт с ягодами", category: "snack", kcal: 150, protein: 12, time: "2 мин", icon: "🥛", ingredients: "Йогурт, ягоды", desc: "из холодильника" }
         ];
     }
     
@@ -560,9 +574,8 @@
     }
     
     function getRecipesByMeal(mealType){
-        if(recipesDB.length) return recipesDB.filter(r => r.category === mealType || r.meal === mealType);
-        const fallback = useFallbackRecipes();
-        return fallback.filter(r => r.meal === mealType);
+        if(recipesDB.length) return recipesDB.filter(r => r.category === mealType);
+        return useFallbackRecipes().filter(r => r.category === mealType);
     }
     
     function updateSwipeCard(){
@@ -571,7 +584,7 @@
         if(meal){
             document.getElementById('swipeIcon').innerHTML = meal.icon || "🍽️";
             document.getElementById('swipeTitle').innerHTML = meal.name;
-            document.getElementById('swipeDesc').innerHTML = `${meal.desc || meal.meal} · ${meal.time || "—"}`;
+            document.getElementById('swipeDesc').innerHTML = `${meal.desc || meal.category} · ${meal.time || "—"}`;
             document.getElementById('swipeKcal').innerHTML = `${meal.kcal} ккал`;
             document.getElementById('swipeProtein').innerHTML = `${meal.protein}г белка`;
             document.getElementById('swipeTime').innerHTML = `⏱️ ${meal.time || "—"}`;
@@ -718,11 +731,28 @@
         showToast(`✅ Вес ${w} кг записан`);
         document.getElementById('quickWeight').value = '';
         renderHistoryAndChart();
+        updateWeightChart();
         if(history.length >= 2){
             let diff = (w - history[history.length-2].weight).toFixed(1);
             if(diff < 0) document.getElementById('weightTrend').innerHTML = `📉 За неделю: −${Math.abs(diff)} кг · отлично!`;
             else if(diff > 0) document.getElementById('weightTrend').innerHTML = `📈 За неделю: +${diff} кг · обратите внимание`;
             else document.getElementById('weightTrend').innerHTML = `📊 За неделю: стабильно · держите курс!`;
+        }
+    }
+    
+    function updateWeightChart() {
+        let history = JSON.parse(localStorage.getItem('femmetry_measurements') || '[]');
+        let ctx = document.getElementById('weightChart')?.getContext('2d');
+        if (ctx && history.length) {
+            if (weightChart) weightChart.destroy();
+            weightChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: history.map(h => new Date(h.date).toLocaleDateString()),
+                    datasets: [{ label: 'Вес (кг)', data: history.map(h => h.weight), borderColor: '#D4A574', borderWidth: 2, fill: false }]
+                },
+                options: { responsive: true, plugins: { legend: { display: false } } }
+            });
         }
     }
     
@@ -736,7 +766,7 @@
         localStorage.setItem('femmetry_activity', document.getElementById('activity').value);
         localStorage.setItem('femmetry_nutrition_type', document.getElementById('nutritionType').value);
         localStorage.setItem('femmetry_age_group', document.getElementById('ageGroup').value);
-        showToast("✅ Данные сохранены"); loadUserData(); renderHistoryAndChart();
+        showToast("✅ Данные сохранены"); loadUserData(); renderHistoryAndChart(); updateWeightChart();
     }
     
     function saveCycleData(){
@@ -754,28 +784,26 @@
         let history = JSON.parse(localStorage.getItem('femmetry_measurements')||'[]');
         if(history.length === 0){ document.getElementById('historyList').innerHTML = '<div class="empty-state"><i class="fas fa-chart-line"></i><p>Нет данных. Добавьте первый замер веса.</p></div>'; return; }
         document.getElementById('historyList').innerHTML = history.slice().reverse().slice(0,5).map(h=>`<div style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--border);"><span>${new Date(h.date).toLocaleDateString()}</span><span><strong>${h.weight} кг</strong> | Т:${h.waist||'-'} | Б:${h.hips||'-'}</span></div>`).join('');
-        let ctx = document.getElementById('weightChart')?.getContext('2d');
-        if(ctx && history.length){ if(weightChart) weightChart.destroy(); weightChart = new Chart(ctx,{type:'line',data:{labels:history.map(h=>new Date(h.date).toLocaleDateString()),datasets:[{label:'Вес (кг)',data:history.map(h=>h.weight),borderColor:'#D4A574',borderWidth:2,fill:false,tension:0.3}]},options:{responsive:true,plugins:{legend:{display:false}}}}); }
     }
     
     function renderBlog(){
         if(blogPosts.length){
             document.getElementById('blogFullList').innerHTML = blogPosts.map(p=>`<div class="blog-item"><span class="tag">${p.category}</span><h3 style="margin:8px 0;">${p.title}</h3><p>${p.content}</p><div style="font-size:0.7rem; color:var(--text-tertiary);">${p.date}</div></div>`).join('');
+            document.getElementById('blogPreview').innerHTML = blogPosts.slice(0,2).map(b=>`<div class="blog-item"><span class="tag">${b.category}</span><div><strong>${b.title}</strong><p style="font-size:0.7rem;">${b.content?.substring(0,80)}...</p></div></div>`).join('');
         } else {
             document.getElementById('blogFullList').innerHTML = '<div class="empty-state"><i class="fas fa-newspaper"></i><p>Статьи появятся скоро</p></div>';
+            document.getElementById('blogPreview').innerHTML = '<div class="empty-state">📝 Скоро появятся статьи</div>';
         }
-        let blogPreview = blogPosts.slice(0,2).map(b=>`<div class="blog-item"><span class="tag">${b.category}</span><div><strong>${b.title}</strong><p style="font-size:0.7rem;">${b.content?.substring(0,80)}...</p></div></div>`).join('');
-        document.getElementById('blogPreview').innerHTML = blogPreview || '<div class="empty-state">📝 Скоро появятся статьи</div>';
     }
     
     function renderForum(){
         if(forumTopics.length){
             document.getElementById('forumFullList').innerHTML = forumTopics.map(t=>`<div class="forum-item"><span class="tag">${t.category}</span><h3 style="margin:8px 0;">${t.title}</h3><p>${t.content}</p><div style="font-size:0.7rem; color:var(--text-tertiary);">${t.author} · ${t.date}</div></div>`).join('');
+            document.getElementById('forumPreview').innerHTML = forumTopics.slice(0,2).map(t=>`<div class="forum-item"><span class="tag">${t.category}</span><div><strong>${t.title}</strong><p style="font-size:0.7rem;">${t.content?.substring(0,60)}...</p></div></div>`).join('');
         } else {
             document.getElementById('forumFullList').innerHTML = '<div class="empty-state"><i class="fas fa-comments"></i><p>Будьте первой, кто начнёт тему</p></div>';
+            document.getElementById('forumPreview').innerHTML = '<div class="empty-state">💬 Будьте первой</div>';
         }
-        let forumPreview = forumTopics.slice(0,2).map(t=>`<div class="forum-item"><span class="tag">${t.category}</span><div><strong>${t.title}</strong><p style="font-size:0.7rem;">${t.content?.substring(0,60)}...</p></div></div>`).join('');
-        document.getElementById('forumPreview').innerHTML = forumPreview || '<div class="empty-state">💬 Будьте первой</div>';
     }
     
     function renderMyRecipes(){ let userRecipes = JSON.parse(localStorage.getItem('femmetry_user_recipes')||'[]'); document.getElementById('myRecipesList').innerHTML = userRecipes.length ? userRecipes.map((r,i)=>`<div class="recipe-item"><div><strong>${r.name}</strong><br><span style="font-size:0.7rem;">${r.kcalPer100} ккал/100г | ${r.kcalPerServing} ккал/порция</span></div><button class="btn-outline" style="padding:4px 12px;" onclick="deleteUserRecipe(${i})">Удалить</button></div>`).join('') : '<div class="empty-state"><i class="fas fa-book-open"></i><p>У вас пока нет сохранённых рецептов</p><button class="btn-outline" onclick="document.querySelector(\'[data-page=\'menu\']\').click()">Добавить из меню →</button></div>'; }
@@ -814,10 +842,97 @@
         } else { document.getElementById('weightTrend').innerHTML = `📊 Добавьте ещё замеров через неделю`; }
     }
     
+    // ========== DRAG & DROP + TOUCH EVENTS ДЛЯ СВАЙПА ==========
+    function initDragEvents() {
+        let card = document.getElementById('swipeCard');
+        if (!card) return;
+        
+        // Mouse events
+        card.addEventListener('mousedown', onDragStart);
+        window.addEventListener('mousemove', onDragMove);
+        window.addEventListener('mouseup', onDragEnd);
+        
+        // Touch events для мобильных
+        card.addEventListener('touchstart', onTouchStart, { passive: false });
+        window.addEventListener('touchmove', onTouchMove, { passive: false });
+        window.addEventListener('touchend', onTouchEnd);
+        
+        function onDragStart(e) {
+            isDragging = true;
+            dragStartX = e.clientX;
+            currentX = 0;
+            card.style.transition = 'none';
+            card.classList.add('dragging');
+        }
+        
+        function onDragMove(e) {
+            if (!isDragging) return;
+            let deltaX = e.clientX - dragStartX;
+            currentX = deltaX;
+            let rotate = deltaX * 0.05;
+            card.style.transform = `translateX(${deltaX}px) rotate(${rotate}deg)`;
+        }
+        
+        function onDragEnd(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            card.classList.remove('dragging');
+            let threshold = 120;
+            if (currentX > threshold) {
+                card.style.transition = 'transform 0.2s';
+                swipeRight();
+            } else if (currentX < -threshold) {
+                card.style.transition = 'transform 0.2s';
+                swipeLeft();
+            } else {
+                card.style.transition = 'transform 0.2s';
+                card.style.transform = '';
+            }
+            setTimeout(() => { card.style.transition = ''; currentX = 0; }, 200);
+        }
+        
+        function onTouchStart(e) {
+            e.preventDefault();
+            let touch = e.touches[0];
+            dragStartX = touch.clientX;
+            isDragging = true;
+            card.style.transition = 'none';
+            card.classList.add('dragging');
+        }
+        
+        function onTouchMove(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            let touch = e.touches[0];
+            let deltaX = touch.clientX - dragStartX;
+            currentX = deltaX;
+            let rotate = deltaX * 0.05;
+            card.style.transform = `translateX(${deltaX}px) rotate(${rotate}deg)`;
+        }
+        
+        function onTouchEnd(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            card.classList.remove('dragging');
+            let threshold = 120;
+            if (currentX > threshold) {
+                card.style.transition = 'transform 0.2s';
+                swipeRight();
+            } else if (currentX < -threshold) {
+                card.style.transition = 'transform 0.2s';
+                swipeLeft();
+            } else {
+                card.style.transition = 'transform 0.2s';
+                card.style.transform = '';
+            }
+            setTimeout(() => { card.style.transition = ''; currentX = 0; }, 200);
+        }
+    }
+    
     function logout(){ if(confirm("Выйти из аккаунта?")){ localStorage.removeItem('femmetry_auth'); window.location.href='index.html'; } }
     
     // Event listeners
-    document.querySelectorAll('.nav-btn').forEach(b=>{b.onclick=()=>{document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active')); document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); b.classList.add('active'); document.getElementById(b.dataset.page+'Page').classList.add('active'); if(b.dataset.page==='dashboard') renderDashboard(); if(b.dataset.page==='menu'){ updateSwipeCard(); renderSwipeSummary(); } if(b.dataset.page==='stats') renderHistoryAndChart(); if(b.dataset.page==='blog') renderBlog(); if(b.dataset.page==='forum') renderForum(); if(b.dataset.page==='recipes') renderMyRecipes(); };});
+    document.querySelectorAll('.nav-btn').forEach(b=>{b.onclick=()=>{document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active')); document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); b.classList.add('active'); document.getElementById(b.dataset.page+'Page').classList.add('active'); if(b.dataset.page==='dashboard') renderDashboard(); if(b.dataset.page==='menu'){ updateSwipeCard(); renderSwipeSummary(); setTimeout(initDragEvents, 100); } if(b.dataset.page==='stats') renderHistoryAndChart(); if(b.dataset.page==='blog') renderBlog(); if(b.dataset.page==='forum') renderForum(); if(b.dataset.page==='recipes') renderMyRecipes(); };});
     document.getElementById('quickWeightBtn').onclick = quickWeight;
     document.getElementById('saveMeasurementsBtn').onclick = saveMeasurements;
     document.getElementById('saveCycleBtn').onclick = saveCycleData;
@@ -836,6 +951,7 @@
     initDataFromGitHub();
     renderHistoryAndChart();
     renderMyRecipes();
+    updateWeightChart();
     
     window.swipeLeft = swipeLeft;
     window.swipeRight = swipeRight;
