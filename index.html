@@ -19,11 +19,9 @@
             --text-secondary: #6B6B6B;
             --text-tertiary: #A0A0A0;
             --accent: #D4A574;
-            --accent-dark: #B8875A;
             --border: #E8E8E3;
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.02);
             --shadow-md: 0 8px 24px rgba(0,0,0,0.04);
-            --shadow-lg: 0 16px 40px rgba(0,0,0,0.06);
             --radius-card: 28px;
             --radius-btn: 40px;
         }
@@ -38,14 +36,14 @@
         
         .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
         
-        /* Typography — ясная иерархия */
+        /* Typography — иерархия как у Apple */
         h1 { font-size: 3.5rem; font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; }
         h2 { font-size: 2rem; font-weight: 500; letter-spacing: -0.01em; }
         h3 { font-size: 1.25rem; font-weight: 500; }
         .text-large { font-size: 1.1rem; color: var(--text-secondary); }
         .text-small { font-size: 0.8rem; color: var(--text-tertiary); }
         
-        /* Navbar — прозрачный, но читаемый */
+        /* Navbar — прозрачный, только нужное */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -73,11 +71,24 @@
             color: var(--text-secondary);
             font-weight: 500;
             font-size: 0.9rem;
-            transition: color 0.2s ease;
+            transition: all 0.25s ease;
+            position: relative;
         }
+        /* Подсветка при наведении — как у Apple */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.25s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
         .nav-links a:hover { color: var(--accent); }
         
-        /* Buttons — чёткие, контрастные */
+        /* Buttons — чёткие, с анимацией */
         .btn-primary {
             background: var(--text);
             color: white;
@@ -92,7 +103,11 @@
             gap: 10px;
             transition: all 0.25s ease;
         }
-        .btn-primary:hover { background: #2A2A2A; transform: translateY(-1px); }
+        .btn-primary:hover { 
+            background: #2A2A2A; 
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
         .btn-outline {
             background: transparent;
             border: 1px solid var(--border);
@@ -100,10 +115,15 @@
             border-radius: var(--radius-btn);
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             color: var(--text);
         }
-        .btn-outline:hover { border-color: var(--text); background: var(--text); color: white; }
+        .btn-outline:hover { 
+            border-color: var(--text); 
+            background: var(--text); 
+            color: white; 
+            transform: translateY(-1px);
+        }
         .btn-login {
             background: transparent;
             border: 1px solid var(--border);
@@ -111,12 +131,17 @@
             border-radius: var(--radius-btn);
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             color: var(--text);
         }
-        .btn-login:hover { border-color: var(--text); background: var(--text); color: white; }
+        .btn-login:hover { 
+            border-color: var(--text); 
+            background: var(--text); 
+            color: white; 
+            transform: translateY(-1px);
+        }
         
-        /* Hero — контрастный, воздушный */
+        /* Hero */
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -125,10 +150,7 @@
             padding: 80px 0 100px;
         }
         .hero h1 .accent { color: var(--accent); font-weight: 600; }
-        .hero-description {
-            margin: 28px 0 32px;
-            line-height: 1.6;
-        }
+        .hero-description { margin: 28px 0 32px; line-height: 1.6; }
         .hero-stats { display: flex; gap: 48px; margin-top: 48px; }
         .stat .number { font-size: 1.8rem; font-weight: 600; color: var(--text); }
         .stat .label { font-size: 0.7rem; color: var(--text-tertiary); letter-spacing: 0.5px; text-transform: uppercase; }
@@ -138,10 +160,12 @@
             padding: 40px;
             text-align: center;
             box-shadow: var(--shadow-md);
+            transition: all 0.25s ease;
         }
+        .hero-visual:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
         .hero-visual img { max-width: 100%; border-radius: 20px; }
         
-        /* Features — чёткая сетка */
+        /* Features — карточки с подсветкой */
         .features { padding: 100px 0; background: var(--card); }
         .section-title { text-align: center; margin-bottom: 64px; }
         .section-title span { color: var(--accent); font-weight: 600; }
@@ -153,12 +177,23 @@
         .feature-card {
             text-align: center;
             padding: 32px 24px;
+            background: var(--bg);
+            border-radius: var(--radius-card);
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            background: var(--card);
         }
         .feature-icon {
             font-size: 2.2rem;
             color: var(--accent);
             margin-bottom: 20px;
+            transition: transform 0.25s ease;
         }
+        .feature-card:hover .feature-icon { transform: scale(1.05); }
         .feature-card h3 { margin-bottom: 12px; }
         .feature-card p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5; }
         
@@ -183,6 +218,12 @@
             font-weight: 500;
             margin: 0 auto 20px;
             box-shadow: var(--shadow-sm);
+            transition: all 0.25s ease;
+        }
+        .steps-grid > div:hover .step-number {
+            transform: scale(1.08);
+            background: var(--accent);
+            color: white;
         }
         .steps-grid h3 { font-size: 1rem; margin-bottom: 8px; }
         .steps-grid p { color: var(--text-secondary); font-size: 0.8rem; }
@@ -201,7 +242,11 @@
             transition: all 0.25s ease;
             cursor: pointer;
         }
-        .blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            background: var(--card);
+        }
         .blog-category {
             font-size: 0.7rem;
             color: var(--accent);
@@ -229,6 +274,7 @@
             box-shadow: var(--shadow-sm);
             transition: all 0.25s ease;
         }
+        .price-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
         .price-card.popular {
             border: 1px solid var(--accent);
             box-shadow: var(--shadow-md);
@@ -262,9 +308,9 @@
             text-decoration: none;
             margin-bottom: 12px;
             font-size: 0.8rem;
-            transition: color 0.2s ease;
+            transition: all 0.2s ease;
         }
-        .footer-col a:hover { color: var(--accent); }
+        .footer-col a:hover { color: var(--accent); transform: translateX(4px); }
         .copyright {
             text-align: center;
             font-size: 0.7rem;
