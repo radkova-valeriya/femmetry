@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#F5F5F0">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.json">
     <title>Femmetry — женское здоровье</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -59,6 +58,8 @@
             font-weight: 600;
             letter-spacing: -0.5px;
             color: var(--text);
+            text-decoration: none;
+            cursor: pointer;
         }
         .logo-light { font-weight: 300; color: var(--text-secondary); }
         .nav-links { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
@@ -83,7 +84,7 @@
         .nav-links a:hover::after { width: 100%; }
         .nav-links a:hover { color: var(--accent); }
         
-        .btn-login {
+        .btn-login, .btn-register {
             background: transparent;
             border: 1px solid var(--border);
             padding: 10px 28px;
@@ -93,7 +94,21 @@
             transition: all 0.25s ease;
             color: var(--text);
         }
-        .btn-login:hover { border-color: var(--text); background: var(--text); color: white; transform: translateY(-1px); }
+        .btn-login:hover, .btn-register:hover { 
+            border-color: var(--text); 
+            background: var(--text); 
+            color: white; 
+            transform: translateY(-1px);
+        }
+        .btn-register {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        .btn-register:hover {
+            background: var(--accent-dark);
+            border-color: var(--accent-dark);
+        }
         .btn-primary {
             background: var(--text);
             color: white;
@@ -105,6 +120,17 @@
             transition: all 0.25s ease;
         }
         .btn-primary:hover { background: #2A2A2A; transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 12px 28px;
+            border-radius: var(--radius-btn);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text);
+        }
+        .btn-outline:hover { border-color: var(--text); background: var(--text); color: white; }
         
         /* Hero */
         .hero {
@@ -231,6 +257,7 @@
             margin-bottom: 12px;
             font-size: 0.8rem;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
         .footer-col a:hover { color: var(--accent); transform: translateX(4px); }
         .copyright { text-align: center; font-size: 0.7rem; color: var(--text-tertiary); padding-top: 32px; border-top: 1px solid var(--border); }
@@ -266,7 +293,9 @@
             font-size: 1.3rem;
             cursor: pointer;
             color: var(--text-tertiary);
+            transition: color 0.2s;
         }
+        .close-modal:hover { color: var(--text); }
         .checkbox-label {
             display: flex;
             align-items: center;
@@ -293,6 +322,7 @@
 </head>
 <body>
 
+<!-- Модалка входа -->
 <div id="authModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeAuthModal()">&times;</span>
@@ -307,18 +337,48 @@
         <label class="checkbox-label"><input type="checkbox" id="consentCheckbox"> <span>Я понимаю, что Femmetry — информационная платформа, а Валерия Радькова не является врачом.</span></label>
         <button class="btn-primary" style="width:100%; justify-content:center;" onclick="handleEmailLogin()">Войти</button>
         <div class="trial-banner">🎁 7 дней бесплатно — полный доступ</div>
+        <p style="text-align:center; margin-top:16px; font-size:0.7rem;">Нет аккаунта? <a href="#" onclick="switchToRegister()" style="color:var(--accent);">Зарегистрироваться</a></p>
+    </div>
+</div>
+
+<!-- Модалка регистрации -->
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeRegisterModal()">&times;</span>
+        <h2 style="font-size: 1.6rem; font-weight: 500; margin-bottom: 8px;">Регистрация</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">Создайте аккаунт</p>
+        <div style="display: flex; gap: 16px; margin-bottom: 24px;">
+            <button onclick="handleGoogleRegister()" style="flex:1; display:flex; align-items:center; justify-content:center; gap:12px; padding:14px; border:1px solid var(--border); border-radius:100px; background:var(--card); cursor:pointer;"><i class="fab fa-google"></i> Google</button>
+        </div>
+        <div style="text-align:center; margin:20px 0; color:var(--text-tertiary);">или по email</div>
+        <input type="text" id="regName" placeholder="Имя" style="width:100%; padding:14px; border-radius:100px; border:1px solid var(--border); background:var(--card); margin-bottom:12px;">
+        <input type="email" id="regEmail" placeholder="Email" style="width:100%; padding:14px; border-radius:100px; border:1px solid var(--border); background:var(--card); margin-bottom:12px;">
+        <input type="password" id="regPassword" placeholder="Пароль" style="width:100%; padding:14px; border-radius:100px; border:1px solid var(--border); background:var(--card); margin-bottom:20px;">
+        <label class="checkbox-label"><input type="checkbox" id="regConsentCheckbox"> <span>Я понимаю, что Femmetry — информационная платформа, а Валерия Радькова не является врачом.</span></label>
+        <button class="btn-primary" style="width:100%; justify-content:center;" onclick="handleEmailRegister()">Зарегистрироваться</button>
+        <div class="trial-banner">🎁 7 дней бесплатно — полный доступ</div>
+        <p style="text-align:center; margin-top:16px; font-size:0.7rem;">Уже есть аккаунт? <a href="#" onclick="switchToLogin()" style="color:var(--accent);">Войти</a></p>
+    </div>
+</div>
+
+<!-- Модалка для страниц (О проекте, Научная база и т.д.) -->
+<div id="infoModal" class="modal">
+    <div class="modal-content" style="max-width: 600px;">
+        <span class="close-modal" onclick="closeInfoModal()">&times;</span>
+        <div id="infoModalContent"></div>
     </div>
 </div>
 
 <div class="container">
     <div class="navbar">
-        <div class="logo">Femmetry<span class="logo-light">.</span></div>
+        <div class="logo" onclick="goToHome()">Femmetry<span class="logo-light">.</span></div>
         <div class="nav-links">
             <a href="#features">Метод</a>
             <a href="#how">Как работает</a>
             <a href="#pricing">Тарифы</a>
             <a href="#blog">Блог</a>
-            <button class="btn-login" onclick="openAuthModal()">Кабинет</button>
+            <button class="btn-login" onclick="openAuthModal()">Вход</button>
+            <button class="btn-register" onclick="openRegisterModal()">Регистрация</button>
         </div>
     </div>
 
@@ -326,7 +386,7 @@
         <div class="hero-content">
             <h1>Ваше тело — <span class="accent">это данные.</span><br>Научитесь <span class="accent">их читать.</span></h1>
             <p class="hero-description" style="margin: 28px 0 32px; color: var(--text-secondary);">Femmetry — первая экосистема женского здоровья. Анализы, цикл, питание и тренировки в единой научной картине.</p>
-            <button class="btn-primary" onclick="openAuthModal()"><i class="fas fa-chart-line"></i> Начать 7 дней бесплатно</button>
+            <button class="btn-primary" onclick="openRegisterModal()"><i class="fas fa-chart-line"></i> Начать 7 дней бесплатно</button>
             <div class="hero-stats">
                 <div class="stat"><div class="number">5000+</div><div class="label">женщин</div></div>
                 <div class="stat"><div class="number">98%</div><div class="label">точность</div></div>
@@ -379,8 +439,8 @@
     <div class="container">
         <h2 class="section-title">Выберите <span>доступ</span></h2>
         <div class="pricing-grid">
-            <div class="price-card"><h3>Пробный</h3><div class="price">0 ₽</div><p style="color: var(--accent);">7 дней полного доступа</p><button class="btn-outline" onclick="openAuthModal()" style="margin-top: 24px;">Активировать</button></div>
-            <div class="price-card popular"><div style="background: var(--bg); color: var(--accent); display: inline-block; padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; margin-bottom: 16px;">🔥 Популярный</div><h3>Premium</h3><div class="price">790 ₽<small>/мес</small></div><p style="color: var(--accent);">или 5 900 ₽/год (экономия 37%)</p><button class="btn-primary" onclick="openAuthModal()" style="margin-top: 24px;">Начать 7 дней</button></div>
+            <div class="price-card"><h3>Пробный</h3><div class="price">0 ₽</div><p style="color: var(--accent);">7 дней полного доступа</p><button class="btn-outline" onclick="openRegisterModal()" style="margin-top: 24px;">Активировать</button></div>
+            <div class="price-card popular"><div style="background: var(--bg); color: var(--accent); display: inline-block; padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; margin-bottom: 16px;">🔥 Популярный</div><h3>Premium</h3><div class="price">790 ₽<small>/мес</small></div><p style="color: var(--accent);">или 5 900 ₽/год (экономия 37%)</p><button class="btn-primary" onclick="openRegisterModal()" style="margin-top: 24px;">Начать 7 дней</button></div>
         </div>
     </div>
 </div>
@@ -389,24 +449,36 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-col"><h4>Femmetry</h4><p style="font-size:0.7rem; color:var(--text-tertiary);">Экосистема женского здоровья</p></div>
-            <div class="footer-col"><h4>О проекте</h4><a href="#" onclick="showModal('about')">О нас</a><a href="#" onclick="showModal('science')">Научная база</a><a href="#" onclick="showModal('faq')">FAQ</a></div>
-            <div class="footer-col"><h4>Помощь</h4><a href="#" onclick="showModal('support')">Поддержка</a><a href="#" onclick="showModal('privacy')">Политика</a><a href="#" onclick="showModal('requisites')">Реквизиты</a></div>
+            <div class="footer-col"><h4>О проекте</h4><a onclick="showModal('about')">О нас</a><a onclick="showModal('science')">Научная база</a><a onclick="showModal('faq')">FAQ</a></div>
+            <div class="footer-col"><h4>Помощь</h4><a onclick="showModal('support')">Поддержка</a><a onclick="showModal('privacy')">Политика</a><a onclick="showModal('requisites')">Реквизиты</a></div>
             <div class="footer-col"><h4>Контакты</h4><a href="mailto:hello@femmetry.ru">hello@femmetry.ru</a><a href="#">Telegram-канал</a></div>
         </div>
         <div class="copyright">© 2025 Femmetry. Женское здоровье с научной точностью.</div>
     </div>
 </div>
 
-<div id="infoModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeInfoModal()">&times;</span>
-        <div id="infoModalContent"></div>
-    </div>
-</div>
-
 <script>
+    // Сохранение позиции скролла для модалок
+    let scrollPosition = 0;
+    
+    function saveScrollPosition() { scrollPosition = window.scrollY; }
+    function restoreScrollPosition() { setTimeout(() => window.scrollTo(0, scrollPosition), 10); }
+    
+    // Модальные окна
+    function openAuthModal() { saveScrollPosition(); document.getElementById('authModal').style.display = 'flex'; }
+    function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; restoreScrollPosition(); }
+    
+    function openRegisterModal() { saveScrollPosition(); document.getElementById('registerModal').style.display = 'flex'; }
+    function closeRegisterModal() { document.getElementById('registerModal').style.display = 'none'; restoreScrollPosition(); }
+    
+    function switchToRegister() { closeAuthModal(); openRegisterModal(); }
+    function switchToLogin() { closeRegisterModal(); openAuthModal(); }
+    
+    function closeInfoModal() { document.getElementById('infoModal').style.display = 'none'; restoreScrollPosition(); }
+    
+    // Контент для модальных окон
     const modalContents = {
-        about: `<h2 style="font-size:1.4rem; font-weight:500; margin-bottom:16px;">О проекте</h2><p style="margin-bottom:16px; color:var(--text-secondary);">Меня зовут Валерия Радькова. Я сертифицированный тренер, специалист по женской физиологии.</p><p style="margin-bottom:16px; color:var(--text-secondary);"><strong>Важное примечание:</strong> Я не врач. Femmetry — информационная платформа для поддержки здорового образа жизни.</p><button class="btn-primary" onclick="openAuthModal(); closeInfoModal();" style="margin-top:16px;">Попробовать 7 дней</button>`,
+        about: `<h2 style="font-size:1.4rem; font-weight:500; margin-bottom:16px;">О проекте</h2><p style="margin-bottom:16px; color:var(--text-secondary);">Меня зовут Валерия Радькова. Я сертифицированный тренер, специалист по женской физиологии.</p><p style="margin-bottom:16px; color:var(--text-secondary);"><strong>Важное примечание:</strong> Я не врач. Femmetry — информационная платформа для поддержки здорового образа жизни.</p><button class="btn-primary" onclick="openRegisterModal(); closeInfoModal();" style="margin-top:16px;">Попробовать 7 дней</button>`,
         science: `<h2 style="font-size:1.4rem; font-weight:500; margin-bottom:16px;">Научная база</h2><p style="margin-bottom:12px;"><strong>WHO recommendations on antenatal care</strong> <span style="color:var(--text-secondary);">(2025)</span></p><p style="margin-bottom:12px;"><strong>WHO diabetes in pregnancy guidelines</strong> <span style="color:var(--text-secondary);">(2025)</span></p><p style="margin-bottom:12px;"><strong>Клинические рекомендации Минздрава РФ</strong> <span style="color:var(--text-secondary);">«Нормальная беременность»</span></p><p style="margin-bottom:12px;"><strong>GPNi. Sex differences in female physiology</strong> <span style="color:var(--text-secondary);">(2025)</span></p><p><strong>Stacy Sims "ROAR"</strong> <span style="color:var(--text-secondary);">— женская физиология</span></p>`,
         faq: `<h2 style="font-size:1.4rem; font-weight:500; margin-bottom:16px;">FAQ</h2><p style="margin-bottom:16px;"><strong>❓ Валерия — врач?</strong><br><span style="color:var(--text-secondary);">Нет. Femmetry — информационная платформа.</span></p><p style="margin-bottom:16px;"><strong>❓ Как работает пробный период?</strong><br><span style="color:var(--text-secondary);">7 дней бесплатного полного доступа.</span></p><p style="margin-bottom:16px;"><strong>❓ Учитывает ли меню цикл?</strong><br><span style="color:var(--text-secondary);">Да, это ключевая особенность Femmetry.</span></p><p><strong>❓ Можно ли пользоваться при беременности?</strong><br><span style="color:var(--text-secondary);">Да, есть специальный модуль с учётом триместра.</span></p>`,
         support: `<h2 style="font-size:1.4rem; font-weight:500; margin-bottom:16px;">Поддержка</h2><p style="margin-bottom:12px;"><strong>Email:</strong> <a href="mailto:valeria@femmetry.ru" style="color:var(--accent);">valeria@femmetry.ru</a></p><p><strong>Telegram:</strong> @femmetry_support</p>`,
@@ -414,27 +486,64 @@
         requisites: `<h2 style="font-size:1.4rem; font-weight:500; margin-bottom:16px;">Реквизиты</h2><p style="margin-bottom:8px;"><strong>Радькова Валерия Андреевна</strong></p><p style="margin-bottom:8px;">ИНН: 505078314069</p><p>Самозанятая (налог на профессиональный доход)</p>`
     };
     
-    function showModal(type) { document.getElementById('infoModalContent').innerHTML = modalContents[type]; document.getElementById('infoModal').style.display = 'flex'; }
-    function closeInfoModal() { document.getElementById('infoModal').style.display = 'none'; }
-    function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
-    function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
+    function showModal(type) { 
+        saveScrollPosition();
+        document.getElementById('infoModalContent').innerHTML = modalContents[type]; 
+        document.getElementById('infoModal').style.display = 'flex'; 
+    }
     
+    // Авторизация
     function handleGoogleLogin() { if(!document.getElementById('consentCheckbox').checked){ alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); return; } localStorage.setItem('femmetry_auth','true'); localStorage.setItem('femmetry_consent','true'); localStorage.setItem('femmetry_trial_start',new Date().toISOString()); window.location.href='cabinet.html'; }
+    function handleGoogleRegister() { if(!document.getElementById('regConsentCheckbox').checked){ alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); return; } let name=document.getElementById('regName').value; if(name) localStorage.setItem('femmetry_user_name',name); localStorage.setItem('femmetry_auth','true'); localStorage.setItem('femmetry_consent','true'); localStorage.setItem('femmetry_trial_start',new Date().toISOString()); window.location.href='cabinet.html'; }
+    
     function handleEmailLogin() { let email=document.getElementById('loginEmail').value, pwd=document.getElementById('loginPassword').value; if(!email||!pwd){ alert("Введите email и пароль"); return; } if(!document.getElementById('consentCheckbox').checked){ alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); return; } localStorage.setItem('femmetry_auth','true'); localStorage.setItem('femmetry_user_email',email); localStorage.setItem('femmetry_consent','true'); localStorage.setItem('femmetry_trial_start',new Date().toISOString()); window.location.href='cabinet.html'; }
     
-    window.onclick = function(e) { if(e.target===document.getElementById('authModal')) closeAuthModal(); if(e.target===document.getElementById('infoModal')) closeInfoModal(); }
+    function handleEmailRegister() { let name=document.getElementById('regName').value, email=document.getElementById('regEmail').value, pwd=document.getElementById('regPassword').value; if(!name||!email||!pwd){ alert("Заполните все поля"); return; } if(!document.getElementById('regConsentCheckbox').checked){ alert("Пожалуйста, подтвердите, что вы ознакомились с информацией"); return; } localStorage.setItem('femmetry_user_name',name); localStorage.setItem('femmetry_user_email',email); localStorage.setItem('femmetry_auth','true'); localStorage.setItem('femmetry_consent','true'); localStorage.setItem('femmetry_trial_start',new Date().toISOString()); window.location.href='cabinet.html'; }
+    
+    function goToHome() { 
+        // Проверяем, авторизован ли пользователь
+        if (localStorage.getItem('femmetry_auth') === 'true') {
+            // Просто переходим на главную, сессия сохраняется
+            window.location.href = 'index.html';
+        } else {
+            window.location.href = 'index.html';
+        }
+    }
+    
+    // Проверка авторизации при загрузке главной
+    function checkAuth() {
+        if (localStorage.getItem('femmetry_auth') === 'true') {
+            // Показываем приветствие (можно добавить виджет)
+            console.log('Пользователь авторизован');
+        }
+    }
+    
+    window.onclick = function(e) { 
+        if(e.target===document.getElementById('authModal')) closeAuthModal(); 
+        if(e.target===document.getElementById('registerModal')) closeRegisterModal();
+        if(e.target===document.getElementById('infoModal')) closeInfoModal(); 
+    }
     
     // Регистрация Service Worker
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').then(reg => console.log('✅ SW registered:', reg)).catch(err => console.log('❌ SW error:', err));
     }
     
+    checkAuth();
+    
     window.showModal = showModal;
     window.closeInfoModal = closeInfoModal;
     window.openAuthModal = openAuthModal;
     window.closeAuthModal = closeAuthModal;
+    window.openRegisterModal = openRegisterModal;
+    window.closeRegisterModal = closeRegisterModal;
+    window.switchToRegister = switchToRegister;
+    window.switchToLogin = switchToLogin;
     window.handleGoogleLogin = handleGoogleLogin;
     window.handleEmailLogin = handleEmailLogin;
+    window.handleGoogleRegister = handleGoogleRegister;
+    window.handleEmailRegister = handleEmailRegister;
+    window.goToHome = goToHome;
 </script>
 </body>
 </html>
